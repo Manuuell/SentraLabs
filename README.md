@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SentraLabs
 
-## Getting Started
+**Creamos. Probamos. Lanzamos.**
 
-First, run the development server:
+Sitio web oficial de **SentraLabs**, un estudio de desarrollo de software enfocado en crear, probar y lanzar productos digitales de alto impacto.
+
+## 🌐 Demo
+
+Visita el sitio en vivo: [sentralabs.vercel.app](https://sentralabs.vercel.app)
+
+## 🛠️ Tech Stack
+
+| Tecnología | Uso |
+|---|---|
+| [Next.js 16](https://nextjs.org/) | Framework fullstack de React |
+| [React 19](https://react.dev/) | Librería de UI |
+| [TypeScript](https://www.typescriptlang.org/) | Tipado estático |
+| [Framer Motion](https://www.framer.com/motion/) | Animaciones y transiciones |
+| [CSS Vanilla](https://developer.mozilla.org/es/docs/Web/CSS) | Estilos personalizados |
+| [Vercel](https://vercel.com/) | Hosting y despliegue |
+
+## ✨ Características
+
+- 🖥️ Diseño dark con estética de terminal
+- 🎬 Animaciones fluidas con Framer Motion
+- 📱 Totalmente responsive
+- ⚡ Optimizado para rendimiento (Next.js App Router)
+- 🔤 Tipografía optimizada con `next/font` (Geist)
+
+## 🚀 Instalación
 
 ```bash
+# Clonar el repositorio
+git clone https://github.com/Manuuell/SentraLabs.git
+cd SentraLabs
+
+# Instalar dependencias
+npm install
+
+# Iniciar servidor de desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Comando | Descripción |
+|---|---|
+| `npm run dev` | Servidor de desarrollo |
+| `npm run build` | Build de producción |
+| `npm start` | Servidor de producción |
 
-## Learn More
+## 📁 Estructura del Proyecto
 
-To learn more about Next.js, take a look at the following resources:
+```
+sentralabs/
+├── app/
+│   ├── globals.css      # Estilos globales
+│   ├── layout.tsx       # Layout principal
+│   ├── page.tsx         # Página principal
+│   └── favicon.ico      # Favicon
+├── package.json
+├── tsconfig.json
+└── next.config.ts
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📬 Contacto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- ✉️ sentralabs@gmail.com
 
-## Deploy on Vercel
+## 📄 Licencia
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© 2026 SentraLabs. Todos los derechos reservados.
