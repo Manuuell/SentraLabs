@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, type Variants } from "framer-motion";
+import Image from "next/image";
 
 /* ────────────────── Navbar ────────────────── */
 function Navbar() {
@@ -311,10 +312,10 @@ function Projects() {
 
 /* ────────────────── Team ────────────────── */
 const team = [
-  { name: "Miembro 1", role: "Co-founder / Dev", initials: "M1" },
-  { name: "Miembro 2", role: "Co-founder / Dev", initials: "M2" },
-  { name: "Miembro 3", role: "Designer", initials: "M3" },
-  { name: "Miembro 4", role: "Developer", initials: "M4" },
+  { name: "Miembro 1", role: "Co-founder / Dev", image: "/images/team/miembro1.png" },
+  { name: "Miembro 2", role: "Co-founder / Dev", image: "/images/team/miembro2.png" },
+  { name: "Miembro 3", role: "Designer", image: "/images/team/miembro3.png" },
+  { name: "Miembro 4", role: "Developer", image: "/images/team/miembro4.png" },
 ];
 
 function Team() {
@@ -345,7 +346,15 @@ function Team() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.4 }}
             >
-              <div className="team-avatar">{m.initials}</div>
+              <div className="team-avatar">
+                <Image
+                  src={m.image}
+                  alt={m.name}
+                  width={80}
+                  height={80}
+                  style={{ borderRadius: "50%", objectFit: "cover" }}
+                />
+              </div>
               <h3 className="team-name">{m.name}</h3>
               <p className="team-role">{m.role}</p>
               <div className="team-links">
