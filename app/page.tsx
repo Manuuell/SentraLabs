@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 /* ────────────────── Navbar ────────────────── */
 function Navbar() {
@@ -65,12 +65,12 @@ function Navbar() {
 }
 
 /* ────────────────── Hero + Code Window ────────────────── */
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12, duration: 0.5, ease: [0.4, 0, 0.2, 1] as const },
+    transition: { delay: i * 0.12, duration: 0.5, ease: "easeOut" },
   }),
 };
 
