@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 /* ────────────────── Navbar ────────────────── */
 function Navbar() {
@@ -323,6 +324,7 @@ function Projects() {
 /* ────────────────── Team ────────────────── */
 const team = [
   {
+    slug: "manuel-esteban",
     name: "Manuel Esteban",
     role: "Fundador",
     image: "/images/team/miembro1.webp",
@@ -330,6 +332,7 @@ const team = [
     linkedin: "https://www.linkedin.com/in/manuuell/",
   },
   {
+    slug: "nino-nina",
     name: "Niño Niña",
     role: "Co-founder / Dev",
     image: "/images/team/miembro2.webp",
@@ -337,6 +340,7 @@ const team = [
     linkedin: "",
   },
   {
+    slug: "matamba",
     name: "Matamba",
     role: "Database Manager",
     image: "/images/team/miembro3.webp",
@@ -344,6 +348,7 @@ const team = [
     linkedin: "https://www.linkedin.com/in/javier-enrique-mercado-bolivar-203781359/",
   },
   {
+    slug: "jerson-diaz",
     name: "Jerson Diaz",
     role: "Developer",
     image: "/images/team/miembro4.webp",
@@ -380,17 +385,19 @@ function Team() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.4 }}
             >
-              <div className="team-avatar">
-                <Image
-                  src={m.image}
-                  alt={m.name}
-                  width={80}
-                  height={80}
-                  style={{ borderRadius: "50%", objectFit: "cover" }}
-                />
-              </div>
-              <h3 className="team-name">{m.name}</h3>
-              <p className="team-role">{m.role}</p>
+              <Link href={`/team/${m.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
+                <div className="team-avatar">
+                  <Image
+                    src={m.image}
+                    alt={m.name}
+                    width={80}
+                    height={80}
+                    style={{ borderRadius: "50%", objectFit: "cover" }}
+                  />
+                </div>
+                <h3 className="team-name">{m.name}</h3>
+                <p className="team-role">{m.role}</p>
+              </Link>
               <div className="team-links">
                 {m.github && (
                   <a href={m.github} target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
