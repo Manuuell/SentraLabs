@@ -95,7 +95,7 @@ function Hero() {
           </motion.p>
 
           <motion.div className="hero-ctas" variants={fadeUp} custom={2}>
-            <a href="mailto:sentralabs@gmail.com" className="btn-primary">
+            <a href="mailto:atencionsentralabs@gmail.com" className="btn-primary">
               Agenda una reunión
             </a>
             <a href="#projects" className="btn-secondary">
@@ -230,19 +230,21 @@ function About() {
 /* ────────────────── Projects ────────────────── */
 const projects = [
   {
-    icon: "🚗",
-    name: "Transcar",
-    desc: "Plataforma de gestión y transporte. Más detalles próximamente.",
-    tags: ["En desarrollo"],
-    links: [],
+    image: "/images/projects/icon.webp",
+    name: "TransCar",
+    desc: "App oficial de TransCaribe. Mapa interactivo con rutas en tiempo real, ETAs en vivo, chatbot con IA (GPT-4), consulta de saldo y noticias del sistema.",
+    tags: ["Flutter", "Mapbox", "OpenAI", "En desarrollo"],
+    links: [
+      { label: "GitHub →", href: "https://github.com/Manuuell/Trascaribe-APP" },
+    ],
   },
   {
-    icon: "🧪",
-    name: "Próximo Proyecto",
-    desc: "Estamos trabajando en nuevas soluciones. ¿Tienes una idea? Hablemos.",
-    tags: ["Próximamente"],
+    image: "/images/projects/marsec_logo.webp",
+    name: "MarSec",
+    desc: "Plataforma de ciberseguridad para embarcaciones. Lecciones interactivas, cuestionarios y asistente virtual 'Capitán Ciber' con IA.",
+    tags: ["Node.js", "Flutter", "SQL Server", "Azure"],
     links: [
-      { label: "contacto →", href: "mailto:sentralabs@gmail.com" },
+      { label: "GitHub →", href: "https://github.com/Manuuell/MarSec" },
     ],
   },
 ];
@@ -275,7 +277,15 @@ function Projects() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
             >
-              <div className="project-icon">{p.icon}</div>
+              <div className="project-icon">
+                <Image
+                  src={p.image}
+                  alt={p.name}
+                  width={48}
+                  height={48}
+                  style={{ borderRadius: "12px", objectFit: "cover" }}
+                />
+              </div>
               <div className="project-info">
                 <h3 className="project-name">{p.name}</h3>
                 <p className="project-desc">{p.desc}</p>
@@ -312,10 +322,34 @@ function Projects() {
 
 /* ────────────────── Team ────────────────── */
 const team = [
-  { name: "Miembro 1", role: "Co-founder / Dev", image: "/images/team/miembro1.png" },
-  { name: "Miembro 2", role: "Co-founder / Dev", image: "/images/team/miembro2.png" },
-  { name: "Miembro 3", role: "Designer", image: "/images/team/miembro3.png" },
-  { name: "Miembro 4", role: "Developer", image: "/images/team/miembro4.png" },
+  {
+    name: "Manuel Esteban",
+    role: "Fundador",
+    image: "/images/team/miembro1.png",
+    github: "https://github.com/Manuuell",
+    linkedin: "https://www.linkedin.com/in/manuuell/",
+  },
+  {
+    name: "Niño Niña",
+    role: "Co-founder / Dev",
+    image: "/images/team/miembro2.png",
+    github: "https://github.com/Angelsistemas7",
+    linkedin: "",
+  },
+  {
+    name: "Matamba",
+    role: "Database Manager",
+    image: "/images/team/miembro3.png",
+    github: "https://github.com/Javimercadobolivar",
+    linkedin: "https://www.linkedin.com/in/javier-enrique-mercado-bolivar-203781359/",
+  },
+  {
+    name: "Jerson Diaz",
+    role: "Developer",
+    image: "/images/team/miembro4.png",
+    github: "https://github.com/jerdiaz",
+    linkedin: "",
+  },
 ];
 
 function Team() {
@@ -358,8 +392,12 @@ function Team() {
               <h3 className="team-name">{m.name}</h3>
               <p className="team-role">{m.role}</p>
               <div className="team-links">
-                <a href="#" aria-label="GitHub">GitHub</a>
-                <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                {m.github && (
+                  <a href={m.github} target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+                )}
+                {m.linkedin && (
+                  <a href={m.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+                )}
               </div>
             </motion.div>
           ))}
@@ -386,8 +424,8 @@ function Contact() {
             Cuéntanos tu idea y te ayudamos a hacerla realidad.
             Sin compromisos, solo café y código.
           </p>
-          <a href="mailto:sentralabs@gmail.com" className="contact-email">
-            ✉ sentralabs@gmail.com
+          <a href="mailto:atencionsentralabs@gmail.com" className="contact-email">
+            ✉ atencionsentralabs@gmail.com
           </a>
         </motion.div>
       </div>
@@ -405,7 +443,7 @@ function Footer() {
           reservados.
         </p>
         <div className="footer-links">
-          <a href="mailto:sentralabs@gmail.com">Email</a>
+          <a href="mailto:atencionsentralabs@gmail.com">Email</a>
           <a href="#hero">Inicio</a>
         </div>
       </div>
