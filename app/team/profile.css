@@ -249,6 +249,77 @@
   color: #a78bfa;
 }
 
+/* ── Awards ── */
+.profile-awards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.profile-award-item {
+  font-family: var(--font-mono, "Geist Mono", monospace);
+  font-size: 0.9rem;
+  color: #e4e4e7;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.profile-award-item:last-child {
+  border-bottom: none;
+}
+
+/* ── Certifications ── */
+.profile-certifications {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.profile-cert-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.profile-cert-row:last-child {
+  border-bottom: none;
+}
+
+.cert-info {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.cert-title {
+  font-family: var(--font-mono, "Geist Mono", monospace);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.cert-issuer {
+  color: #71717a;
+  font-size: 0.85rem;
+}
+
+.cert-link {
+  color: #a78bfa;
+  font-family: var(--font-mono, "Geist Mono", monospace);
+  font-size: 0.8rem;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.cert-link:hover {
+  color: #c4b5fd;
+  text-decoration: underline;
+}
+
 /* ── Divider ── */
 .profile-divider {
   border: none;

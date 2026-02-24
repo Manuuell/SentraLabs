@@ -22,6 +22,12 @@ export interface TeamMember {
         link?: string;
     }[];
     skills: string[];
+    awards?: string[];
+    certifications?: {
+        title: string;
+        issuer: string;
+        link?: string;
+    }[];
 }
 
 export const teamMembers: TeamMember[] = [
@@ -45,9 +51,9 @@ export const teamMembers: TeamMember[] = [
                 link: "https://github.com/Manuuell/Trascaribe-APP",
             },
             {
-                title: "MarSec",
+                title: "MarSec — Mejor Proyecto TalentoTech 2025",
                 description:
-                    "Plataforma de ciberseguridad para embarcaciones con lecciones interactivas y asistente IA.",
+                    "Plataforma de ciberseguridad para embarcaciones. Ganador del premio al mejor proyecto TalentoTech.",
                 link: "https://github.com/Manuuell/MarSec",
             },
         ],
@@ -89,6 +95,22 @@ export const teamMembers: TeamMember[] = [
             "OpenAI API",
             "Azure",
             "Vercel",
+        ],
+        awards: [
+            "Ganador Mejor Proyecto TalentoTech — MarSec 2025",
+            "Ganador Hackathon Inteligencia Artificial — TalentoTech",
+        ],
+        certifications: [
+            {
+                title: "Ciberseguridad",
+                issuer: "MinTIC TalentoTech",
+                link: "https://wallet.xertify.co/certificates/7D7A1006A002",
+            },
+            {
+                title: "Inteligencia Artificial",
+                issuer: "MinTIC TalentoTech",
+                link: "https://wallet.xertify.co/certificates/7D7A1006A004",
+            },
         ],
     },
     {

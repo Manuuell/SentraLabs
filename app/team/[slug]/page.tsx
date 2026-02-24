@@ -178,6 +178,47 @@ export default async function ProfilePage({
                         </div>
                     </section>
                 )}
+
+                {/* Awards */}
+                {member.awards && member.awards.length > 0 && (
+                    <section className="profile-section">
+                        <h2 className="profile-section-title">Premios</h2>
+                        <div className="profile-awards">
+                            {member.awards.map((a) => (
+                                <div key={a} className="profile-award-item">
+                                    🏆 {a}
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                {/* Certifications */}
+                {member.certifications && member.certifications.length > 0 && (
+                    <section className="profile-section">
+                        <h2 className="profile-section-title">Certificaciones</h2>
+                        <div className="profile-certifications">
+                            {member.certifications.map((c) => (
+                                <div key={c.title} className="profile-cert-row">
+                                    <div className="cert-info">
+                                        <span className="cert-title">{c.title}</span>
+                                        <span className="cert-issuer">— {c.issuer}</span>
+                                    </div>
+                                    {c.link && (
+                                        <a
+                                            href={c.link}
+                                            target="_blank"
+                                            rel="noopener"
+                                            className="cert-link"
+                                        >
+                                            ver certificado →
+                                        </a>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
             </div>
         </div>
     );

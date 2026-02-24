@@ -248,6 +248,13 @@ const projects = [
       { label: "GitHub →", href: "https://github.com/Manuuell/MarSec" },
     ],
   },
+  {
+    image: "",
+    name: "EcoOne",
+    desc: "Próximamente. Más detalles sobre este proyecto muy pronto.",
+    tags: ["Próximamente"],
+    links: [],
+  },
 ];
 
 function Projects() {
@@ -279,13 +286,17 @@ function Projects() {
               transition={{ delay: i * 0.1, duration: 0.4 }}
             >
               <div className="project-icon">
-                <Image
-                  src={p.image}
-                  alt={p.name}
-                  width={48}
-                  height={48}
-                  style={{ borderRadius: "12px", objectFit: "cover" }}
-                />
+                {p.image ? (
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    width={48}
+                    height={48}
+                    style={{ borderRadius: "12px", objectFit: "cover" }}
+                  />
+                ) : (
+                  <span style={{ fontSize: "1.5rem" }}>🌿</span>
+                )}
               </div>
               <div className="project-info">
                 <h3 className="project-name">{p.name}</h3>
