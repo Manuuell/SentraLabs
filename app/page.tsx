@@ -445,8 +445,14 @@ const projects = [
 ];
 
 function Projects() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [lightbox, setLightbox] = useState<string | null>(null);
+  const [openMockups, setOpenMockups] = useState<number[]>([]);
+
+  const toggleMockups = (idx: number) => {
+    setOpenMockups(prev => prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]);
+  };
+
   return (
     <>
       {lightbox && (
@@ -521,9 +527,29 @@ function Projects() {
                       ))}
                     </div>
                   )}
-                  {/* Phone Mockups */}
+                  {/* Phone Mockups Toggle */}
                   {"mockups" in p && (p as { mockups?: string[] }).mockups && (
-                    <div className="mockup-gallery">
+                    <div className="mockup-toggle-container" style={{ marginTop: "16px" }}>
+                      <button
+                        className="btn-secondary"
+                        onClick={() => toggleMockups(i)}
+                        style={{ padding: "8px 16px", fontSize: "0.75rem" }}
+                      >
+                        {openMockups.includes(i)
+                          ? (lang === 'en' ? "Hide preview" : "Ocultar previsualización")
+                          : (lang === 'en' ? "View preview" : "Ver previsualización")}
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Phone Mockups */}
+                  {"mockups" in p && (p as { mockups?: string[] }).mockups && openMockups.includes(i) && (
+                    <motion.div
+                      className="mockup-gallery"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      transition={{ duration: 0.3 }}
+                    >
                       {((p as { mockups?: string[] }).mockups ?? []).map((src, idx) => (
                         <div className="phone-mockup" key={idx} onClick={() => setLightbox(src)} style={{ cursor: "pointer" }}>
                           <div className="phone-screen">
@@ -536,7 +562,7 @@ function Projects() {
                           </div>
                         </div>
                       ))}
-                    </div>
+                    </motion.div>
                   )}
                 </div>
               </motion.div>
