@@ -140,6 +140,19 @@ function Hero() {
             </a>
           </motion.div>
 
+          <motion.div variants={fadeUp} custom={2.5} style={{ marginBottom: "2rem" }}>
+            <span
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "0.8rem",
+                color: "var(--fg-dim)",
+                animation: "blink 2s infinite"
+              }}
+            >
+              [ Enter ↵ ]
+            </span>
+          </motion.div>
+
           <motion.div variants={fadeUp} custom={3}>
             <CodeWindow />
           </motion.div>
@@ -841,6 +854,15 @@ export default function Home() {
         <hr className="divider" />
         <Contact />
         <Footer />
+
+        {/* Terminal Float */}
+        <button
+          className="terminal-float"
+          aria-label="Abrir Terminal"
+          onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }))}
+        >
+          {">_"}
+        </button>
 
         {/* WhatsApp Float */}
         <a
