@@ -342,48 +342,6 @@ function Services() {
   );
 }
 
-/* ────────────────── Tech Stack ────────────────── */
-const techStack = [
-  "Flutter", "React", "Next.js", "TypeScript",
-  "Node.js", "Firebase", "Azure", "Mapbox",
-  "OpenAI", "SQL Server", "Git", "Vercel",
-];
-
-function TechStack() {
-  const { t } = useI18n();
-  return (
-    <section className="section" id="stack">
-      <div className="container">
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <span className="section-label">{t.stack.label}</span>
-          <h2 className="section-title">{t.stack.title}</h2>
-          <p className="section-desc">{t.stack.desc}</p>
-        </motion.div>
-
-        <div className="tech-grid">
-          {techStack.map((tech, i) => (
-            <motion.div
-              className="tech-item"
-              key={tech}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05, duration: 0.3 }}
-            >
-              {tech}
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ────────────────── FAQ ────────────────── */
 const faqs = [
@@ -494,10 +452,8 @@ function Projects() {
       {lightbox && (
         <div className="lightbox-overlay" onClick={() => setLightbox(null)}>
           <button className="lightbox-close" onClick={() => setLightbox(null)}>✕</button>
-          <div className="lightbox-phone" onClick={(e) => e.stopPropagation()}>
-            <div className="lightbox-screen">
-              <Image src={lightbox} alt="Screenshot" fill style={{ objectFit: "cover" }} />
-            </div>
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <Image src={lightbox} alt="Screenshot" fill style={{ objectFit: "contain" }} />
           </div>
         </div>
       )}
@@ -827,58 +783,14 @@ function TerminalEasterEgg() {
   );
 }
 
-function CustomCursor() {
-  const [pos, setPos] = useState({ x: -100, y: -100 });
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) return;
-
-    setVisible(true);
-    let targetX = -100;
-    let targetY = -100;
-    let currentX = -100;
-    let currentY = -100;
-
-    const onMove = (e: MouseEvent) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
-    };
-
-    const animate = () => {
-      currentX += (targetX - currentX) * 0.15;
-      currentY += (targetY - currentY) * 0.15;
-      setPos({ x: currentX, y: currentY });
-      requestAnimationFrame(animate);
-    };
-
-    window.addEventListener("mousemove", onMove);
-    const raf = requestAnimationFrame(animate);
-
-    return () => {
-      window.removeEventListener("mousemove", onMove);
-      cancelAnimationFrame(raf);
-    };
-  }, []);
-
-  if (!visible) return null;
-
-  return (
-    <div
-      className="custom-cursor"
-      style={{ left: pos.x, top: pos.y }}
-    />
-  );
-}
 
 /* ────────────────── Page ────────────────── */
 export default function Home() {
   return (
     <I18nProvider>
       <div className="page-content">
-        <CustomCursor />
         <TerminalEasterEgg />
+
         <Navbar />
         <Hero />
         <hr className="divider" />
@@ -887,8 +799,6 @@ export default function Home() {
         <Services />
         <hr className="divider" />
         <Projects />
-        <hr className="divider" />
-        <TechStack />
         <hr className="divider" />
         <Team />
         <hr className="divider" />
