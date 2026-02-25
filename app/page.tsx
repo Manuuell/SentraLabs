@@ -452,8 +452,10 @@ function Projects() {
       {lightbox && (
         <div className="lightbox-overlay" onClick={() => setLightbox(null)}>
           <button className="lightbox-close" onClick={() => setLightbox(null)}>✕</button>
-          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <Image src={lightbox} alt="Screenshot" fill style={{ objectFit: "contain" }} />
+          <div className="lightbox-phone" onClick={(e) => e.stopPropagation()}>
+            <div className="lightbox-screen">
+              <Image src={lightbox} alt="Screenshot" fill style={{ objectFit: "cover" }} />
+            </div>
           </div>
         </div>
       )}
