@@ -516,10 +516,57 @@ function Footer() {
   );
 }
 
+/* ────────────────── Custom Cursor ────────────────── */
+function CustomCursor() {
+  const [pos, setPos] = useState({ x: -100, y: -100 });
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) return;
+
+    setVisible(true);
+    let targetX = -100;
+    let targetY = -100;
+    let currentX = -100;
+    let currentY = -100;
+
+    const onMove = (e: MouseEvent) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+    };
+
+    const animate = () => {
+      currentX += (targetX - currentX) * 0.15;
+      currentY += (targetY - currentY) * 0.15;
+      setPos({ x: currentX, y: currentY });
+      requestAnimationFrame(animate);
+    };
+
+    window.addEventListener("mousemove", onMove);
+    const raf = requestAnimationFrame(animate);
+
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <div
+      className="custom-cursor"
+      style={{ left: pos.x, top: pos.y }}
+    />
+  );
+}
+
 /* ────────────────── Page ────────────────── */
 export default function Home() {
   return (
     <div className="page-content">
+      <CustomCursor />
       <Navbar />
       <Hero />
       <hr className="divider" />
@@ -531,6 +578,19 @@ export default function Home() {
       <hr className="divider" />
       <Contact />
       <Footer />
+
+      {/* WhatsApp Float */}
+      <a
+        href="https://wa.me/573215640735"
+        target="_blank"
+        rel="noopener"
+        className="whatsapp-float"
+        aria-label="Chat en WhatsApp"
+      >
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="#fff">
+          <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.502 1.128 6.744 3.046 9.378L1.054 31.29l6.118-1.958a15.907 15.907 0 008.832 2.666C24.826 31.998 32 24.822 32 16.004 32 7.176 24.826 0 16.004 0zm9.318 22.614c-.396 1.114-1.956 2.038-3.21 2.308-.856.182-1.974.328-5.738-1.234-4.818-1.998-7.92-6.882-8.162-7.202-.232-.32-1.95-2.6-1.95-4.96s1.234-3.52 1.672-4.002c.438-.482.954-.602 1.272-.602.318 0 .636.004.914.016.294.014.688-.112 1.078.822.396.954 1.352 3.312 1.47 3.554.118.242.198.524.04.844-.158.32-.238.52-.478.802-.24.282-.504.63-.72.844-.238.24-.488.498-.21.976.278.478 1.234 2.036 2.65 3.298 1.82 1.622 3.354 2.124 3.832 2.362.478.238.756.198 1.034-.118.278-.318 1.194-1.392 1.512-1.872.318-.478.636-.398 1.074-.238.438.158 2.794 1.318 3.272 1.558.478.238.796.358.914.558.118.198.118 1.154-.278 2.27z" />
+        </svg>
+      </a>
     </div>
   );
 }
