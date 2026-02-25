@@ -267,9 +267,9 @@ const projects = [
       { label: "GitHub →", href: "https://github.com/Manuuell/EcoOnee" },
     ],
     mockups: [
-      "/images/projects/ecoone/mockup1.webp",
-      "/images/projects/ecoone/mockup2.webp",
-      "/images/projects/ecoone/mockup3.webp",
+      "/images/projects/ecoone/mockup1e.webp",
+      "/images/projects/ecoone/mockup2e.webp",
+      "/images/projects/ecoone/mockup3e.webp",
     ],
   },
 ];
