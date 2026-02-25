@@ -4,6 +4,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { I18nProvider, useI18n } from "./i18n/context";
 
 /* ────────────────── Navbar ────────────────── */
 function Navbar() {
@@ -32,11 +33,13 @@ function Navbar() {
     localStorage.setItem("theme", next);
   };
 
+  const { t, lang, setLang } = useI18n();
+
   const links = [
-    { label: "Inicio", href: "#hero" },
-    { label: "Nosotros", href: "#about" },
-    { label: "Proyectos", href: "#projects" },
-    { label: "Equipo", href: "#team" },
+    { label: t.nav.home, href: "#hero" },
+    { label: t.nav.about, href: "#about" },
+    { label: t.nav.projects, href: "#projects" },
+    { label: t.nav.team, href: "#team" },
   ];
 
   return (
@@ -77,13 +80,21 @@ function Navbar() {
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           <button
             className="theme-toggle"
+            onClick={() => setLang(lang === "es" ? "en" : "es")}
+            aria-label="Cambiar idioma"
+            style={{ fontSize: "0.75rem", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}
+          >
+            {lang === "es" ? "EN" : "ES"}
+          </button>
+          <button
+            className="theme-toggle"
             onClick={toggleTheme}
             aria-label="Cambiar tema"
           >
             {theme === "dark" ? "☀️" : "🌙"}
           </button>
           <a href="#contact" className="nav-cta" onClick={() => setMenuOpen(false)}>
-            Contacto
+            {t.nav.contact}
           </a>
         </div>
       </div>
@@ -102,6 +113,7 @@ const fadeUp: Variants = {
 };
 
 function Hero() {
+  const { t } = useI18n();
   return (
     <section className="hero section" id="hero">
       <div className="container">
@@ -111,21 +123,20 @@ function Hero() {
           animate="visible"
         >
           <motion.h1 className="hero-tagline" variants={fadeUp} custom={0}>
-            Creamos. Probamos.{" "}
-            <span className="word-accent">Lanzamos.</span>
+            {t.hero.tagline1} {t.hero.tagline2}{" "}
+            <span className="word-accent">{t.hero.tagline3}</span>
           </motion.h1>
 
           <motion.p className="hero-sub" variants={fadeUp} custom={1}>
-            Somos un estudio de desarrollo de software. Transformamos tus ideas
-            en productos digitales listos para el mundo real.
+            {t.hero.sub}
           </motion.p>
 
           <motion.div className="hero-ctas" variants={fadeUp} custom={2}>
             <a href="mailto:atencionsentralabs@gmail.com" className="btn-primary">
-              Agenda una reunión
+              {t.hero.cta1}
             </a>
             <a href="#projects" className="btn-secondary">
-              Ver proyectos
+              {t.hero.cta2}
             </a>
           </motion.div>
 
@@ -139,17 +150,18 @@ function Hero() {
 }
 
 function CodeWindow() {
+  const { t } = useI18n();
   return (
     <div className="code-window">
       <div className="code-titlebar">
         <span className="code-dot red" />
         <span className="code-dot yellow" />
         <span className="code-dot green" />
-        <span className="code-filename">SentraLabs.tsx</span>
+        <span className="code-filename">{t.code.filename}</span>
       </div>
       <div className="code-body">
         <pre>
-          <span className="cm">{"// Tu próximo proyecto empieza aquí"}</span>
+          <span className="cm">{t.code.comment}</span>
           {"\n"}
           <span className="kw">const</span>{" "}
           <span className="var">project</span>{" "}
@@ -236,14 +248,15 @@ function useCountUp(target: number, duration = 1500) {
 
 /* ────────────────── About ────────────────── */
 function About() {
+  const { t } = useI18n();
   const projects = useCountUp(3);
   const devs = useCountUp(4);
   const awards = useCountUp(2);
 
   const stats = [
-    { ref: projects.ref, value: `${projects.count}+`, label: "Proyectos", color: "blue" as const },
-    { ref: devs.ref, value: `${devs.count}`, label: "Desarrolladores", color: "purple" as const },
-    { ref: awards.ref, value: `${awards.count}`, label: "Premios", color: "green" as const },
+    { ref: projects.ref, value: `${projects.count}+`, label: t.about.stats.projects, color: "blue" as const },
+    { ref: devs.ref, value: `${devs.count}`, label: t.about.stats.devs, color: "purple" as const },
+    { ref: awards.ref, value: `${awards.count}`, label: t.about.stats.awards, color: "green" as const },
   ];
 
   return (
@@ -256,16 +269,9 @@ function About() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
-          <span className="section-label">// nosotros</span>
-          <h2 className="section-title">
-            Software que resuelve problemas reales
-          </h2>
-          <p className="section-desc">
-            En SentraLabs nos apasiona construir tecnología con propósito.
-            Diseñamos, desarrollamos y lanzamos productos digitales que
-            impulsan negocios y resuelven necesidades concretas — desde
-            aplicaciones web hasta sistemas empresariales completos.
-          </p>
+          <span className="section-label">{t.about.label}</span>
+          <h2 className="section-title">{t.about.title}</h2>
+          <p className="section-desc">{t.about.desc}</p>
         </motion.div>
 
         <div className="about-grid">
@@ -298,6 +304,8 @@ const services = [
 ];
 
 function Services() {
+  const { t } = useI18n();
+  const icons = ["📱", "🌐", "🤖", "🔒"];
   return (
     <section className="section" id="services">
       <div className="container">
@@ -308,15 +316,13 @@ function Services() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
-          <span className="section-label">// servicios</span>
-          <h2 className="section-title">Lo que hacemos</h2>
-          <p className="section-desc">
-            Soluciones digitales de alto impacto, desde la idea hasta el lanzamiento.
-          </p>
+          <span className="section-label">{t.services.label}</span>
+          <h2 className="section-title">{t.services.title}</h2>
+          <p className="section-desc">{t.services.desc}</p>
         </motion.div>
 
         <div className="services-grid">
-          {services.map((s, i) => (
+          {t.services.items.map((s, i) => (
             <motion.div
               className="service-card"
               key={s.title}
@@ -325,7 +331,7 @@ function Services() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
             >
-              <span className="service-icon">{s.icon}</span>
+              <span className="service-icon">{icons[i]}</span>
               <h3 className="service-title">{s.title}</h3>
               <p className="service-desc">{s.desc}</p>
             </motion.div>
@@ -344,6 +350,7 @@ const techStack = [
 ];
 
 function TechStack() {
+  const { t } = useI18n();
   return (
     <section className="section" id="stack">
       <div className="container">
@@ -354,24 +361,22 @@ function TechStack() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
-          <span className="section-label">// tecnologías</span>
-          <h2 className="section-title">Nuestro Stack</h2>
-          <p className="section-desc">
-            Las herramientas que usamos para construir productos de calidad.
-          </p>
+          <span className="section-label">{t.stack.label}</span>
+          <h2 className="section-title">{t.stack.title}</h2>
+          <p className="section-desc">{t.stack.desc}</p>
         </motion.div>
 
         <div className="tech-grid">
-          {techStack.map((t, i) => (
+          {techStack.map((tech, i) => (
             <motion.div
               className="tech-item"
-              key={t}
+              key={tech}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05, duration: 0.3 }}
             >
-              {t}
+              {tech}
             </motion.div>
           ))}
         </div>
@@ -390,6 +395,7 @@ const faqs = [
 ];
 
 function FAQ() {
+  const { t } = useI18n();
   const [open, setOpen] = useState<number | null>(null);
 
   return (
@@ -402,12 +408,12 @@ function FAQ() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
-          <span className="section-label">// faq</span>
-          <h2 className="section-title">Preguntas Frecuentes</h2>
+          <span className="section-label">{t.faq.label}</span>
+          <h2 className="section-title">{t.faq.title}</h2>
         </motion.div>
 
         <div className="faq-list">
-          {faqs.map((f, i) => (
+          {t.faq.items.map((f, i) => (
             <motion.div
               className={`faq-item ${open === i ? "faq-open" : ""}`}
               key={i}
@@ -481,6 +487,7 @@ const projects = [
 ];
 
 function Projects() {
+  const { t } = useI18n();
   const [lightbox, setLightbox] = useState<string | null>(null);
   return (
     <>
@@ -503,11 +510,9 @@ function Projects() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.5 }}
           >
-            <span className="section-label">// proyectos</span>
-            <h2 className="section-title">Lo que construimos</h2>
-            <p className="section-desc">
-              Cada proyecto es una oportunidad de crear algo que importa.
-            </p>
+            <span className="section-label">{t.projects.label}</span>
+            <h2 className="section-title">{t.projects.title}</h2>
+            <p className="section-desc">{t.projects.desc}</p>
           </motion.div>
 
           <div className="projects-grid">
@@ -622,6 +627,7 @@ const team = [
 ];
 
 function Team() {
+  const { t } = useI18n();
   return (
     <section className="section" id="team">
       <div className="container">
@@ -632,11 +638,9 @@ function Team() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
-          <span className="section-label">// equipo</span>
-          <h2 className="section-title">Las personas detrás del código</h2>
-          <p className="section-desc">
-            Un equipo joven, técnico y comprometido con crear soluciones de calidad.
-          </p>
+          <span className="section-label">{t.team.label}</span>
+          <h2 className="section-title">{t.team.title}</h2>
+          <p className="section-desc">{t.team.desc}</p>
         </motion.div>
 
         <div className="team-grid">
@@ -680,6 +684,7 @@ function Team() {
 
 /* ────────────────── Contact ────────────────── */
 function Contact() {
+  const { t } = useI18n();
   return (
     <section className="section" id="contact">
       <div className="container">
@@ -690,11 +695,8 @@ function Contact() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="contact-title">¿Tienes un proyecto en mente?</h2>
-          <p className="contact-desc">
-            Cuéntanos tu idea y te ayudamos a hacerla realidad.
-            Sin compromisos, solo café y código.
-          </p>
+          <h2 className="contact-title">{t.contact.title}</h2>
+          <p className="contact-desc">{t.contact.desc}</p>
           <a href="mailto:atencionsentralabs@gmail.com" className="contact-email">
             ✉ atencionsentralabs@gmail.com
           </a>
@@ -706,18 +708,18 @@ function Contact() {
 
 /* ────────────────── Footer ────────────────── */
 function Footer() {
+  const { t } = useI18n();
   return (
     <footer className="footer">
       <div className="container">
         <p className="footer-text">
-          © {new Date().getFullYear()} SentraLabs. Todos los derechos
-          reservados.
+          © {new Date().getFullYear()} SentraLabs. {t.footer.rights}
         </p>
         <div className="footer-links">
           <a href="mailto:atencionsentralabs@gmail.com">Email</a>
-          <Link href="/privacidad">Privacidad</Link>
-          <Link href="/terminos">Términos</Link>
-          <a href="#hero">Inicio</a>
+          <Link href="/privacidad">{t.footer.privacy}</Link>
+          <Link href="/terminos">{t.footer.terms}</Link>
+          <a href="#hero">{t.footer.home}</a>
         </div>
       </div>
     </footer>
@@ -873,39 +875,41 @@ function CustomCursor() {
 /* ────────────────── Page ────────────────── */
 export default function Home() {
   return (
-    <div className="page-content">
-      <CustomCursor />
-      <TerminalEasterEgg />
-      <Navbar />
-      <Hero />
-      <hr className="divider" />
-      <About />
-      <hr className="divider" />
-      <Services />
-      <hr className="divider" />
-      <Projects />
-      <hr className="divider" />
-      <TechStack />
-      <hr className="divider" />
-      <Team />
-      <hr className="divider" />
-      <FAQ />
-      <hr className="divider" />
-      <Contact />
-      <Footer />
+    <I18nProvider>
+      <div className="page-content">
+        <CustomCursor />
+        <TerminalEasterEgg />
+        <Navbar />
+        <Hero />
+        <hr className="divider" />
+        <About />
+        <hr className="divider" />
+        <Services />
+        <hr className="divider" />
+        <Projects />
+        <hr className="divider" />
+        <TechStack />
+        <hr className="divider" />
+        <Team />
+        <hr className="divider" />
+        <FAQ />
+        <hr className="divider" />
+        <Contact />
+        <Footer />
 
-      {/* WhatsApp Float */}
-      <a
-        href="https://wa.me/573215640735"
-        target="_blank"
-        rel="noopener"
-        className="whatsapp-float"
-        aria-label="Chat en WhatsApp"
-      >
-        <svg viewBox="0 0 32 32" width="28" height="28" fill="#fff">
-          <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.502 1.128 6.744 3.046 9.378L1.054 31.29l6.118-1.958a15.907 15.907 0 008.832 2.666C24.826 31.998 32 24.822 32 16.004 32 7.176 24.826 0 16.004 0zm9.318 22.614c-.396 1.114-1.956 2.038-3.21 2.308-.856.182-1.974.328-5.738-1.234-4.818-1.998-7.92-6.882-8.162-7.202-.232-.32-1.95-2.6-1.95-4.96s1.234-3.52 1.672-4.002c.438-.482.954-.602 1.272-.602.318 0 .636.004.914.016.294.014.688-.112 1.078.822.396.954 1.352 3.312 1.47 3.554.118.242.198.524.04.844-.158.32-.238.52-.478.802-.24.282-.504.63-.72.844-.238.24-.488.498-.21.976.278.478 1.234 2.036 2.65 3.298 1.82 1.622 3.354 2.124 3.832 2.362.478.238.756.198 1.034-.118.278-.318 1.194-1.392 1.512-1.872.318-.478.636-.398 1.074-.238.438.158 2.794 1.318 3.272 1.558.478.238.796.358.914.558.118.198.118 1.154-.278 2.27z" />
-        </svg>
-      </a>
-    </div>
+        {/* WhatsApp Float */}
+        <a
+          href="https://wa.me/573215640735"
+          target="_blank"
+          rel="noopener"
+          className="whatsapp-float"
+          aria-label="Chat en WhatsApp"
+        >
+          <svg viewBox="0 0 32 32" width="28" height="28" fill="#fff">
+            <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.502 1.128 6.744 3.046 9.378L1.054 31.29l6.118-1.958a15.907 15.907 0 008.832 2.666C24.826 31.998 32 24.822 32 16.004 32 7.176 24.826 0 16.004 0zm9.318 22.614c-.396 1.114-1.956 2.038-3.21 2.308-.856.182-1.974.328-5.738-1.234-4.818-1.998-7.92-6.882-8.162-7.202-.232-.32-1.95-2.6-1.95-4.96s1.234-3.52 1.672-4.002c.438-.482.954-.602 1.272-.602.318 0 .636.004.914.016.294.014.688-.112 1.078.822.396.954 1.352 3.312 1.47 3.554.118.242.198.524.04.844-.158.32-.238.52-.478.802-.24.282-.504.63-.72.844-.238.24-.488.498-.21.976.278.478 1.234 2.036 2.65 3.298 1.82 1.622 3.354 2.124 3.832 2.362.478.238.756.198 1.034-.118.278-.318 1.194-1.392 1.512-1.872.318-.478.636-.398 1.074-.238.438.158 2.794 1.318 3.272 1.558.478.238.796.358.914.558.118.198.118 1.154-.278 2.27z" />
+          </svg>
+        </a>
+      </div>
+    </I18nProvider>
   );
 }
