@@ -690,6 +690,8 @@ function Footer() {
         </p>
         <div className="footer-links">
           <a href="mailto:atencionsentralabs@gmail.com">Email</a>
+          <Link href="/privacidad">Privacidad</Link>
+          <Link href="/terminos">Términos</Link>
           <a href="#hero">Inicio</a>
         </div>
       </div>
@@ -697,7 +699,107 @@ function Footer() {
   );
 }
 
-/* ────────────────── Custom Cursor ────────────────── */
+/* ────────────────── Terminal Easter Egg ────────────────── */
+const terminalCommands: Record<string, string> = {
+  help: "Comandos: help, projects, team, contact, skills, clear",
+  projects: "→ TransCar — App de transporte urbano en Cartagena\n→ MarSec — Plataforma de ciberseguridad (🏆 Mejor Proyecto TalentoTech)\n→ EcoOne — Reciclaje con EcoCoins",
+  team: "→ Manuel Esteban — Fundador\n→ Niño Niña — Co-founder / Dev\n→ Matamba — Database Manager\n→ Jerson Diaz — Developer",
+  contact: "→ Email: atencionsentralabs@gmail.com\n→ WhatsApp: +57 321 564 0735\n→ GitHub: github.com/Manuuell",
+  skills: "Flutter · React · Next.js · TypeScript · Node.js · Firebase · Azure · OpenAI · SQL Server · Mapbox",
+};
+
+function TerminalEasterEgg() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [input, setInput] = useState("");
+  const [history, setHistory] = useState<{ cmd: string; output: string }[]>([
+    { cmd: "", output: "Bienvenido a SentraLabs Terminal v1.0\nEscribe 'help' para ver los comandos." },
+  ]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "`" && !isOpen) {
+        e.preventDefault();
+        setIsOpen(true);
+      }
+      if (e.key === "Escape" && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [history]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cmd = input.trim().toLowerCase();
+    if (!cmd) return;
+
+    if (cmd === "clear") {
+      setHistory([]);
+      setInput("");
+      return;
+    }
+
+    const output = terminalCommands[cmd] || `Comando no encontrado: '${cmd}'. Escribe 'help'.`;
+    setHistory((h) => [...h, { cmd: input, output }]);
+    setInput("");
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="terminal-overlay" onClick={() => setIsOpen(false)}>
+      <div className="terminal-window" onClick={(e) => e.stopPropagation()}>
+        <div className="terminal-titlebar">
+          <span className="code-dot red" />
+          <span className="code-dot yellow" />
+          <span className="code-dot green" />
+          <span className="terminal-title">sentralabs@web:~$</span>
+          <button className="terminal-close" onClick={() => setIsOpen(false)}>✕</button>
+        </div>
+        <div className="terminal-body" ref={scrollRef}>
+          {history.map((h, i) => (
+            <div key={i}>
+              {h.cmd && (
+                <p className="terminal-cmd">
+                  <span className="terminal-prompt">{'>'}</span> {h.cmd}
+                </p>
+              )}
+              <pre className="terminal-output">{h.output}</pre>
+            </div>
+          ))}
+          <form onSubmit={handleSubmit} className="terminal-input-line">
+            <span className="terminal-prompt">{'>'}</span>
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              className="terminal-input"
+              spellCheck={false}
+              autoComplete="off"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function CustomCursor() {
   const [pos, setPos] = useState({ x: -100, y: -100 });
   const [visible, setVisible] = useState(false);
@@ -748,6 +850,7 @@ export default function Home() {
   return (
     <div className="page-content">
       <CustomCursor />
+      <TerminalEasterEgg />
       <Navbar />
       <Hero />
       <hr className="divider" />
