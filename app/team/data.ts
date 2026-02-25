@@ -41,7 +41,7 @@ export const teamMembers: TeamMember[] = [
         socials: {
             github: "https://github.com/Manuuell",
             linkedin: "https://www.linkedin.com/in/manuuell/",
-            email: "atencionsentralabs@gmail.com",
+            email: "Estebanmanuel600@gmail.com",
         },
         highlights: [
             {
@@ -78,6 +78,13 @@ export const teamMembers: TeamMember[] = [
                     "Sitio web oficial del estudio. Dark terminal aesthetic, animaciones con Framer Motion.",
                 tags: ["Next.js", "React", "TypeScript", "Framer Motion"],
                 link: "https://github.com/Manuuell/SentraLabs",
+            },
+            {
+                name: "EcoOne",
+                description:
+                    "App móvil multiplataforma que incentiva el reciclaje con EcoCoins. Conecta ciudadanos, operadores, comercios y administradores. Chatbot IA, QR y billetera digital.",
+                tags: ["Flutter", "Clean Architecture", "OpenAI", "Firebase"],
+                link: "https://github.com/Manuuell/EcoOnee",
             },
         ],
         skills: [
