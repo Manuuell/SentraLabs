@@ -61,7 +61,7 @@ export const teamMembers: TeamMember[] = [
             {
                 name: "TransCar",
                 description:
-                    "App móvil oficial de TransCaribe. Mapa interactivo con rutas en tiempo real, ETAs en vivo, chatbot con IA (GPT-4), consulta de saldo y noticias del sistema.",
+                    "App de transporte urbano en Cartagena. Mapa interactivo con rutas en tiempo real, ETAs en vivo, chatbot con IA (GPT-4), consulta de saldo y noticias del sistema.",
                 tags: ["Flutter", "Dart", "Mapbox", "OpenAI", "Google Sign-In"],
                 link: "https://github.com/Manuuell/Trascaribe-APP",
             },

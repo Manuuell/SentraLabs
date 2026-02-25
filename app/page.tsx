@@ -233,7 +233,7 @@ const projects = [
   {
     image: "/images/projects/icon.webp",
     name: "TransCar",
-    desc: "App oficial de TransCaribe. Mapa interactivo con rutas en tiempo real, ETAs en vivo, chatbot con IA (GPT-4), consulta de saldo y noticias del sistema.",
+    desc: "App de transporte urbano en Cartagena. Mapa interactivo con rutas en tiempo real, ETAs en vivo, chatbot con IA (GPT-4), consulta de saldo y noticias del sistema.",
     tags: ["Flutter", "Mapbox", "OpenAI", "En desarrollo"],
     links: [
       { label: "GitHub →", href: "https://github.com/Manuuell/Trascaribe-APP" },
@@ -275,95 +275,105 @@ const projects = [
 ];
 
 function Projects() {
+  const [lightbox, setLightbox] = useState<string | null>(null);
   return (
-    <section className="section" id="projects">
-      <div className="container">
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <span className="section-label">// proyectos</span>
-          <h2 className="section-title">Lo que construimos</h2>
-          <p className="section-desc">
-            Cada proyecto es una oportunidad de crear algo que importa.
-          </p>
-        </motion.div>
-
-        <div className="projects-grid">
-          {projects.map((p, i) => (
-            <motion.div
-              className="project-card"
-              key={p.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.4 }}
-            >
-              <div className="project-icon">
-                {p.image ? (
-                  <Image
-                    src={p.image}
-                    alt={p.name}
-                    width={48}
-                    height={48}
-                    style={{ borderRadius: "12px", objectFit: "cover" }}
-                  />
-                ) : (
-                  <span style={{ fontSize: "1.5rem" }}>🌿</span>
-                )}
-              </div>
-              <div className="project-info">
-                <h3 className="project-name">{p.name}</h3>
-                <p className="project-desc">{p.desc}</p>
-                <div className="project-tags">
-                  {p.tags.map((t) => (
-                    <span className="tag" key={t}>
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                {p.links.length > 0 && (
-                  <div className="project-links">
-                    {p.links.map((l) => (
-                      <a
-                        href={l.href}
-                        className="project-link"
-                        key={l.label}
-                        target="_blank"
-                        rel="noopener"
-                      >
-                        {l.label}
-                      </a>
-                    ))}
-                  </div>
-                )}
-                {/* Phone Mockups */}
-                {"mockups" in p && (p as { mockups?: string[] }).mockups && (
-                  <div className="mockup-gallery">
-                    {((p as { mockups?: string[] }).mockups ?? []).map((src, idx) => (
-                      <div className="phone-mockup" key={idx}>
-                        <div className="phone-notch" />
-                        <div className="phone-screen">
-                          <Image
-                            src={src}
-                            alt={`${p.name} screenshot ${idx + 1}`}
-                            fill
-                            style={{ objectFit: "cover" }}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          ))}
+    <>
+      {lightbox && (
+        <div className="lightbox-overlay" onClick={() => setLightbox(null)}>
+          <button className="lightbox-close" onClick={() => setLightbox(null)}>✕</button>
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <Image src={lightbox} alt="Screenshot" width={400} height={800} style={{ objectFit: "contain", borderRadius: "16px" }} />
+          </div>
         </div>
-      </div>
-    </section>
+      )}
+      <section className="section" id="projects">
+        <div className="container">
+          <motion.div
+            className="section-header"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="section-label">// proyectos</span>
+            <h2 className="section-title">Lo que construimos</h2>
+            <p className="section-desc">
+              Cada proyecto es una oportunidad de crear algo que importa.
+            </p>
+          </motion.div>
+
+          <div className="projects-grid">
+            {projects.map((p, i) => (
+              <motion.div
+                className="project-card"
+                key={p.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.4 }}
+              >
+                <div className="project-icon">
+                  {p.image ? (
+                    <Image
+                      src={p.image}
+                      alt={p.name}
+                      width={48}
+                      height={48}
+                      style={{ borderRadius: "12px", objectFit: "cover" }}
+                    />
+                  ) : (
+                    <span style={{ fontSize: "1.5rem" }}>🌿</span>
+                  )}
+                </div>
+                <div className="project-info">
+                  <h3 className="project-name">{p.name}</h3>
+                  <p className="project-desc">{p.desc}</p>
+                  <div className="project-tags">
+                    {p.tags.map((t) => (
+                      <span className="tag" key={t}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  {p.links.length > 0 && (
+                    <div className="project-links">
+                      {p.links.map((l) => (
+                        <a
+                          href={l.href}
+                          className="project-link"
+                          key={l.label}
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          {l.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                  {/* Phone Mockups */}
+                  {"mockups" in p && (p as { mockups?: string[] }).mockups && (
+                    <div className="mockup-gallery">
+                      {((p as { mockups?: string[] }).mockups ?? []).map((src, idx) => (
+                        <div className="phone-mockup" key={idx} onClick={() => setLightbox(src)} style={{ cursor: "pointer" }}>
+                          <div className="phone-screen">
+                            <Image
+                              src={src}
+                              alt={`${p.name} screenshot ${idx + 1}`}
+                              fill
+                              style={{ objectFit: "cover" }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 
