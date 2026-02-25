@@ -735,7 +735,7 @@ function TerminalEasterEgg() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "-" && !isOpen) {
+      if (e.key === "Enter" && !isOpen) {
         e.preventDefault();
         setIsOpen(true);
       }
