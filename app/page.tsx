@@ -9,12 +9,28 @@ import Link from "next/link";
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("theme") as "dark" | "light" | null;
+    if (saved) {
+      setTheme(saved);
+      document.documentElement.setAttribute("data-theme", saved);
+    }
+  }, []);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
   }, []);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  };
 
   const links = [
     { label: "Inicio", href: "#hero" },
@@ -28,8 +44,8 @@ function Navbar() {
       className="navbar"
       style={{
         background: scrolled
-          ? "rgba(10,10,15,0.85)"
-          : "rgba(10,10,15,0.65)",
+          ? theme === "dark" ? "rgba(10,10,15,0.85)" : "rgba(255,255,255,0.85)"
+          : theme === "dark" ? "rgba(10,10,15,0.65)" : "rgba(255,255,255,0.65)",
       }}
     >
       <div className="navbar-inner">
@@ -58,9 +74,18 @@ function Navbar() {
           ))}
         </ul>
 
-        <a href="#contact" className="nav-cta" onClick={() => setMenuOpen(false)}>
-          Contacto
-        </a>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label="Cambiar tema"
+          >
+            {theme === "dark" ? "☀️" : "🌙"}
+          </button>
+          <a href="#contact" className="nav-cta" onClick={() => setMenuOpen(false)}>
+            Contacto
+          </a>
+        </div>
       </div>
     </header>
   );

@@ -30,6 +30,93 @@
   --transition: 0.25s cubic-bezier(.4, 0, .2, 1);
 }
 
+[data-theme="light"] {
+  --bg: #fafafa;
+  --surface: #f0f0f3;
+  --surface-2: #ffffff;
+  --fg: #111118;
+  --fg-muted: #52525b;
+  --fg-dim: #a1a1aa;
+  --border: rgba(0, 0, 0, 0.08);
+  --blue: #2563eb;
+  --purple: #7c3aed;
+  --green: #059669;
+  --cyan: #0891b2;
+  --amber: #d97706;
+  --red: #dc2626;
+  --glow-blue: rgba(37, 99, 235, 0.08);
+  --glow-purple: rgba(124, 58, 237, 0.06);
+  --shadow-card: 0 2px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Light mode overrides for hardcoded colors */
+[data-theme="light"] body::before {
+  opacity: 0.3;
+}
+
+[data-theme="light"] .nav-cta {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+[data-theme="light"] .nav-cta:hover {
+  color: var(--bg);
+}
+
+[data-theme="light"] .btn-primary {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+[data-theme="light"] .btn-primary:hover {
+  color: var(--bg);
+}
+
+[data-theme="light"] .code-window {
+  background: #1a1a2e;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .code-titlebar {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="light"] .team-avatar {
+  color: #fff;
+}
+
+[data-theme="light"] .nav-toggle span {
+  background: var(--fg);
+}
+
+[data-theme="light"] .nav-links.open {
+  background: var(--surface-2);
+}
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
 /* ─── Reset ─── */
 *,
 *::before,
