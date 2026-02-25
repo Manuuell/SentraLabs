@@ -617,7 +617,7 @@ const team = [
   },
   {
     slug: "jerson-diaz",
-    name: "Jerson Diaz",
+    name: "El tumba techo",
     role: "Developer",
     image: "/images/team/miembro4.webp",
     github: "https://github.com/jerdiaz",

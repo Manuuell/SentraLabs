@@ -152,7 +152,7 @@ export const teamMembers: TeamMember[] = [
     },
     {
         slug: "jerson-diaz",
-        name: "Jerson Diaz",
+        name: "El tumba techo",
         role: "Developer",
         image: "/images/team/miembro4.webp",
         oneLiner: "Developer en SentraLabs.",
