@@ -855,15 +855,6 @@ export default function Home() {
         <Contact />
         <Footer />
 
-        {/* Terminal Float */}
-        <button
-          className="terminal-float"
-          aria-label="Abrir Terminal"
-          onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }))}
-        >
-          {">_"}
-        </button>
-
         {/* WhatsApp Float */}
         <a
           href="https://wa.me/573215640735"
