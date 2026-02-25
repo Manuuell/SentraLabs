@@ -603,7 +603,7 @@ const team = [
     slug: "nino-nina",
     name: "Niño Niña",
     role: "Co-founder / Dev",
-    image: "/images/team/miembro2.webp",
+    image: "/images/team/miembro2e.webp",
     github: "https://github.com/Angelsistemas7",
     linkedin: "",
   },

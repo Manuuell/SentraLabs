@@ -124,7 +124,7 @@ export const teamMembers: TeamMember[] = [
         slug: "nino-nina",
         name: "Niño Niña",
         role: "Co-founder / Dev",
-        image: "/images/team/miembro2.webp",
+        image: "/images/team/miembro2e.webp",
         oneLiner: "Co-fundador de SentraLabs.",
         bio: "Desarrollador comprometido con crear soluciones de calidad.",
         socials: {
