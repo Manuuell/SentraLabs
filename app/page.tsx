@@ -247,6 +247,11 @@ const projects = [
     links: [
       { label: "GitHub →", href: "https://github.com/Manuuell/MarSec" },
     ],
+    mockups: [
+      "/images/projects/marsec/screen1.webp",
+      "/images/projects/marsec/screen2.webp",
+      "/images/projects/marsec/screen3.webp",
+    ],
   },
   {
     image: "",
@@ -322,6 +327,24 @@ function Projects() {
                       >
                         {l.label}
                       </a>
+                    ))}
+                  </div>
+                )}
+                {/* Phone Mockups */}
+                {"mockups" in p && (p as { mockups?: string[] }).mockups && (
+                  <div className="mockup-gallery">
+                    {((p as { mockups?: string[] }).mockups ?? []).map((src, idx) => (
+                      <div className="phone-mockup" key={idx}>
+                        <div className="phone-notch" />
+                        <div className="phone-screen">
+                          <Image
+                            src={src}
+                            alt={`${p.name} screenshot ${idx + 1}`}
+                            fill
+                            style={{ objectFit: "cover" }}
+                          />
+                        </div>
+                      </div>
                     ))}
                   </div>
                 )}
