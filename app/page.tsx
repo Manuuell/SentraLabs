@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -178,12 +178,47 @@ function CodeWindow() {
   );
 }
 
+/* ────────────────── Animated Counter Hook ────────────────── */
+function useCountUp(target: number, duration = 1500) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          const start = performance.now();
+          const step = (now: number) => {
+            const progress = Math.min((now - start) / duration, 1);
+            setCount(Math.floor(progress * target));
+            if (progress < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [target, duration]);
+
+  return { count, ref };
+}
+
 /* ────────────────── About ────────────────── */
 function About() {
+  const projects = useCountUp(3);
+  const devs = useCountUp(4);
+  const awards = useCountUp(2);
+
   const stats = [
-    { value: "100%", label: "Compromiso", color: "blue" as const },
-    { value: "24/7", label: "Soporte", color: "purple" as const },
-    { value: "∞", label: "Ideas", color: "green" as const },
+    { ref: projects.ref, value: `${projects.count}+`, label: "Proyectos", color: "blue" as const },
+    { ref: devs.ref, value: `${devs.count}`, label: "Desarrolladores", color: "purple" as const },
+    { ref: awards.ref, value: `${awards.count}`, label: "Premios", color: "green" as const },
   ];
 
   return (
@@ -213,6 +248,7 @@ function About() {
             <motion.div
               className="about-stat"
               key={s.label}
+              ref={s.ref}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -220,6 +256,151 @@ function About() {
             >
               <div className={`stat-value ${s.color}`}>{s.value}</div>
               <div className="stat-label">{s.label}</div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────── Services ────────────────── */
+const services = [
+  { icon: "📱", title: "Desarrollo Móvil", desc: "Apps nativas y multiplataforma con Flutter. Diseño intuitivo, rendimiento nativo y deploy en iOS y Android." },
+  { icon: "🌐", title: "Desarrollo Web", desc: "Sitios y aplicaciones web modernas con Next.js, React y TypeScript. Rápidos, escalables y optimizados para SEO." },
+  { icon: "🤖", title: "Inteligencia Artificial", desc: "Chatbots, asistentes virtuales y automatización con OpenAI. Integración de IA en productos existentes." },
+  { icon: "🔒", title: "Ciberseguridad", desc: "Plataformas de formación, análisis de vulnerabilidades y soluciones de seguridad digital para empresas." },
+];
+
+function Services() {
+  return (
+    <section className="section" id="services">
+      <div className="container">
+        <motion.div
+          className="section-header"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="section-label">// servicios</span>
+          <h2 className="section-title">Lo que hacemos</h2>
+          <p className="section-desc">
+            Soluciones digitales de alto impacto, desde la idea hasta el lanzamiento.
+          </p>
+        </motion.div>
+
+        <div className="services-grid">
+          {services.map((s, i) => (
+            <motion.div
+              className="service-card"
+              key={s.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.4 }}
+            >
+              <span className="service-icon">{s.icon}</span>
+              <h3 className="service-title">{s.title}</h3>
+              <p className="service-desc">{s.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────── Tech Stack ────────────────── */
+const techStack = [
+  "Flutter", "React", "Next.js", "TypeScript",
+  "Node.js", "Firebase", "Azure", "Mapbox",
+  "OpenAI", "SQL Server", "Git", "Vercel",
+];
+
+function TechStack() {
+  return (
+    <section className="section" id="stack">
+      <div className="container">
+        <motion.div
+          className="section-header"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="section-label">// tecnologías</span>
+          <h2 className="section-title">Nuestro Stack</h2>
+          <p className="section-desc">
+            Las herramientas que usamos para construir productos de calidad.
+          </p>
+        </motion.div>
+
+        <div className="tech-grid">
+          {techStack.map((t, i) => (
+            <motion.div
+              className="tech-item"
+              key={t}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05, duration: 0.3 }}
+            >
+              {t}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────── FAQ ────────────────── */
+const faqs = [
+  { q: "¿Qué tipo de proyectos desarrollan?", a: "Desarrollamos aplicaciones móviles (Flutter), sitios web (Next.js/React), plataformas con IA (OpenAI) y soluciones de ciberseguridad. Desde MVPs hasta productos completos." },
+  { q: "¿Cuánto tiempo tarda un proyecto?", a: "Depende de la complejidad. Un MVP puede estar listo en 4-8 semanas. Proyectos más complejos pueden tomar 3-6 meses. Siempre damos una estimación detallada antes de empezar." },
+  { q: "¿Cómo es el proceso de trabajo?", a: "Seguimos un flujo ágil: descubrimiento → diseño → desarrollo → pruebas → lanzamiento. Mantenemos comunicación constante y entregas incrementales." },
+  { q: "¿Ofrecen mantenimiento post-lanzamiento?", a: "Sí. Ofrecemos planes de mantenimiento y soporte continuo. Actualizaciones, corrección de bugs, nuevas features y monitoreo." },
+  { q: "¿Trabajan con clientes fuera de Colombia?", a: "Sí, trabajamos de forma remota con clientes de cualquier parte del mundo. La comunicación es principalmente en español e inglés." },
+];
+
+function FAQ() {
+  const [open, setOpen] = useState<number | null>(null);
+
+  return (
+    <section className="section" id="faq">
+      <div className="container">
+        <motion.div
+          className="section-header"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="section-label">// faq</span>
+          <h2 className="section-title">Preguntas Frecuentes</h2>
+        </motion.div>
+
+        <div className="faq-list">
+          {faqs.map((f, i) => (
+            <motion.div
+              className={`faq-item ${open === i ? "faq-open" : ""}`}
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+            >
+              <button
+                className="faq-question"
+                onClick={() => setOpen(open === i ? null : i)}
+              >
+                <span className="faq-arrow">{open === i ? "▼" : "▶"}</span>
+                {f.q}
+              </button>
+              {open === i && (
+                <p className="faq-answer">{f.a}</p>
+              )}
             </motion.div>
           ))}
         </div>
@@ -572,9 +753,15 @@ export default function Home() {
       <hr className="divider" />
       <About />
       <hr className="divider" />
+      <Services />
+      <hr className="divider" />
       <Projects />
       <hr className="divider" />
+      <TechStack />
+      <hr className="divider" />
       <Team />
+      <hr className="divider" />
+      <FAQ />
       <hr className="divider" />
       <Contact />
       <Footer />
