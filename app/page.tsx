@@ -208,6 +208,8 @@ function CodeWindow() {
           <span className="op">;</span>
           {"\n"}
           <span className="cm">{"// → 🚀 Deployed"}</span>
+          {"\n"}
+          <span className="cm" style={{ opacity: 0.6, animation: "pulse 3s infinite" }}>{t.code.tip}</span>
           <span className="cursor" />
         </pre>
       </div>

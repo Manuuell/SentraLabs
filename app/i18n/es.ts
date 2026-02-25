@@ -11,7 +11,7 @@ export const es = {
         cta2: "Ver proyectos",
     },
     // Code Window
-    code: { comment: "// Tu próximo proyecto empieza aquí", filename: "SentraLabs.tsx" },
+    code: { comment: "// Tu próximo proyecto empieza aquí", filename: "SentraLabs.tsx", tip: "// Tip: Presiona [Enter] para magia ✨" },
     // About
     about: {
         label: "// nosotros",

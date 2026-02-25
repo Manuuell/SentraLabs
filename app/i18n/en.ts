@@ -10,7 +10,7 @@ export const en: Translations = {
         cta1: "Book a meeting",
         cta2: "View projects",
     },
-    code: { comment: "// Your next project starts here", filename: "SentraLabs.tsx" },
+    code: { comment: "// Your next project starts here", filename: "SentraLabs.tsx", tip: "// Tip: Press [Enter] for magic ✨" },
     about: {
         label: "// about",
         title: "Software that solves real problems",
