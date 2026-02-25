@@ -663,7 +663,9 @@ function Team() {
                   />
                 </div>
                 <h3 className="team-name">{m.name}</h3>
-                <p className="team-role">{m.role}</p>
+                <p className="team-role">
+                  {m.role === "Fundador" ? (t.nav.team === "Team" ? "Founder" : "Fundador") : m.role}
+                </p>
                 <div style={{ marginTop: "12px", marginBottom: "16px" }}>
                   <span className="btn-secondary" style={{ padding: "6px 14px", fontSize: "0.75rem" }}>
                     {t.nav.team === "Team" ? "View Profile" : "Ver perfil"}
