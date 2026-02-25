@@ -248,9 +248,9 @@ const projects = [
       { label: "GitHub →", href: "https://github.com/Manuuell/MarSec" },
     ],
     mockups: [
-      "/images/projects/marsec/screen1.webp",
-      "/images/projects/marsec/screen2.webp",
-      "/images/projects/marsec/screen3.webp",
+      "/images/projects/marsec/mockup1.webp",
+      "/images/projects/marsec/mockup2.webp",
+      "/images/projects/marsec/mockup3.webp",
     ],
   },
   {
