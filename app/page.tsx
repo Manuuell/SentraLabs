@@ -238,6 +238,11 @@ const projects = [
     links: [
       { label: "GitHub →", href: "https://github.com/Manuuell/Trascaribe-APP" },
     ],
+    mockups: [
+      "/images/projects/transcar/mockup1.webp",
+      "/images/projects/transcar/mockup2.webp",
+      "/images/projects/transcar/mockup3.webp",
+    ],
   },
   {
     image: "/images/projects/marsec_logo.webp",
@@ -260,6 +265,11 @@ const projects = [
     tags: ["Flutter", "Clean Architecture", "OpenAI", "Firebase"],
     links: [
       { label: "GitHub →", href: "https://github.com/Manuuell/EcoOnee" },
+    ],
+    mockups: [
+      "/images/projects/ecoone/mockup1.webp",
+      "/images/projects/ecoone/mockup2.webp",
+      "/images/projects/ecoone/mockup3.webp",
     ],
   },
 ];
