@@ -249,7 +249,7 @@ const projects = [
     ],
   },
   {
-    image: "/images/projects/ecoone.webp",
+    image: "",
     name: "EcoOne",
     desc: "App móvil multiplataforma que incentiva el reciclaje urbano con EcoCoins — moneda digital ecológica. Conecta ciudadanos, operadores, comercios y administradores. Chatbot IA, gestión de QR, billetera digital y mapa de centros.",
     tags: ["Flutter", "Clean Architecture", "OpenAI", "Firebase"],
