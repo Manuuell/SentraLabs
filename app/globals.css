@@ -1274,30 +1274,7 @@ a:hover {
 }
 
 /* ══════════════ CUSTOM CURSOR ══════════════ */
-@media (hover: hover) and (pointer: fine) {
-  body {
-    cursor: none;
-  }
-
-  a,
-  button,
-  [role="button"] {
-    cursor: none;
-  }
-}
-
-.custom-cursor {
-  position: fixed;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(96, 165, 250, 0.8) 0%, rgba(167, 139, 250, 0.4) 60%, transparent 100%);
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: screen;
-  box-shadow: 0 0 8px rgba(96, 165, 250, 0.5);
-}
+/* Estilos del cursor personalizado removidos */
 
 /* ══════════════ TERMINAL EASTER EGG ══════════════ */
 .terminal-overlay {
