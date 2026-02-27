@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import CustomCursor from "./components/CustomCursor";
 
 export const metadata: Metadata = {
   title: "SentraLabs — Creamos el software que tu idea necesita",
@@ -23,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body>
-        <CustomCursor />
         {children}
       </body>
     </html>
