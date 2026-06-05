@@ -6,7 +6,7 @@ Sitio web oficial de **SentraLabs**, un estudio de desarrollo de software enfoca
 
 ## 🌐 Demo
 
-Visita el sitio en vivo: [sentralabs.vercel.app](https://sentralabs.vercel.app)
+Visita el sitio en vivo: [sentralabs.co](https://sentralabs.co)
 
 ## 🛠️ Tech Stack
 
