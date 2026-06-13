@@ -35,7 +35,7 @@ export const teamMembers: TeamMember[] = [
         slug: "manuel-esteban",
         name: "Manuel Esteban",
         role: "Fundador",
-        image: "/images/team/miembro1.webp",
+        image: "/images/team/miembro1b.jpg",
         oneLiner: "Fundador de SentraLabs. Desarrollador fullstack & mobile.",
         bio: "Apasionado por construir productos digitales que resuelven problemas reales. Lidero SentraLabs con la visión de crear software de alto impacto — desde aplicaciones móviles hasta plataformas web completas. Creo en el código limpio, la iteración rápida y el lanzamiento constante.",
         socials: {
@@ -124,7 +124,7 @@ export const teamMembers: TeamMember[] = [
         slug: "nino-nina",
         name: "Angel Acero",
         role: "Co-founder / Dev",
-        image: "/images/team/miembro2e.webp",
+        image: "/images/team/miembro2f.jpg",
         oneLiner: "Co-fundador de SentraLabs.",
         bio: "Desarrollador comprometido con crear soluciones de calidad.",
         socials: {
