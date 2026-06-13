@@ -67,7 +67,7 @@ sentralabs/
 
 ## 📬 Contacto
 
-- ✉️ sentralabs@gmail.com
+- ✉️ atencionsentralabs@gmail.com
 
 ## 📄 Licencia
 
