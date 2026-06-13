@@ -155,7 +155,7 @@ export const teamMembers: TeamMember[] = [
         name: "Jerson Díaz",
         role: "Co-founder / Dev",
         image: "/images/team/miembro4b.jpg",
-        oneLiner: "Developer en SentraLabs.",
+        oneLiner: "Co-fundador de SentraLabs.",
         bio: "Me especializo en el desarrollo móvil y web utilizando tecnologías como Flutter, Dart, Python y SQL. Creo en el código limpio, la iteración rápida y el lanzamiento constante de software de alto impacto, abarcando desde aplicaciones hasta arquitecturas soportadas en la nube y bases de datos.",
         socials: {
             github: "https://github.com/jerdiaz",
