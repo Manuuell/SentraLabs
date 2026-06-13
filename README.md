@@ -1,8 +1,15 @@
-# SentraLabs
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="public/logo-dark.png">
+    <img src="public/logo-light.png" alt="SentraLabs" width="420">
+  </picture>
+</p>
 
-**Creamos. Probamos. Lanzamos.**
+<p align="center"><strong>Creamos. Probamos. Lanzamos.</strong></p>
 
-Sitio web oficial de **SentraLabs**, un estudio de desarrollo de software enfocado en crear, probar y lanzar productos digitales de alto impacto.
+<p align="center">
+  Sitio web oficial de <strong>SentraLabs</strong>, un estudio de desarrollo de software enfocado en crear, probar y lanzar productos digitales de alto impacto.
+</p>
 
 ## 🌐 Demo
 
@@ -12,7 +19,7 @@ Visita el sitio en vivo: [sentralabs.co](https://sentralabs.co)
 
 | Tecnología | Uso |
 |---|---|
-| [Next.js 16](https://nextjs.org/) | Framework fullstack de React |
+| [Next.js 16](https://nextjs.org/) | Framework fullstack de React (App Router) |
 | [React 19](https://react.dev/) | Librería de UI |
 | [TypeScript](https://www.typescriptlang.org/) | Tipado estático |
 | [Framer Motion](https://www.framer.com/motion/) | Animaciones y transiciones |
@@ -22,10 +29,12 @@ Visita el sitio en vivo: [sentralabs.co](https://sentralabs.co)
 ## ✨ Características
 
 - 🖥️ Diseño dark con estética de terminal
+- 🌗 Tema claro / oscuro con persistencia
+- 🌐 Multiidioma (Español / Inglés)
 - 🎬 Animaciones fluidas con Framer Motion
 - 📱 Totalmente responsive
 - ⚡ Optimizado para rendimiento (Next.js App Router)
-- 🔤 Tipografía optimizada con `next/font` (Geist)
+- 🔤 Tipografía con estética de código (`JetBrains Mono` + `Inter`)
 
 ## 🚀 Instalación
 
@@ -56,10 +65,17 @@ Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 ```
 sentralabs/
 ├── app/
-│   ├── globals.css      # Estilos globales
-│   ├── layout.tsx       # Layout principal
-│   ├── page.tsx         # Página principal
-│   └── favicon.ico      # Favicon
+│   ├── i18n/           # Internacionalización ES/EN (context + traducciones)
+│   ├── team/           # Equipo: datos y perfiles dinámicos (/team/[slug])
+│   ├── components/     # Componentes reutilizables
+│   ├── privacidad/     # Política de privacidad
+│   ├── terminos/       # Términos y condiciones
+│   ├── globals.css     # Estilos globales
+│   ├── layout.tsx      # Layout raíz + metadata
+│   ├── page.tsx        # Landing principal
+│   ├── icon.png        # Favicon (App Router)
+│   └── not-found.tsx   # Página 404
+├── public/             # Imágenes, logos y assets estáticos
 ├── package.json
 ├── tsconfig.json
 └── next.config.ts
@@ -67,7 +83,7 @@ sentralabs/
 
 ## 📬 Contacto
 
-- ✉️ sentralabs@gmail.com
+- ✉️ atencionsentralabs@gmail.com
 
 ## 📄 Licencia
 
