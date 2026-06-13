@@ -53,8 +53,14 @@ function Navbar() {
     >
       <div className="navbar-inner">
         <a href="#hero" className="nav-logo">
-          <span className="logo-dot" />
-          SentraLabs
+          <Image
+            src={theme === "dark" ? "/logo-dark.png" : "/logo-light.png"}
+            alt="SentraLabs"
+            width={102}
+            height={36}
+            priority
+            style={{ height: "36px", width: "auto" }}
+          />
         </a>
 
         <button
@@ -423,11 +429,6 @@ const projects = [
     links: [
       { label: "GitHub →", href: "https://github.com/Manuuell/Trascaribe-APP" },
     ],
-    mockups: [
-      "/images/projects/transcar/mockup1.webp",
-      "/images/projects/transcar/mockup2.webp",
-      "/images/projects/transcar/mockup3.webp",
-    ],
   },
   {
     image: "/images/projects/marsec_logo.webp",
@@ -601,7 +602,7 @@ const team = [
   },
   {
     slug: "nino-nina",
-    name: "Niño Niña",
+    name: "Angel Acero",
     role: "Co-founder / Dev",
     image: "/images/team/miembro2e.webp",
     github: "https://github.com/Angelsistemas7",
@@ -609,7 +610,7 @@ const team = [
   },
   {
     slug: "matamba",
-    name: "Matamba",
+    name: "Javier Mercado",
     role: "Database Manager",
     image: "/images/team/miembro3.webp",
     github: "https://github.com/Javimercadobolivar",
@@ -617,11 +618,11 @@ const team = [
   },
   {
     slug: "jerson-diaz",
-    name: "El tumba techo",
-    role: "Developer",
-    image: "/images/team/miembro4.webp",
+    name: "Jerson Díaz",
+    role: "Co-founder / Dev",
+    image: "/images/team/miembro4b.jpg",
     github: "https://github.com/jerdiaz",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/jerson-diaz-07b97333b/",
   },
 ];
 
@@ -736,7 +737,7 @@ function Footer() {
 const terminalCommands: Record<string, string> = {
   help: "Comandos: help, projects, team, contact, skills, clear",
   projects: "→ TransCar — App de transporte urbano en Cartagena\n→ MarSec — Plataforma de ciberseguridad (🏆 Mejor Proyecto TalentoTech)\n→ EcoOne — Reciclaje con EcoCoins",
-  team: "→ Manuel Esteban — Fundador\n→ Niño Niña — Co-founder / Dev\n→ Matamba — Database Manager\n→ Jerson Diaz — Developer",
+  team: "→ Manuel Esteban — Fundador\n→ Angel Acero — Co-founder / Dev\n→ Javier Mercado — Database Manager\n→ Jerson Díaz — Co-founder / Dev",
   contact: "→ Email: atencionsentralabs@gmail.com\n→ WhatsApp: +57 321 564 0735\n→ GitHub: github.com/Manuuell",
   skills: "Flutter · React · Next.js · TypeScript · Node.js · Firebase · Azure · OpenAI · SQL Server · Mapbox",
 };

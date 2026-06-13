@@ -122,7 +122,7 @@ export const teamMembers: TeamMember[] = [
     },
     {
         slug: "nino-nina",
-        name: "Niño Niña",
+        name: "Angel Acero",
         role: "Co-founder / Dev",
         image: "/images/team/miembro2e.webp",
         oneLiner: "Co-fundador de SentraLabs.",
@@ -136,7 +136,7 @@ export const teamMembers: TeamMember[] = [
     },
     {
         slug: "matamba",
-        name: "Matamba",
+        name: "Javier Mercado",
         role: "Database Manager",
         image: "/images/team/miembro3.webp",
         oneLiner: "Database Manager en SentraLabs.",
@@ -152,13 +152,14 @@ export const teamMembers: TeamMember[] = [
     },
     {
         slug: "jerson-diaz",
-        name: "El tumba techo",
-        role: "Developer",
-        image: "/images/team/miembro4.webp",
+        name: "Jerson Díaz",
+        role: "Co-founder / Dev",
+        image: "/images/team/miembro4b.jpg",
         oneLiner: "Developer en SentraLabs.",
         bio: "Desarrollador enfocado en construir soluciones digitales efectivas.",
         socials: {
             github: "https://github.com/jerdiaz",
+            linkedin: "https://www.linkedin.com/in/jerson-diaz-07b97333b/",
         },
         highlights: [],
         projects: [],
