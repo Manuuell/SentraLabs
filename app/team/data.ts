@@ -237,6 +237,18 @@ export const teamMembers: TeamMember[] = [
             },
         ],
     },
+    {
+        slug: "gelbert-cantillo",
+        name: "Gelbert Cantillo",
+        role: "Diseñador UX/UI",
+        image: "/images/team/miembro5.jpg",
+        oneLiner: "Diseñador UX/UI en SentraLabs.",
+        bio: "Diseñador UX/UI enfocado en crear experiencias digitales atractivas, funcionales y centradas en el usuario para los productos de SentraLabs.",
+        socials: {},
+        highlights: [],
+        projects: [],
+        skills: [],
+    },
 ];
 
 export function getTeamMember(slug: string): TeamMember | undefined {

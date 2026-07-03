@@ -624,6 +624,14 @@ const team = [
     github: "https://github.com/jerdiaz",
     linkedin: "https://www.linkedin.com/in/jerson-diaz-07b97333b/",
   },
+  {
+    slug: "gelbert-cantillo",
+    name: "Gelbert Cantillo",
+    role: "Diseñador UX/UI",
+    image: "/images/team/miembro5.jpg",
+    github: "",
+    linkedin: "",
+  },
 ];
 
 function Team() {
