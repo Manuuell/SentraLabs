@@ -35,7 +35,7 @@ export const teamMembers: TeamMember[] = [
         slug: "manuel-esteban",
         name: "Manuel Esteban",
         role: "Fundador",
-        image: "/images/team/miembro1b.jpg",
+        image: "/images/team/manuel-esteban-fundador-sentralabs.jpg",
         oneLiner: "Fundador de SentraLabs. Desarrollador fullstack & mobile.",
         bio: "Apasionado por construir productos digitales que resuelven problemas reales. Lidero SentraLabs con la visión de crear software de alto impacto — desde aplicaciones móviles hasta plataformas web completas. Creo en el código limpio, la iteración rápida y el lanzamiento constante.",
         socials: {
@@ -124,7 +124,7 @@ export const teamMembers: TeamMember[] = [
         slug: "nino-nina",
         name: "Angel Acero",
         role: "Co-founder / Dev",
-        image: "/images/team/miembro2f.jpg",
+        image: "/images/team/angel-acero-cofundador-desarrollador.jpg",
         oneLiner: "Co-fundador de SentraLabs.",
         bio: "Desarrollador comprometido con crear soluciones de calidad.",
         socials: {
@@ -138,7 +138,7 @@ export const teamMembers: TeamMember[] = [
         slug: "matamba",
         name: "Javier Mercado",
         role: "Database Manager",
-        image: "/images/team/miembro3.webp",
+        image: "/images/team/javier-mercado-database-manager.webp",
         oneLiner: "Database Manager en SentraLabs.",
         bio: "Especialista en bases de datos y gestión de infraestructura de datos.",
         socials: {
@@ -154,7 +154,7 @@ export const teamMembers: TeamMember[] = [
         slug: "jerson-diaz",
         name: "Jerson Díaz",
         role: "Co-founder / Dev",
-        image: "/images/team/miembro4b.jpg",
+        image: "/images/team/jerson-diaz-cofundador-desarrollador.jpg",
         oneLiner: "Co-fundador de SentraLabs.",
         bio: "Me especializo en el desarrollo móvil y web utilizando tecnologías como Flutter, Dart, Python y SQL. Creo en el código limpio, la iteración rápida y el lanzamiento constante de software de alto impacto, abarcando desde aplicaciones hasta arquitecturas soportadas en la nube y bases de datos.",
         socials: {
@@ -241,7 +241,7 @@ export const teamMembers: TeamMember[] = [
         slug: "gelbert-cantillo",
         name: "Gelbert Cantillo",
         role: "Diseñador UX/UI",
-        image: "/images/team/miembro5.jpg",
+        image: "/images/team/gelbert-cantillo-disenador-ux-ui.jpg",
         oneLiner: "Diseñador UX/UI en SentraLabs.",
         bio: "Diseñador UX/UI enfocado en crear experiencias digitales atractivas, funcionales y centradas en el usuario para los productos de SentraLabs.",
         socials: {},

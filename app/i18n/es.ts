@@ -3,10 +3,13 @@ export const es = {
     nav: { home: "Inicio", about: "Nosotros", projects: "Proyectos", team: "Equipo", contact: "Contacto" },
     // Hero
     hero: {
-        tagline1: "Creamos.",
-        tagline2: "Probamos.",
-        tagline3: "Lanzamos.",
-        sub: "Estudio de desarrollo de software en Cartagena. Convertimos ideas en productos digitales de alto impacto.",
+        // El gancho de marca pasa a ser el kicker: el H1 tiene que llevar la
+        // keyword ("desarrollo de software a medida en Cartagena").
+        kicker: "// creamos · probamos · lanzamos",
+        tagline1: "Creamos software",
+        tagline2: "a medida",
+        tagline3: "en Cartagena",
+        sub: "Estudio de desarrollo de software en Cartagena. Convertimos ideas en productos digitales de alto impacto: apps móviles, plataformas web e integraciones de IA.",
         cta1: "Agenda una reunión",
         cta2: "Ver proyectos",
     },
@@ -15,7 +18,7 @@ export const es = {
     // About
     about: {
         label: "// nosotros",
-        title: "Software que resuelve problemas reales",
+        title: "Desarrollo de software que resuelve problemas reales",
         desc: "En SentraLabs nos apasiona construir tecnología con propósito. Diseñamos, desarrollamos y lanzamos productos digitales que impulsan negocios y resuelven necesidades concretas — desde aplicaciones web hasta sistemas empresariales completos.",
         stats: { projects: "Proyectos", devs: "Desarrolladores", awards: "Premios" },
     },

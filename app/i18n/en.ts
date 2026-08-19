@@ -3,17 +3,18 @@ import type { Translations } from "./es";
 export const en: Translations = {
     nav: { home: "Home", about: "About", projects: "Projects", team: "Team", contact: "Contact" },
     hero: {
-        tagline1: "We Create.",
-        tagline2: "We Test.",
-        tagline3: "We Launch.",
-        sub: "Software development studio in Cartagena. We turn ideas into high-impact digital products.",
+        kicker: "// we create · we test · we launch",
+        tagline1: "We build",
+        tagline2: "custom software",
+        tagline3: "in Cartagena",
+        sub: "Custom software development studio in Cartagena. We turn ideas into high-impact digital products: mobile apps, web platforms and AI integrations.",
         cta1: "Book a meeting",
         cta2: "View projects",
     },
     code: { comment: "// Your next project starts here", filename: "SentraLabs.tsx", tip: "// Tip: Press [Enter] for magic ✨" },
     about: {
         label: "// about",
-        title: "Software that solves real problems",
+        title: "Custom software that solves real problems",
         desc: "At SentraLabs we're passionate about building technology with purpose. We design, develop and launch digital products that drive businesses and solve real needs — from web applications to complete enterprise systems.",
         stats: { projects: "Projects", devs: "Developers", awards: "Awards" },
     },

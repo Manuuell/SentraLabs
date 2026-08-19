@@ -95,6 +95,7 @@
 
 .theme-toggle {
   background: none;
+  text-decoration: none;
   border: 1px solid var(--border);
   border-radius: var(--radius-pill);
   width: 36px;

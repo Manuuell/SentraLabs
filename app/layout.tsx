@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { JsonLd } from "./lib/JsonLd";
+import { AnalyticsNoScript, AnalyticsScript } from "./lib/Analytics";
 import {
   CONTACT_EMAIL,
   SITE_DESCRIPTION,
+  SITE_TITLE,
   SITE_NAME,
   SITE_TAGLINE,
   SITE_URL,
@@ -13,12 +15,18 @@ import {
 export const metadata: Metadata = {
   // Base para resolver las URLs relativas de canonical y openGraph.
   metadataBase: new URL(SITE_URL),
-  title: "SentraLabs — Creamos el software que tu idea necesita",
+  title: SITE_TITLE,
   description: SITE_DESCRIPTION,
-  keywords: ["software", "desarrollo", "SentraLabs", "startup", "web", "app"],
-  alternates: { canonical: "/" },
+  keywords: [
+    "desarrollo de software en Cartagena",
+    "software a medida",
+    "desarrollo de apps móviles Flutter",
+    "desarrollo web Next.js",
+    "estudio de software Colombia",
+    "SentraLabs",
+  ],
   openGraph: {
-    title: "SentraLabs — Creamos el software que tu idea necesita",
+    title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     type: "website",
     url: "/",
@@ -27,8 +35,16 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SentraLabs — Creamos el software que tu idea necesita",
+    title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+  },
+  // Códigos de propiedad de Search Console y Bing. Se rellenan con variables
+  // de entorno en el build; sin ellas no se emite ninguna etiqueta.
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+    other: process.env.BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION }
+      : {},
   },
 };
 
@@ -71,6 +87,8 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body>
+        <AnalyticsNoScript />
+        <AnalyticsScript />
         <JsonLd data={organizationSchema} />
         <JsonLd data={websiteSchema} />
         {children}

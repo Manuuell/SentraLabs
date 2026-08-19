@@ -3,6 +3,24 @@ import type { NextConfig } from "next";
 const isDev = process.env.NODE_ENV !== "production";
 
 /**
+ * La CSP solo abre los dominios de Google Tag Manager si hay contenedor
+ * configurado. Sin analitica, la politica se queda igual de cerrada que antes.
+ */
+const hasAnalytics = Boolean(process.env.NEXT_PUBLIC_GTM_ID);
+const gtm = "https://www.googletagmanager.com";
+const gaHosts = [
+  "https://www.google-analytics.com",
+  "https://*.google-analytics.com",
+  "https://*.analytics.google.com",
+];
+const analytics = {
+  script: hasAnalytics ? ` ${gtm} ${gaHosts[0]}` : "",
+  connect: hasAnalytics ? ` ${gtm} ${gaHosts.join(" ")}` : "",
+  img: hasAnalytics ? ` ${gtm} ${gaHosts.join(" ")}` : "",
+  frame: hasAnalytics ? ` ${gtm}` : "",
+};
+
+/**
  * Content-Security-Policy: lista blanca de lo que el navegador puede cargar.
  * Es el complemento del saneamiento de entradas (app/lib/sanitize.ts): si algo
  * se colara igual, esto limita lo que podria hacer.
@@ -13,7 +31,7 @@ const contentSecurityPolicy = [
   // Next inyecta scripts en linea con la carga de RSC. Quitar 'unsafe-inline'
   // exige nonces por middleware, y eso volveria dinamicas paginas que hoy son
   // estaticas. En dev, ademas, Turbopack y react-refresh necesitan eval.
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}${analytics.script}`,
 
   // Los estilos en linea salen de los style={{ }} de React y de framer-motion.
   // googleapis sirve la hoja de fuentes que importa globals.css.
@@ -21,13 +39,13 @@ const contentSecurityPolicy = [
   "font-src 'self' https://fonts.gstatic.com",
 
   // Todas las imagenes son locales; data:/blob: los usa next/image internamente.
-  "img-src 'self' data: blob:",
+  `img-src 'self' data: blob:${analytics.img}`,
 
   // En dev el websocket de HMR va contra el mismo host.
-  `connect-src 'self'${isDev ? " ws: wss:" : ""}`,
+  `connect-src 'self'${isDev ? " ws: wss:" : ""}${analytics.connect}`,
 
   "object-src 'none'",
-  "frame-src 'none'",
+  `frame-src ${hasAnalytics ? analytics.frame.trim() : "'none'"}`,
   "frame-ancestors 'none'", // nadie puede meter el sitio en un iframe
   "base-uri 'self'", // impide reescribir la base de las URLs relativas
   "form-action 'self'",

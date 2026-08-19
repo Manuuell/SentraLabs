@@ -85,17 +85,21 @@ export default async function ProfilePage({
             <JsonLd data={personSchema} />
             <JsonLd data={breadcrumbSchema} />
 
-            {/* Back */}
-            <Link href="/#team" className="profile-back">
-                ← Volver al equipo
-            </Link>
+            {/* Breadcrumb: misma ruta que declara el BreadcrumbList de arriba. */}
+            <nav aria-label="Ruta de navegación" className="profile-breadcrumb">
+                <Link href="/">Inicio</Link>
+                <span aria-hidden="true">/</span>
+                <Link href="/#team">Equipo</Link>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page">{member.name}</span>
+            </nav>
 
             <div className="profile-container">
                 {/* Header */}
                 <header className="profile-header">
                     <Image
                         src={member.image}
-                        alt={member.name}
+                        alt={`${member.name}, ${member.role} en SentraLabs`}
                         width={100}
                         height={100}
                         className="profile-photo"
@@ -157,9 +161,9 @@ export default async function ProfilePage({
                                 const Tag = h.link ? "a" : "div";
                                 const linkProps = h.link
                                     ? {
-                                        href: h.link,
+                                        href: safeUrl(h.link),
                                         target: "_blank" as const,
-                                        rel: "noopener",
+                                        rel: "noopener noreferrer",
                                     }
                                     : {};
                                 return (

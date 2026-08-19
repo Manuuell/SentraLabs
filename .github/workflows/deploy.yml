@@ -33,6 +33,14 @@ jobs:
         run: npm ci
 
       - name: Build (Next.js standalone)
+        # Variables de repositorio (Settings → Secrets and variables → Actions →
+        # Variables). Si no existen llegan vacías y cada cosa queda apagada: sin
+        # GTM no se emite tracking ni se abre la CSP, y sin códigos no se
+        # imprimen las etiquetas de verificación.
+        env:
+          NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
+          GOOGLE_SITE_VERIFICATION: ${{ vars.GOOGLE_SITE_VERIFICATION }}
+          BING_SITE_VERIFICATION: ${{ vars.BING_SITE_VERIFICATION }}
         run: npm run build
 
       - name: Empaquetar salida standalone
