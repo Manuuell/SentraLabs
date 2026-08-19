@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "SentraLabs",
     description: "Creamos el software que tu idea necesita.",
     type: "website",
-    url: "https://sentralabs.com",
+    url: "https://sentralabs.co",
   },
 };
 
