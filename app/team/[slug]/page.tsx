@@ -1,8 +1,11 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { getTeamMember, getAllSlugs } from "../data";
 import { safeMailto, safeUrl, sanitizeSlug } from "../../lib/sanitize";
+import { JsonLd } from "../../lib/JsonLd";
+import { SITE_URL, absoluteUrl } from "../../lib/site";
 import "../profile.css";
 
 export function generateStaticParams() {
@@ -13,13 +16,28 @@ export async function generateMetadata({
     params,
 }: {
     params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
     const { slug } = await params;
     const member = getTeamMember(sanitizeSlug(slug));
     if (!member) return { title: "Miembro no encontrado" };
+
+    const title = `${member.name} — ${member.role} en SentraLabs`;
+    const url = `/team/${member.slug}`;
     return {
-        title: `${member.name} — SentraLabs`,
+        title,
         description: member.oneLiner,
+        alternates: { canonical: url },
+        openGraph: {
+            title,
+            description: member.oneLiner,
+            url,
+            type: "profile",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description: member.oneLiner,
+        },
     };
 }
 
@@ -32,8 +50,41 @@ export default async function ProfilePage({
     const member = getTeamMember(sanitizeSlug(slug));
     if (!member) notFound();
 
+    const profileUrl = absoluteUrl(`/team/${member.slug}`);
+
+    /* Person: le dice a Google quien firma el contenido (páginas de autor). */
+    const personSchema = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": `${profileUrl}#person`,
+        name: member.name,
+        jobTitle: member.role,
+        description: member.oneLiner,
+        image: absoluteUrl(member.image),
+        url: profileUrl,
+        knowsAbout: member.skills,
+        worksFor: { "@id": `${SITE_URL}/#organization` },
+        sameAs: [member.socials.github, member.socials.linkedin].filter(
+            (link): link is string => Boolean(safeUrl(link))
+        ),
+    };
+
+    /* Breadcrumbs: la ruta Inicio → Equipo → Persona que sale en el buscador. */
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
+            { "@type": "ListItem", position: 2, name: "Equipo", item: absoluteUrl("/#team") },
+            { "@type": "ListItem", position: 3, name: member.name, item: profileUrl },
+        ],
+    };
+
     return (
         <div className="profile-page">
+            <JsonLd data={personSchema} />
+            <JsonLd data={breadcrumbSchema} />
+
             {/* Back */}
             <Link href="/#team" className="profile-back">
                 ← Volver al equipo

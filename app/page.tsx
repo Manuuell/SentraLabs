@@ -5,6 +5,9 @@ import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { I18nProvider, useI18n } from "./i18n/context";
+import { es } from "./i18n/es";
+import { JsonLd } from "./lib/JsonLd";
+import { SITE_URL } from "./lib/site";
 import {
   readStoredOption,
   safeUrl,
@@ -383,12 +386,26 @@ const faqs = [
   { q: "¿Trabajan con clientes fuera de Colombia?", a: "Sí, trabajamos de forma remota con clientes de cualquier parte del mundo. La comunicación es principalmente en español e inglés." },
 ];
 
+/* El HTML que se genera en el build está en español, así que el schema se
+   construye desde las traducciones ES: es lo que ve el buscador. */
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `${SITE_URL}/#faq`,
+  mainEntity: es.faq.items.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
+
 function FAQ() {
   const { t } = useI18n();
   const [open, setOpen] = useState<number | null>(null);
 
   return (
     <section className="section" id="faq">
+      <JsonLd data={faqSchema} />
       <div className="container">
         <motion.div
           className="section-header"

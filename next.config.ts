@@ -78,6 +78,20 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+
+  // www y raiz servian el mismo HTML con 200, o sea contenido duplicado. Esto
+  // solo funciona si Nginx reenvia el Host original (proxy_set_header Host
+  // $host); si no, hay que hacer el 301 en el propio vhost.
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.sentralabs.co" }],
+        destination: "https://sentralabs.co/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

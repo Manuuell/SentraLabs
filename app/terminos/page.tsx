@@ -1,8 +1,25 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata = {
+export const metadata: Metadata = {
     title: "Términos y Condiciones — SentraLabs",
     description: "Términos y condiciones de uso de SentraLabs",
+    alternates: { canonical: "/terminos" },
+    openGraph: {
+        title: "Términos y Condiciones — SentraLabs",
+        description: "Términos y condiciones de uso de SentraLabs",
+        url: "/terminos",
+        type: "website",
+        // Al declarar openGraph aquí no se hereda la imagen del layout: se pide
+        // explícitamente la tarjeta generada en app/opengraph-image.tsx.
+        images: ["/opengraph-image"],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Términos y Condiciones — SentraLabs",
+        description: "Términos y condiciones de uso de SentraLabs",
+        images: ["/opengraph-image"],
+    },
 };
 
 export default function Terminos() {
