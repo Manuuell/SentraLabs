@@ -5,19 +5,29 @@ import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { I18nProvider, useI18n } from "./i18n/context";
+import {
+  readStoredOption,
+  safeUrl,
+  sanitizeCommand,
+  sanitizeText,
+  stripUnsafeChars,
+  writeStoredOption,
+} from "./lib/sanitize";
+
+/* Valores válidos del tema: cualquier otra cosa en localStorage se ignora. */
+const THEMES = ["dark", "light"] as const;
+type Theme = (typeof THEMES)[number];
 
 /* ────────────────── Navbar ────────────────── */
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
-    const saved = localStorage.getItem("theme") as "dark" | "light" | null;
-    if (saved) {
-      setTheme(saved);
-      document.documentElement.setAttribute("data-theme", saved);
-    }
+    const saved = readStoredOption("theme", THEMES, "dark");
+    setTheme(saved);
+    document.documentElement.setAttribute("data-theme", saved);
   }, []);
 
   useEffect(() => {
@@ -27,10 +37,10 @@ function Navbar() {
   }, []);
 
   const toggleTheme = () => {
-    const next = theme === "dark" ? "light" : "dark";
+    const next: Theme = theme === "dark" ? "light" : "dark";
     setTheme(next);
     document.documentElement.setAttribute("data-theme", next);
-    localStorage.setItem("theme", next);
+    writeStoredOption("theme", next, THEMES);
   };
 
   const { t, lang, setLang } = useI18n();
@@ -532,11 +542,11 @@ function Projects() {
                     <div className="project-links">
                       {p.links.map((l) => (
                         <a
-                          href={l.href}
+                          href={safeUrl(l.href, "#projects")}
                           className="project-link"
                           key={l.label}
                           target="_blank"
-                          rel="noopener"
+                          rel="noopener noreferrer"
                         >
                           {l.label}
                         </a>
@@ -682,11 +692,11 @@ function Team() {
                 </div>
               </Link>
               <div className="team-links">
-                {m.github && (
-                  <a href={m.github} target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+                {safeUrl(m.github) && (
+                  <a href={safeUrl(m.github)} target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
                 )}
-                {m.linkedin && (
-                  <a href={m.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+                {safeUrl(m.linkedin) && (
+                  <a href={safeUrl(m.linkedin)} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
                 )}
               </div>
             </motion.div>
@@ -742,13 +752,19 @@ function Footer() {
 }
 
 /* ────────────────── Terminal Easter Egg ────────────────── */
-const terminalCommands: Record<string, string> = {
-  help: "Comandos: help, projects, team, contact, skills, clear",
-  projects: "→ TransCar — App de transporte urbano en Cartagena\n→ MarSec — Plataforma de ciberseguridad (🏆 Mejor Proyecto TalentoTech)\n→ EcoOne — Reciclaje con EcoCoins",
-  team: "→ Manuel Esteban — Fundador\n→ Angel Acero — Co-founder / Dev\n→ Javier Mercado — Database Manager\n→ Jerson Díaz — Co-founder / Dev",
-  contact: "→ Email: atencionsentralabs@gmail.com\n→ WhatsApp: +57 321 564 0735\n→ GitHub: github.com/Manuuell",
-  skills: "Flutter · React · Next.js · TypeScript · Node.js · Firebase · Azure · OpenAI · SQL Server · Mapbox",
-};
+/* Map y no objeto: un objeto hereda de Object.prototype, así que buscar
+   "constructor" o "__proto__" devolvería algo que no es un comando. */
+const terminalCommands = new Map<string, string>([
+  ["help", "Comandos: help, projects, team, contact, skills, clear"],
+  ["projects", "→ TransCar — App de transporte urbano en Cartagena\n→ MarSec — Plataforma de ciberseguridad (🏆 Mejor Proyecto TalentoTech)\n→ EcoOne — Reciclaje con EcoCoins"],
+  ["team", "→ Manuel Esteban — Fundador\n→ Angel Acero — Co-founder / Dev\n→ Javier Mercado — Database Manager\n→ Jerson Díaz — Co-founder / Dev"],
+  ["contact", "→ Email: atencionsentralabs@gmail.com\n→ WhatsApp: +57 321 564 0735\n→ GitHub: github.com/Manuuell"],
+  ["skills", "Flutter · React · Next.js · TypeScript · Node.js · Firebase · Azure · OpenAI · SQL Server · Mapbox"],
+]);
+
+/* Límites de la entrada: longitud del comando y entradas guardadas en pantalla. */
+const MAX_CMD_LENGTH = 64;
+const MAX_HISTORY = 50;
 
 function TerminalEasterEgg() {
   const [isOpen, setIsOpen] = useState(false);
@@ -787,7 +803,9 @@ function TerminalEasterEgg() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const cmd = input.trim().toLowerCase();
+    // echo: lo que se muestra de vuelta. cmd: lo que se busca en la tabla.
+    const echo = sanitizeText(input, MAX_CMD_LENGTH);
+    const cmd = sanitizeCommand(input, MAX_CMD_LENGTH);
     if (!cmd) return;
 
     if (cmd === "clear") {
@@ -796,8 +814,9 @@ function TerminalEasterEgg() {
       return;
     }
 
-    const output = terminalCommands[cmd] || `Comando no encontrado: '${cmd}'. Escribe 'help'.`;
-    setHistory((h) => [...h, { cmd: input, output }]);
+    const output =
+      terminalCommands.get(cmd) ?? `Comando no encontrado: '${echo}'. Escribe 'help'.`;
+    setHistory((h) => [...h, { cmd: echo, output }].slice(-MAX_HISTORY));
     setInput("");
   };
 
@@ -830,8 +849,9 @@ function TerminalEasterEgg() {
               ref={inputRef}
               type="text"
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => setInput(stripUnsafeChars(e.target.value).slice(0, MAX_CMD_LENGTH))}
               className="terminal-input"
+              maxLength={MAX_CMD_LENGTH}
               spellCheck={false}
               autoComplete="off"
             />
@@ -870,7 +890,7 @@ export default function Home() {
         <a
           href="https://wa.me/573215640735"
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
           className="whatsapp-float"
           aria-label="Chat en WhatsApp"
         >

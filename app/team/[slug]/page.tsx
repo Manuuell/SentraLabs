@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { getTeamMember, getAllSlugs } from "../data";
+import { safeMailto, safeUrl, sanitizeSlug } from "../../lib/sanitize";
 import "../profile.css";
 
 export function generateStaticParams() {
@@ -14,7 +15,7 @@ export async function generateMetadata({
     params: Promise<{ slug: string }>;
 }) {
     const { slug } = await params;
-    const member = getTeamMember(slug);
+    const member = getTeamMember(sanitizeSlug(slug));
     if (!member) return { title: "Miembro no encontrado" };
     return {
         title: `${member.name} — SentraLabs`,
@@ -28,7 +29,7 @@ export default async function ProfilePage({
     params: Promise<{ slug: string }>;
 }) {
     const { slug } = await params;
-    const member = getTeamMember(slug);
+    const member = getTeamMember(sanitizeSlug(slug));
     if (!member) notFound();
 
     return (
@@ -59,29 +60,29 @@ export default async function ProfilePage({
 
                 {/* Social Links */}
                 <div className="profile-socials">
-                    {member.socials.github && (
+                    {safeUrl(member.socials.github) && (
                         <a
-                            href={member.socials.github}
+                            href={safeUrl(member.socials.github)}
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             className="profile-social-link"
                         >
                             GitHub
                         </a>
                     )}
-                    {member.socials.linkedin && (
+                    {safeUrl(member.socials.linkedin) && (
                         <a
-                            href={member.socials.linkedin}
+                            href={safeUrl(member.socials.linkedin)}
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             className="profile-social-link"
                         >
                             LinkedIn
                         </a>
                     )}
-                    {member.socials.email && (
+                    {safeMailto(member.socials.email) && (
                         <a
-                            href={`mailto:${member.socials.email}`}
+                            href={safeMailto(member.socials.email)}
                             className="profile-social-link"
                         >
                             Email: {member.socials.email}
@@ -137,11 +138,11 @@ export default async function ProfilePage({
                             {member.projects.map((p) => (
                                 <div key={p.name} className="profile-project-row">
                                     <div className="project-row-left">
-                                        {p.link ? (
+                                        {safeUrl(p.link) ? (
                                             <a
-                                                href={p.link}
+                                                href={safeUrl(p.link)}
                                                 target="_blank"
-                                                rel="noopener"
+                                                rel="noopener noreferrer"
                                                 className="project-row-name"
                                             >
                                                 {p.name}
@@ -204,11 +205,11 @@ export default async function ProfilePage({
                                         <span className="cert-title">{c.title}</span>
                                         <span className="cert-issuer">— {c.issuer}</span>
                                     </div>
-                                    {c.link && (
+                                    {safeUrl(c.link) && (
                                         <a
-                                            href={c.link}
+                                            href={safeUrl(c.link)}
                                             target="_blank"
-                                            rel="noopener"
+                                            rel="noopener noreferrer"
                                             className="cert-link"
                                         >
                                             ver certificado →

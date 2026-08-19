@@ -3,8 +3,11 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import { es, type Translations } from "./es";
 import { en } from "./en";
+import { readStoredOption, sanitizeOption, writeStoredOption } from "../lib/sanitize";
 
-type Lang = "es" | "en";
+/* Idiomas válidos: cualquier otro valor guardado o recibido cae en "es". */
+const LANGS = ["es", "en"] as const;
+type Lang = (typeof LANGS)[number];
 
 interface I18nContextType {
     lang: Lang;
@@ -24,15 +27,13 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     const [lang, setLangState] = useState<Lang>("es");
 
     useEffect(() => {
-        const saved = localStorage.getItem("lang") as Lang | null;
-        if (saved && (saved === "es" || saved === "en")) {
-            setLangState(saved);
-        }
+        setLangState(readStoredOption("lang", LANGS, "es"));
     }, []);
 
     const setLang = (l: Lang) => {
-        setLangState(l);
-        localStorage.setItem("lang", l);
+        const safe = sanitizeOption(l, LANGS, "es");
+        setLangState(safe);
+        writeStoredOption("lang", safe, LANGS);
     };
 
     return (
