@@ -1,0 +1,83 @@
+name: Deploy a VPS
+
+# Compila en el runner de GitHub y despliega al VPS por SSH (PM2 + Next.js
+# standalone). El VPS no compila nada: solo recibe la salida ya construida.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Evita despliegues solapados si llegan varios pushes seguidos.
+concurrency:
+  group: deploy-vps
+  cancel-in-progress: false
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    # Ruta de despliegue en el VPS (no es secreta). Debe coincidir con el "cwd"
+    # de ecosystem.config.cjs y con el proxy_pass del vhost de Nginx.
+    env:
+      DEPLOY_PATH: /var/www/sentralabs
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # El VPS corre Node 20; se compila con la misma major para evitar
+          # diferencias entre lo construido aquí y lo ejecutado allá.
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Build (Next.js standalone)
+        run: npm run build
+
+      - name: Empaquetar salida standalone
+        # El standalone no incluye los estáticos ni /public: Next espera que se
+        # copien al lado. Sin esto el sitio carga sin CSS/JS ni imágenes.
+        run: |
+          cp -r .next/static .next/standalone/.next/static
+          cp -r public .next/standalone/public
+          cp ecosystem.config.cjs .next/standalone/
+
+      - name: Preparar SSH
+        env:
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan "$VPS_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Subir al VPS (rsync)
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+        run: |
+          # Red de seguridad: --delete borra en destino lo que no venga en el
+          # build, así que una ruta vacía o "/" sería destructiva. Se aborta antes.
+          case "$DEPLOY_PATH" in
+            ""|"/"|"/."|"/root"|"/home"|"/usr"|"/etc"|"/var"|"/boot"|"/bin")
+              echo "::error::DEPLOY_PATH inseguro ('$DEPLOY_PATH'). Debe ser algo como /var/www/sentralabs."
+              exit 1
+              ;;
+          esac
+          # --delete deja la carpeta idéntica al build: sin esto se acumulan los
+          # chunks viejos de .next/static de cada despliegue anterior.
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/id_deploy" \
+            .next/standalone/ "$VPS_USER@$VPS_HOST:$DEPLOY_PATH/"
+
+      - name: Reiniciar con PM2
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+        run: |
+          # startOrReload: crea el proceso la primera vez y recarga en adelante.
+          # "pm2 save" persiste la lista para que sobreviva a un reinicio del VPS.
+          ssh -i ~/.ssh/id_deploy "$VPS_USER@$VPS_HOST" \
+            "cd '$DEPLOY_PATH' && pm2 startOrReload ecosystem.config.cjs --update-env && pm2 save"
