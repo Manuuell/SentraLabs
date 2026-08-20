@@ -32,6 +32,25 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
+      - name: Instalar binario de sharp para el VPS (linux/arm64)
+        # El runner de GitHub Actions es linux/x64, pero el VPS es linux/arm64:
+        # "npm ci" solo trae el binario nativo de sharp para la arquitectura del
+        # runner. Sin este paso, next/image no encuentra el binario correcto en
+        # producción y sirve las imágenes originales sin optimizar.
+        #
+        # "npm install --os=linux --cpu=arm64 sharp" no es fiable: cuando sharp
+        # ya está resuelto en el lockfile, npm no reevalúa sus optionalDependencies
+        # de otra plataforma. Se baja el tarball exacto del registro y se coloca
+        # a mano — las versiones deben coincidir con las de package-lock.json.
+        run: |
+          SHARP_VERSION="0.34.5"
+          LIBVIPS_VERSION="1.2.4"
+          mkdir -p node_modules/@img/sharp-linux-arm64 node_modules/@img/sharp-libvips-linux-arm64
+          curl -sL "https://registry.npmjs.org/@img/sharp-linux-arm64/-/sharp-linux-arm64-${SHARP_VERSION}.tgz" \
+            | tar -xz -C node_modules/@img/sharp-linux-arm64 --strip-components=1
+          curl -sL "https://registry.npmjs.org/@img/sharp-libvips-linux-arm64/-/sharp-libvips-linux-arm64-${LIBVIPS_VERSION}.tgz" \
+            | tar -xz -C node_modules/@img/sharp-libvips-linux-arm64 --strip-components=1
+
       - name: Build (Next.js standalone)
         # Variables de repositorio (Settings → Secrets and variables → Actions →
         # Variables). Si no existen llegan vacías y cada cosa queda apagada: sin
