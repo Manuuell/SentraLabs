@@ -46,10 +46,18 @@ jobs:
       - name: Empaquetar salida standalone
         # El standalone no incluye los estáticos ni /public: Next espera que se
         # copien al lado. Sin esto el sitio carga sin CSS/JS ni imágenes.
+        #
+        # sharp se copia aparte porque el output file tracing de Next a veces
+        # no arrastra el binario nativo de un optionalDependency a
+        # .next/standalone/node_modules, y next/image entonces sirve las
+        # imágenes originales sin optimizar en vez de fallar de forma visible.
         run: |
           cp -r .next/static .next/standalone/.next/static
           cp -r public .next/standalone/public
           cp ecosystem.config.cjs .next/standalone/
+          mkdir -p .next/standalone/node_modules
+          cp -r node_modules/sharp .next/standalone/node_modules/
+          cp -r node_modules/@img .next/standalone/node_modules/
 
       - name: Preparar SSH
         env:
