@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef, useCallback } from "react";
-import { motion, type Variants } from "framer-motion";
+import { MotionConfig, motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { I18nProvider, translations, useI18n, type Lang } from "./i18n/context";
@@ -321,7 +321,7 @@ function About() {
               ref={s.ref}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
             >
               <div className={`stat-value ${s.color}`}>{s.value}</div>
@@ -367,7 +367,7 @@ function Services() {
               key={s.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
             >
               <span className="service-icon">{icons[i]}</span>
@@ -381,6 +381,164 @@ function Services() {
   );
 }
 
+
+/* ────────────────── Proceso (columna fija + pasos) ────────────────── */
+
+/** Ventana de terminal que ilustra una fase. Decorativa: repite lo que ya dice el paso. */
+function ProcessPanel({ file, lines }: { file: string; lines: string[] }) {
+  return (
+    <div className="code-window process-window">
+      <div className="code-titlebar">
+        <span className="code-dot red" />
+        <span className="code-dot yellow" />
+        <span className="code-dot green" />
+        <span className="code-filename">{file}</span>
+      </div>
+      <div className="code-body">
+        <pre>
+          {lines.map((line) => (
+            <span key={line} className={line.startsWith("$") ? "op" : "cm"}>
+              {line}
+              {"\n"}
+            </span>
+          ))}
+        </pre>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Los pasos se separan con mucho aire vertical y la columna derecha se queda
+ * fija en el centro: al recorrer un paso, su panel es el que se muestra.
+ *
+ * El paso activo lo decide un IntersectionObserver que solo mira la mitad
+ * superior de la pantalla (rootMargin recorta el 55% de abajo). De los pasos
+ * que estan ahi dentro gana el mas bajo: el que acaba de entrar. Con una franja
+ * estrecha en el centro habria tramos sin ningun paso dentro y el resaltado se
+ * quedaria atras; asi la cobertura es continua.
+ *
+ * En movil la columna fija no se renderiza: cada paso lleva su panel debajo.
+ */
+function Process() {
+  const { t } = useI18n();
+  const [active, setActive] = useState(0);
+  const stepRefs = useRef<(HTMLLIElement | null)[]>([]);
+
+  useEffect(() => {
+    const inView = new Set<number>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const index = Number((entry.target as HTMLElement).dataset.step);
+          if (!Number.isInteger(index)) continue;
+          if (entry.isIntersecting) inView.add(index);
+          else inView.delete(index);
+        }
+        // Fuera de la seccion no queda ninguno: se mantiene el ultimo activo.
+        if (inView.size > 0) setActive(Math.max(...inView));
+      },
+      { rootMargin: "0px 0px -55% 0px", threshold: 0 }
+    );
+
+    const steps = stepRefs.current;
+    for (const step of steps) if (step) observer.observe(step);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section className="section" id="process">
+      <div className="container">
+        <motion.div
+          className="section-header"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="section-label">{t.process.label}</span>
+          <h2 className="section-title">{t.process.title}</h2>
+          <p className="section-desc">{t.process.desc}</p>
+        </motion.div>
+
+        <div className="process-grid">
+          <ol className="process-steps">
+            {t.process.steps.map((step, i) => (
+              <li
+                key={step.n}
+                data-step={i}
+                ref={(el) => {
+                  stepRefs.current[i] = el;
+                }}
+                className={`process-step ${i === active ? "is-active" : ""}`}
+              >
+                <span className="process-step-n">{step.n}</span>
+                <h3 className="process-step-title">{step.title}</h3>
+                <p className="process-step-desc">{step.desc}</p>
+                <div className="process-panel-inline">
+                  <ProcessPanel file={step.file} lines={step.lines} />
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div className="process-visual" aria-hidden="true">
+            <div className="process-sticky">
+              {t.process.steps.map((step, i) => (
+                <div
+                  key={step.n}
+                  className={`process-panel ${i === active ? "is-active" : ""}`}
+                >
+                  <ProcessPanel file={step.file} lines={step.lines} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────── Barra de progreso de scroll ────────────────── */
+function ScrollProgress() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const doc = document.documentElement;
+      const scrollable = doc.scrollHeight - doc.clientHeight;
+      setProgress(scrollable > 0 ? doc.scrollTop / scrollable : 0);
+    };
+
+    // El evento de scroll dispara muy seguido: se agrupa en un frame.
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return (
+    <div className="scroll-progress" aria-hidden="true">
+      <div
+        className="scroll-progress-bar"
+        style={{ transform: `scaleX(${progress})` }}
+      />
+    </div>
+  );
+}
 
 /* ────────────────── FAQ ────────────────── */
 const faqs = [
@@ -432,7 +590,7 @@ function FAQ() {
               key={i}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: i * 0.05 }}
             >
               <button
@@ -536,7 +694,7 @@ function Projects() {
                 key={p.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-60px" }}
                 transition={{ delay: i * 0.1, duration: 0.4 }}
               >
                 <div className="project-icon">
@@ -692,7 +850,7 @@ function Team() {
               key={m.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: i * 0.08, duration: 0.4 }}
             >
               <Link href={`/team/${m.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
@@ -892,39 +1050,47 @@ function TerminalEasterEgg() {
    app/en/page.tsx) decide el idioma y aporta sus propios metadatos. */
 export function HomeContent({ lang }: { lang: Lang }) {
   return (
-    <I18nProvider lang={lang}>
-      <div className="page-content">
-        <TerminalEasterEgg />
+    /* reducedMotion="user": si el sistema pide menos animacion, framer-motion
+       deja de mover elementos y se limita a los fundidos. El CSS hace lo suyo
+       en la regla prefers-reduced-motion de globals.css. */
+    <MotionConfig reducedMotion="user">
+      <I18nProvider lang={lang}>
+        <div className="page-content">
+          <ScrollProgress />
+          <TerminalEasterEgg />
 
-        <Navbar />
-        <Hero />
-        <hr className="divider" />
-        <About />
-        <hr className="divider" />
-        <Services />
-        <hr className="divider" />
-        <Projects />
-        <hr className="divider" />
-        <Team />
-        <hr className="divider" />
-        <FAQ />
-        <hr className="divider" />
-        <Contact />
-        <Footer />
+          <Navbar />
+          <Hero />
+          <hr className="divider" />
+          <About />
+          <hr className="divider" />
+          <Services />
+          <hr className="divider" />
+          <Process />
+          <hr className="divider" />
+          <Projects />
+          <hr className="divider" />
+          <Team />
+          <hr className="divider" />
+          <FAQ />
+          <hr className="divider" />
+          <Contact />
+          <Footer />
 
-        {/* WhatsApp Float */}
-        <a
-          href="https://wa.me/573215640735"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="whatsapp-float"
-          aria-label="Chat en WhatsApp"
-        >
-          <svg viewBox="0 0 32 32" width="28" height="28" fill="#fff">
-            <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.502 1.128 6.744 3.046 9.378L1.054 31.29l6.118-1.958a15.907 15.907 0 008.832 2.666C24.826 31.998 32 24.822 32 16.004 32 7.176 24.826 0 16.004 0zm9.318 22.614c-.396 1.114-1.956 2.038-3.21 2.308-.856.182-1.974.328-5.738-1.234-4.818-1.998-7.92-6.882-8.162-7.202-.232-.32-1.95-2.6-1.95-4.96s1.234-3.52 1.672-4.002c.438-.482.954-.602 1.272-.602.318 0 .636.004.914.016.294.014.688-.112 1.078.822.396.954 1.352 3.312 1.47 3.554.118.242.198.524.04.844-.158.32-.238.52-.478.802-.24.282-.504.63-.72.844-.238.24-.488.498-.21.976.278.478 1.234 2.036 2.65 3.298 1.82 1.622 3.354 2.124 3.832 2.362.478.238.756.198 1.034-.118.278-.318 1.194-1.392 1.512-1.872.318-.478.636-.398 1.074-.238.438.158 2.794 1.318 3.272 1.558.478.238.796.358.914.558.118.198.118 1.154-.278 2.27z" />
-          </svg>
-        </a>
-      </div>
-    </I18nProvider>
+          {/* WhatsApp Float */}
+          <a
+            href="https://wa.me/573215640735"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="whatsapp-float"
+            aria-label="Chat en WhatsApp"
+          >
+            <svg viewBox="0 0 32 32" width="28" height="28" fill="#fff">
+              <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.502 1.128 6.744 3.046 9.378L1.054 31.29l6.118-1.958a15.907 15.907 0 008.832 2.666C24.826 31.998 32 24.822 32 16.004 32 7.176 24.826 0 16.004 0zm9.318 22.614c-.396 1.114-1.956 2.038-3.21 2.308-.856.182-1.974.328-5.738-1.234-4.818-1.998-7.92-6.882-8.162-7.202-.232-.32-1.95-2.6-1.95-4.96s1.234-3.52 1.672-4.002c.438-.482.954-.602 1.272-.602.318 0 .636.004.914.016.294.014.688-.112 1.078.822.396.954 1.352 3.312 1.47 3.554.118.242.198.524.04.844-.158.32-.238.52-.478.802-.24.282-.504.63-.72.844-.238.24-.488.498-.21.976.278.478 1.234 2.036 2.65 3.298 1.82 1.622 3.354 2.124 3.832 2.362.478.238.756.198 1.034-.118.278-.318 1.194-1.392 1.512-1.872.318-.478.636-.398 1.074-.238.438.158 2.794 1.318 3.272 1.558.478.238.796.358.914.558.118.198.118 1.154-.278 2.27z" />
+            </svg>
+          </a>
+        </div>
+      </I18nProvider>
+    </MotionConfig>
   );
 }

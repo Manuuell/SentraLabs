@@ -136,6 +136,9 @@
 /* ─── Body ─── */
 html {
   scroll-behavior: smooth;
+  /* La navbar flota a 16px del borde y mide 52px: sin este margen, al saltar a
+     un ancla el titulo de la seccion queda tapado debajo de ella. */
+  scroll-padding-top: 96px;
 }
 
 body {
@@ -1375,4 +1378,180 @@ a:hover {
   font-size: 0.82rem;
   outline: none;
   caret-color: var(--blue);
+}
+
+/* ══════════════ SCROLL PROGRESS ══════════════ */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 1200;
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  width: 100%;
+  /* Se escala en X en vez de cambiar el ancho: solo compone, no relayoutea. */
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--blue), var(--purple), var(--green));
+}
+
+/* ══════════════ PROCESO ══════════════ */
+.process-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* El aire entre pasos es lo que da el recorrido: cada uno ocupa media pantalla
+   de scroll, y por eso la columna de la derecha tiene tiempo de cambiar. */
+.process-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 40vh;
+  display: flex;
+  flex-direction: column;
+  gap: 45vh;
+}
+
+.process-step {
+  border-left: 2px solid var(--border);
+  padding-left: 20px;
+  opacity: 0.3;
+  transform: scale(0.98);
+  transform-origin: left center;
+  transition: opacity 0.5s cubic-bezier(.4, 0, .2, 1),
+    transform 0.5s cubic-bezier(.4, 0, .2, 1),
+    border-color 0.5s cubic-bezier(.4, 0, .2, 1);
+}
+
+.process-step.is-active {
+  opacity: 1;
+  transform: scale(1);
+  border-left-color: var(--blue);
+}
+
+.process-step-n {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--fg-dim);
+  margin-bottom: 8px;
+  transition: color 0.5s cubic-bezier(.4, 0, .2, 1);
+}
+
+.process-step.is-active .process-step-n {
+  color: var(--blue);
+}
+
+.process-step-title {
+  font-size: 1.1rem;
+  color: var(--fg);
+  margin-bottom: 10px;
+}
+
+.process-step-desc {
+  color: var(--fg-muted);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.process-visual {
+  position: relative;
+  height: 100%;
+}
+
+/* 190px = la mitad del alto del panel, para dejarlo centrado en la pantalla. */
+.process-sticky {
+  position: sticky;
+  top: calc(50vh - 190px);
+  height: 380px;
+}
+
+.process-panel {
+  position: absolute;
+  inset: 0;
+  /* La ventana es mas baja que el hueco fijo: centrarla evita que baile. */
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  transition: opacity 0.5s cubic-bezier(.4, 0, .2, 1),
+    transform 0.5s cubic-bezier(.4, 0, .2, 1);
+  pointer-events: none;
+}
+
+.process-panel.is-active {
+  opacity: 1;
+  transform: none;
+}
+
+.process-window {
+  /* Dentro del panel flexible hay que pedir el ancho: si no, encoge al texto. */
+  max-width: none;
+  width: 100%;
+}
+
+/* Solo aparece en movil, donde no hay columna fija. */
+.process-panel-inline {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .process-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .process-visual {
+    display: none;
+  }
+
+  /* Sin panel fijo no hay nada que sincronizar: los pasos van seguidos y
+     legibles, cada uno con su ventana debajo. */
+  .process-steps {
+    gap: 56px;
+    padding-bottom: 0;
+  }
+
+  .process-step {
+    opacity: 1;
+    transform: none;
+  }
+
+  .process-panel-inline {
+    display: block;
+    margin-top: 20px;
+  }
+}
+
+/* ══════════════ MENOS MOVIMIENTO ══════════════ */
+/* Quien lo pide a nivel de sistema ve la misma pagina sin desplazamientos ni
+   parpadeos. Los cambios de opacidad y color se quedan: informan, no marean. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .process-step,
+  .process-panel {
+    transform: none !important;
+  }
 }

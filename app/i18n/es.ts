@@ -34,6 +34,49 @@ export const es = {
             { title: "Ciberseguridad", desc: "Plataformas de formación, análisis de vulnerabilidades y soluciones de seguridad digital para empresas." },
         ],
     },
+    // Proceso
+    process: {
+        label: "// proceso",
+        title: "Cómo trabajamos",
+        desc: "Un flujo ágil, con entregas incrementales y comunicación constante en cada fase.",
+        steps: [
+            {
+                n: "01",
+                title: "Descubrimiento",
+                desc: "Entendemos el problema antes de escribir una línea de código: objetivos, usuarios y qué entra —y qué no— en el primer lanzamiento.",
+                file: "descubrimiento.sh",
+                lines: ["$ definir objetivos", "$ mapear usuarios", "$ acotar el alcance del MVP", "✓ backlog priorizado"],
+            },
+            {
+                n: "02",
+                title: "Diseño",
+                desc: "Wireframes y prototipo navegable. Validamos flujos y pantallas contigo antes de construirlos, cuando cambiar todavía es barato.",
+                file: "diseno.sh",
+                lines: ["$ wireframes", "$ prototipo navegable", "$ sistema de diseño", "✓ flujos validados"],
+            },
+            {
+                n: "03",
+                title: "Desarrollo",
+                desc: "Sprints cortos con entregas incrementales. Ves el producto crecer semana a semana, no en una sola entrega al final.",
+                file: "desarrollo.sh",
+                lines: ["$ sprint 01 ✓", "$ sprint 02 ✓", "$ sprint 03 ...", "✓ entregas semanales"],
+            },
+            {
+                n: "04",
+                title: "Pruebas",
+                desc: "QA funcional, pruebas en dispositivos reales y ajustes de rendimiento. Nada sale a producción sin haberse roto antes aquí.",
+                file: "pruebas.sh",
+                lines: ["$ qa funcional", "$ dispositivos reales", "$ rendimiento", "✓ listo para publicar"],
+            },
+            {
+                n: "05",
+                title: "Lanzamiento",
+                desc: "Publicación, monitoreo y soporte. El lanzamiento es el principio de la vida del producto, no el final del proyecto.",
+                file: "lanzamiento.sh",
+                lines: ["$ deploy a producción", "$ monitoreo activo", "$ soporte y mejoras", "🚀 en producción"],
+            },
+        ],
+    },
     // Projects
     projects: { label: "// proyectos", title: "Lo que construimos", desc: "Cada proyecto es una oportunidad de crear algo que importa." },
     // Tech Stack
