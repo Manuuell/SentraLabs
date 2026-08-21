@@ -108,6 +108,20 @@ const nextConfig: NextConfig = {
         destination: "https://sentralabs.co/:path*",
         permanent: true,
       },
+
+      // Dos perfiles del equipo usaban apodos como slug y ya estaban en el
+      // sitemap. Al pasar a nombre-apellido, las URLs viejas darian 404: estos
+      // 301 conservan lo indexado y los enlaces que alguien haya compartido.
+      {
+        source: "/team/nino-nina",
+        destination: "/team/angel-acero",
+        permanent: true,
+      },
+      {
+        source: "/team/matamba",
+        destination: "/team/javier-mercado",
+        permanent: true,
+      },
     ];
   },
 };

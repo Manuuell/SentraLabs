@@ -121,7 +121,7 @@ export const teamMembers: TeamMember[] = [
         ],
     },
     {
-        slug: "nino-nina",
+        slug: "angel-acero",
         name: "Angel Acero",
         role: "Co-founder / Dev",
         image: "/images/team/angel-acero-cofundador-desarrollador.jpg",
@@ -135,7 +135,7 @@ export const teamMembers: TeamMember[] = [
         skills: [],
     },
     {
-        slug: "matamba",
+        slug: "javier-mercado",
         name: "Javier Mercado",
         role: "Database Manager",
         image: "/images/team/javier-mercado-database-manager.webp",

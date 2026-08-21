@@ -635,7 +635,7 @@ const team = [
     linkedin: "https://www.linkedin.com/in/manuuell/",
   },
   {
-    slug: "nino-nina",
+    slug: "angel-acero",
     name: "Angel Acero",
     role: "Co-founder / Dev",
     image: "/images/team/angel-acero-cofundador-desarrollador.jpg",
@@ -643,7 +643,7 @@ const team = [
     linkedin: "",
   },
   {
-    slug: "matamba",
+    slug: "javier-mercado",
     name: "Javier Mercado",
     role: "Database Manager",
     image: "/images/team/javier-mercado-database-manager.webp",
