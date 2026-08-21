@@ -4,6 +4,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { MotionConfig, motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import ChatWidget from "./components/ChatWidget";
 import { I18nProvider, translations, useI18n, type Lang } from "./i18n/context";
 import { JsonLd } from "./lib/JsonLd";
 import { SITE_URL } from "./lib/site";
@@ -381,6 +382,49 @@ function Services() {
   );
 }
 
+
+/* ────────────────── Beneficios ────────────────── */
+function Benefits() {
+  const { t } = useI18n();
+  return (
+    <section className="section" id="benefits">
+      <div className="container">
+        <motion.div
+          className="section-header"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="section-label">{t.benefits.label}</span>
+          <h2 className="section-title">{t.benefits.title}</h2>
+          <p className="section-desc">{t.benefits.desc}</p>
+        </motion.div>
+
+        <div className="benefits-grid">
+          {t.benefits.items.map((b, i) => (
+            <motion.div
+              className="benefit-card"
+              key={b.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ delay: i * 0.1, duration: 0.4 }}
+            >
+              <span className="benefit-icon" aria-hidden="true">
+                {b.icon}
+              </span>
+              <div>
+                <h3 className="benefit-title">{b.title}</h3>
+                <p className="benefit-desc">{b.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 /* ────────────────── Proceso (columna fija + pasos) ────────────────── */
 
@@ -958,8 +1002,24 @@ function TerminalEasterEgg() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    /* El atajo no puede quedarse con la tecla de otro: si el foco esta en un
+       campo, un boton o un enlace, Enter le pertenece a ese control. Sin esto,
+       quien navega con el teclado abre la terminal en vez de seguir el enlace,
+       y el chat no podria enviar un mensaje. */
+    const ownsEnter = (target: EventTarget | null) => {
+      const el = target as HTMLElement | null;
+      if (!el || typeof el.tagName !== "string") return false;
+      if (el.isContentEditable) return true;
+      return ["INPUT", "TEXTAREA", "SELECT", "BUTTON", "A"].includes(el.tagName);
+    };
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && !isOpen) {
+      if (
+        e.key === "Enter" &&
+        !isOpen &&
+        !e.defaultPrevented &&
+        !ownsEnter(e.target)
+      ) {
         e.preventDefault();
         setIsOpen(true);
       }
@@ -1066,6 +1126,8 @@ export function HomeContent({ lang }: { lang: Lang }) {
           <hr className="divider" />
           <Services />
           <hr className="divider" />
+          <Benefits />
+          <hr className="divider" />
           <Process />
           <hr className="divider" />
           <Projects />
@@ -1076,6 +1138,8 @@ export function HomeContent({ lang }: { lang: Lang }) {
           <hr className="divider" />
           <Contact />
           <Footer />
+
+          <ChatWidget />
 
           {/* WhatsApp Float */}
           <a

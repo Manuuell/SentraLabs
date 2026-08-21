@@ -34,6 +34,34 @@ export const es = {
             { title: "Ciberseguridad", desc: "Plataformas de formación, análisis de vulnerabilidades y soluciones de seguridad digital para empresas." },
         ],
     },
+    // Beneficios
+    benefits: {
+        label: "// beneficios",
+        title: "Por qué trabajar con nosotros",
+        desc: "Somos un equipo pequeño, y eso se nota en cómo trabajamos contigo.",
+        items: [
+            {
+                icon: "🎯",
+                title: "Hecho a tu medida",
+                desc: "El producto se ajusta a cómo trabajas, no al revés. Nada de adaptar tu operación a una plantilla que compraste.",
+            },
+            {
+                icon: "📦",
+                title: "Entregas cada semana",
+                desc: "Ves avances reales desde el primer sprint. Si algo no va por donde esperabas, lo corregimos en días, no en meses.",
+            },
+            {
+                icon: "🔑",
+                title: "El código es tuyo",
+                desc: "Te entregamos el repositorio y la documentación. Puedes auditarlo, moverlo o seguirlo con otro equipo cuando quieras.",
+            },
+            {
+                icon: "💬",
+                title: "Hablas con quien programa",
+                desc: "Sin capas de gestión ni intermediarios. Preguntas técnicas contestadas por la persona que escribió esa parte.",
+            },
+        ],
+    },
     // Proceso
     process: {
         label: "// proceso",
@@ -94,6 +122,31 @@ export const es = {
             { q: "¿Ofrecen mantenimiento post-lanzamiento?", a: "Sí. Ofrecemos planes de mantenimiento y soporte continuo. Actualizaciones, corrección de bugs, nuevas features y monitoreo." },
             { q: "¿Trabajan con clientes fuera de Colombia?", a: "Sí, trabajamos de forma remota con clientes de cualquier parte del mundo. La comunicación es principalmente en español e inglés." },
         ],
+    },
+    // Asistente
+    chat: {
+        name: "SentraLabs AI",
+        status: "En línea · Responde al instante",
+        badge: "asistente virtual",
+        greeting: "¡Hola! Soy el asistente de SentraLabs. ¿En qué puedo ayudarte?",
+        suggestionsLabel: "sugerencias",
+        suggestions: [
+            { icon: "💰", text: "Quiero cotizar un proyecto" },
+            { icon: "🚀", text: "¿Qué servicios ofrecen?" },
+            { icon: "⏱️", text: "¿Cuánto tarda un MVP?" },
+            { icon: "🛠️", text: "¿Con qué tecnologías trabajan?" },
+        ],
+        placeholder: "Escribe tu mensaje...",
+        send: "Enviar",
+        open: "Abrir el asistente",
+        close: "Cerrar el asistente",
+        reset: "Reiniciar la conversación",
+        teaser: "¿Quieres cotizar un proyecto o resolver una duda?",
+        teaserClose: "Cerrar el aviso",
+        disclaimer: "Respuestas generadas por IA.",
+        error: "No pude responder ahora mismo. Escríbenos a atencionsentralabs@gmail.com y te contestamos.",
+        rateLimited: "Demasiados mensajes seguidos. Espera un momento antes de continuar.",
+        unavailable: "El asistente todavía no está disponible. Escríbenos a atencionsentralabs@gmail.com.",
     },
     // Contact
     contact: {

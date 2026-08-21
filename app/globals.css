@@ -1555,3 +1555,413 @@ a:hover {
     transform: none !important;
   }
 }
+
+
+/* ══════════════ BENEFICIOS ══════════════ */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* A diferencia de las tarjetas de servicio, aqui el icono va al lado: son
+   frases cortas y en columna quedaban con demasiado aire arriba. */
+.benefit-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.benefit-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(96, 165, 250, 0.25);
+  box-shadow: 0 8px 32px rgba(96, 165, 250, 0.06);
+}
+
+.benefit-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.benefit-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 6px;
+}
+
+.benefit-desc {
+  color: var(--fg-muted);
+  font-size: 0.875rem;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ══════════════ ASISTENTE ══════════════ */
+/* El flotante de WhatsApp ocupa la esquina (bottom 28, alto 56): el lanzador
+   del chat se apila justo encima, 28 + 56 + 12. */
+.chat-launcher {
+  position: fixed;
+  bottom: 96px;
+  right: 28px;
+  z-index: 1500;
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  color: #fff;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow:
+    0 4px 16px rgba(96, 165, 250, 0.35),
+    0 0 40px rgba(167, 139, 250, 0.15);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.chat-launcher:hover {
+  transform: scale(1.08) translateY(-2px);
+}
+
+.chat-teaser {
+  position: fixed;
+  bottom: 164px;
+  right: 28px;
+  z-index: 1500;
+  max-width: 260px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  animation: fade-in-up 0.4s ease both;
+}
+
+.chat-teaser-text {
+  display: block;
+  background: none;
+  border: none;
+  text-align: left;
+  color: var(--fg-muted);
+  font-family: inherit;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  padding: 16px 18px;
+  cursor: pointer;
+}
+
+.chat-teaser-text:hover {
+  color: var(--fg);
+}
+
+.chat-teaser-close {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--fg-muted);
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.chat-panel {
+  position: fixed;
+  bottom: 164px;
+  right: 28px;
+  z-index: 1600;
+  width: 380px;
+  max-width: calc(100vw - 40px);
+  height: 540px;
+  /* 164 abajo + 70 de navbar flotante + 16 de aire: por debajo de esto el panel
+     tapaba el idioma, el tema y el CTA de contacto. */
+  max-height: calc(100vh - 250px);
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  animation: fade-in-up 0.25s ease both;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.chat-avatar {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-identity {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-identity strong {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+  color: var(--fg);
+}
+
+.chat-status {
+  font-size: 0.7rem;
+  color: var(--green);
+}
+
+.chat-icon-btn {
+  background: none;
+  border: none;
+  color: var(--fg-dim);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition), background var(--transition);
+}
+
+.chat-icon-btn:hover {
+  color: var(--fg);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-badge {
+  align-self: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 4px 14px;
+}
+
+.chat-bubble {
+  max-width: 85%;
+  padding: 11px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.chat-bubble-bot {
+  align-self: flex-start;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  border-bottom-left-radius: 4px;
+}
+
+.chat-bubble-user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+/* Tres puntos mientras no ha llegado el primer trozo de la respuesta. */
+.chat-typing {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.chat-typing i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--fg-dim);
+  animation: chat-dot 1.2s ease-in-out infinite;
+}
+
+.chat-typing i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.chat-typing i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes chat-dot {
+
+  0%,
+  60%,
+  100% {
+    opacity: 0.25;
+  }
+
+  30% {
+    opacity: 1;
+  }
+}
+
+.chat-suggestions {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.chat-suggestions-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 10px;
+}
+
+.chat-suggestions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.chat-suggestion {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--fg-muted);
+  font-family: inherit;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  text-align: left;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.chat-suggestion:hover {
+  color: var(--fg);
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+.chat-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px 4px;
+  border-top: 1px solid var(--border);
+}
+
+.chat-input {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 0.82rem;
+  padding: 10px 16px;
+  outline: none;
+  caret-color: var(--blue);
+}
+
+.chat-input:focus {
+  border-color: rgba(96, 165, 250, 0.4);
+}
+
+.chat-send {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+
+.chat-send:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.chat-disclaimer {
+  font-size: 0.65rem;
+  line-height: 1.5;
+  color: var(--fg-dim);
+  text-align: center;
+  padding: 6px 16px 12px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* En movil el panel ocupa casi todo: una ventanita flotante no se lee. */
+  .chat-panel {
+    inset: 12px 12px 12px;
+    width: auto;
+    height: auto;
+    max-height: none;
+  }
+
+  .chat-teaser {
+    bottom: 164px;
+    right: 20px;
+    max-width: calc(100vw - 40px);
+  }
+
+  .chat-launcher {
+    right: 20px;
+  }
+}
