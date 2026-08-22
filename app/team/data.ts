@@ -47,8 +47,7 @@ export const teamMembers: TeamMember[] = [
             {
                 title: "TransCar",
                 description:
-                    "App oficial de TransCaribe con mapa interactivo, ETAs en vivo y chatbot GPT-4. Flutter + Mapbox.",
-                link: "https://github.com/Manuuell/Trascaribe-APP",
+                    "App para el sistema TransCaribe con mapa interactivo, ETAs en vivo, recarga de tarjeta y chatbot con IA. Flutter + Firebase.",
             },
             {
                 title: "MarSec — Mejor Proyecto TalentoTech 2025",
@@ -61,9 +60,8 @@ export const teamMembers: TeamMember[] = [
             {
                 name: "TransCar",
                 description:
-                    "App de transporte urbano en Cartagena. Mapa interactivo con rutas en tiempo real, ETAs en vivo, chatbot con IA (GPT-4), consulta de saldo y noticias del sistema.",
-                tags: ["Flutter", "Dart", "Mapbox", "OpenAI", "Google Sign-In"],
-                link: "https://github.com/Manuuell/Trascaribe-APP",
+                    "App de transporte para el sistema TransCaribe en Cartagena. Mapa con buses en tiempo real, ETAs con datos de tráfico, recarga de tarjeta desde el celular, membresía premium y chatbot con IA. En fase beta con usuarios reales.",
+                tags: ["Flutter", "Firebase", "Mapbox", "OpenAI"],
             },
             {
                 name: "MarSec",
@@ -165,8 +163,7 @@ export const teamMembers: TeamMember[] = [
         highlights: [
             {
                 title: "TransCar",
-                description: "App oficial de TransCaribe con mapa interactivo, ETAs en vivo y chatbot GPT-4. Flutter + Mapbox.",
-                link: "https://github.com/Manuuell/Trascaribe-APP",
+                description: "App para el sistema TransCaribe con mapa interactivo, ETAs en vivo, recarga de tarjeta y chatbot con IA. Flutter + Firebase.",
             },
             {
                 title: "MarSec — Mejor Proyecto TalentoTech 2025",
@@ -177,9 +174,8 @@ export const teamMembers: TeamMember[] = [
         projects: [
             {
                 name: "TransCar",
-                description: "App de transporte urbano en Cartagena. Mapa interactivo con rutas en tiempo real, ETAs en vivo, chatbot con IA (GPT-4), consulta de saldo y noticias del sistema.",
-                tags: ["Flutter", "Dart", "Mapbox", "OpenAI", "Google Sign-In"],
-                link: "https://github.com/Manuuell/Trascaribe-APP",
+                description: "App de transporte para el sistema TransCaribe en Cartagena. Mapa con buses en tiempo real, ETAs con datos de tráfico, recarga de tarjeta desde el celular, membresía premium y chatbot con IA. En fase beta con usuarios reales.",
+                tags: ["Flutter", "Firebase", "Mapbox", "OpenAI"],
             },
             {
                 name: "MarSec",

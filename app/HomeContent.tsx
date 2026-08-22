@@ -660,11 +660,9 @@ const projects = [
   {
     image: "/images/projects/transcar-logo.webp",
     name: "TransCar",
-    desc: "App de transporte urbano en Cartagena. Mapa interactivo con rutas en tiempo real, ETAs en vivo, chatbot con IA (GPT-4), consulta de saldo y noticias del sistema.",
-    tags: ["Flutter", "Mapbox", "OpenAI", "En desarrollo"],
-    links: [
-      { label: "GitHub →", href: "https://github.com/Manuuell/Trascaribe-APP" },
-    ],
+    desc: "App de transporte para el sistema TransCaribe en Cartagena: mapa en tiempo real de los buses, ETAs calculados con datos de tráfico, recarga de la tarjeta desde el celular, membresía premium y un chatbot con IA que resuelve dudas de rutas y saldo. En fase beta con usuarios reales.",
+    tags: ["Flutter", "Firebase", "Mapbox", "OpenAI"],
+    links: [],
   },
   {
     image: "/images/projects/marsec-logo.webp",

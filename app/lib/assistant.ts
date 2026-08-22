@@ -45,7 +45,7 @@ PROCESO (cinco fases)
 5. Lanzamiento: publicacion, monitoreo y soporte.
 
 PROYECTOS
-- TransCar: app de transporte urbano en Cartagena. Mapa con rutas en tiempo real, ETAs, chatbot con IA, consulta de saldo. Flutter, Mapbox, OpenAI. En desarrollo.
+- TransCar: app de transporte para el sistema TransCaribe en Cartagena. Mapa con buses en tiempo real, ETAs con datos de trafico, recarga de tarjeta desde el celular, membresia premium y chatbot con IA. Flutter, Firebase, Mapbox, OpenAI. En fase beta con usuarios reales.
 - MarSec: plataforma de ciberseguridad para embarcaciones, con lecciones, cuestionarios y un asistente virtual. Node.js, Flutter, SQL Server, Azure. Gano el premio a Mejor Proyecto TalentoTech 2025.
 - EcoOne: app que incentiva el reciclaje urbano con EcoCoins, una moneda digital ecologica. Flutter, Clean Architecture, OpenAI, Firebase.
 
