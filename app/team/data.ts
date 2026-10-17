@@ -188,7 +188,7 @@ export const teamMembers: TeamMember[] = [
             {
                 name: "Tooli",
                 description:
-                    "App para estudiantes de la Universidad del Sinú Cartagena: notas, horario, tareas y aula virtual en un solo lugar. Independiente, en beta cerrada.",
+                    "App para estudiantes universitarios de Cartagena: notas, horario, tareas y aula virtual en un solo lugar. Un mismo código genera una app por institución: Universidad del Sinú (en beta cerrada) y Tecnológico Comfenalco (en desarrollo). Independiente, no oficial.",
                 tags: ["Flutter", "Dart", "Moodle"],
             },
             {
@@ -286,7 +286,7 @@ export const teamMembers: TeamMember[] = [
         ],
         awards: [
             "Proyecto ganador — Hackathon 2026 con Ecopetrol, la UTB, el SENA y la Alcaldía",
-            "Entre los 10 mejores proyectos — Nexus Rural 2026",
+            "Entre los 20 mejores proyectos — Nexus Rural 2026",
             "Mejor proyecto de análisis de datos — Talento Tech 2024",
             "Proyecto ganador — Trend Micro 2023",
             "Proyecto ganador — MinTIC 2023",
@@ -373,7 +373,7 @@ export const teamMembers: TeamMember[] = [
                 {
                     name: "Tooli",
                     description:
-                        "App for Universidad del Sinú Cartagena students: grades, schedule, assignments and the virtual classroom in one place. Independent, in closed beta.",
+                        "App for university students in Cartagena: grades, schedule, assignments and the virtual classroom in one place. One codebase builds a separate app per institution: Universidad del Sinú (closed beta) and Tecnológico Comfenalco (in development). Independent, not official.",
                     tags: ["Flutter", "Dart", "Moodle"],
                 },
                 {
@@ -471,7 +471,7 @@ export const teamMembers: TeamMember[] = [
             ],
             awards: [
                 "Winning project — 2026 Hackathon with Ecopetrol, UTB, SENA and the Mayor's Office",
-                "Top 10 project — Nexus Rural 2026",
+                "Top 20 project — Nexus Rural 2026",
                 "Best data analytics project — Talento Tech 2024",
                 "Winning project — Trend Micro 2023",
                 "Winning project — MinTIC 2023",
