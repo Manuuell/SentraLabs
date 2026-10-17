@@ -1,9 +1,31 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { CONTACT_EMAIL } from "../lib/site";
 
-export const metadata = {
-    title: "Tooli — tu semestre en el bolsillo",
-    description:
-        "Tooli, la app para estudiantes hecha por SentraLabs: clases, tareas, notas y el aula virtual de tu universidad en un solo lugar.",
+const title = "Tooli — tu semestre en el bolsillo";
+const description =
+    "Tooli, la app para estudiantes hecha por SentraLabs: clases, tareas, notas y el aula virtual de tu universidad en un solo lugar.";
+
+/* La página también se sirve en tooli.sentralabs.co: el canonical la une a
+   sentralabs.co/tooli para que no cuente como contenido duplicado. */
+export const metadata: Metadata = {
+    title,
+    description,
+    alternates: { canonical: "/tooli" },
+    openGraph: {
+        title,
+        description,
+        url: "/tooli",
+        type: "website",
+        locale: "es_CO",
+        images: ["/opengraph-image"],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+        images: ["/opengraph-image"],
+    },
 };
 
 const mono = "'JetBrains Mono', monospace";
@@ -49,8 +71,8 @@ export default function Tooli() {
                 </h2>
                 <p style={{ color: "#a1a1aa", lineHeight: 1.8 }}>
                     Escríbenos a{" "}
-                    <a href="mailto:atencionsentralabs@gmail.com" style={{ color: "#60a5fa" }}>
-                        atencionsentralabs@gmail.com
+                    <a href={`mailto:${CONTACT_EMAIL}`} style={{ color: "#60a5fa" }}>
+                        {CONTACT_EMAIL}
                     </a>
                     . Lee nuestra{" "}
                     <Link href="/tooli/privacidad" style={{ color: "#60a5fa" }}>

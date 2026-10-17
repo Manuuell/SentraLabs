@@ -24,13 +24,13 @@ Visita el sitio en vivo: [sentralabs.co](https://sentralabs.co)
 | [TypeScript](https://www.typescriptlang.org/) | Tipado estático |
 | [Framer Motion](https://www.framer.com/motion/) | Animaciones y transiciones |
 | [CSS Vanilla](https://developer.mozilla.org/es/docs/Web/CSS) | Estilos personalizados |
-| [Vercel](https://vercel.com/) | Hosting y despliegue |
+| VPS + Nginx + PM2 | Hosting y despliegue (el build lo hace GitHub Actions) |
 
 ## ✨ Características
 
 - 🖥️ Diseño dark con estética de terminal
 - 🌗 Tema claro / oscuro con persistencia
-- 🌐 Multiidioma (Español / Inglés)
+- 🌐 Multiidioma con URL propia por idioma (`/` español, `/en` inglés) y hreflang
 - 🎬 Animaciones fluidas con Framer Motion
 - 📱 Totalmente responsive
 - ⚡ Optimizado para rendimiento (Next.js App Router)
@@ -51,6 +51,22 @@ npm run dev
 ```
 
 Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
+
+## 🔑 Variables de entorno
+
+Todas son opcionales: si no existen, la funcionalidad asociada queda apagada y no se emite ninguna etiqueta. En producción se definen como *repository variables* en GitHub (Settings → Secrets and variables → Actions → Variables) y el workflow de deploy las pasa al build.
+
+| Variable | Para qué sirve |
+|---|---|
+| `NEXT_PUBLIC_GTM_ID` | Contenedor de Google Tag Manager (`GTM-XXXXXX`). Al definirla se inyecta el tag **y** la CSP abre los dominios de Google; sin ella no se carga nada de tracking. |
+| `GOOGLE_SITE_VERIFICATION` | Código de verificación de Google Search Console (solo el valor del meta, no la etiqueta completa). |
+| `BING_SITE_VERIFICATION` | Código de verificación de Bing Webmaster Tools. |
+
+Para probar en local:
+
+```bash
+NEXT_PUBLIC_GTM_ID=GTM-XXXXXX npm run dev
+```
 
 ## 📦 Scripts
 

@@ -1,42 +1,36 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 import { es, type Translations } from "./es";
 import { en } from "./en";
+import { sanitizeOption } from "../lib/sanitize";
 
-type Lang = "es" | "en";
+/* Idiomas válidos: cualquier otro valor recibido cae en "es". */
+export const LANGS = ["es", "en"] as const;
+export type Lang = (typeof LANGS)[number];
 
 interface I18nContextType {
     lang: Lang;
     t: Translations;
-    setLang: (lang: Lang) => void;
 }
 
 const I18nContext = createContext<I18nContextType>({
     lang: "es",
     t: es,
-    setLang: () => { },
 });
 
-const translations: Record<Lang, Translations> = { es, en };
+export const translations: Record<Lang, Translations> = { es, en };
 
-export function I18nProvider({ children }: { children: ReactNode }) {
-    const [lang, setLangState] = useState<Lang>("es");
-
-    useEffect(() => {
-        const saved = localStorage.getItem("lang") as Lang | null;
-        if (saved && (saved === "es" || saved === "en")) {
-            setLangState(saved);
-        }
-    }, []);
-
-    const setLang = (l: Lang) => {
-        setLangState(l);
-        localStorage.setItem("lang", l);
-    };
+/**
+ * El idioma lo manda la URL ("/" en español, "/en" en inglés), no localStorage:
+ * así cada versión tiene su propia dirección indexable y el contenido no puede
+ * contradecir a la URL que el buscador guardó.
+ */
+export function I18nProvider({ children, lang }: { children: ReactNode; lang: Lang }) {
+    const safe = sanitizeOption(lang, LANGS, "es");
 
     return (
-        <I18nContext.Provider value={{ lang, t: translations[lang], setLang }}>
+        <I18nContext.Provider value={{ lang: safe, t: translations[safe] }}>
             {children}
         </I18nContext.Provider>
     );

@@ -1,7 +1,11 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { getTeamMember, getAllSlugs } from "../data";
+import { safeMailto, safeUrl, sanitizeSlug } from "../../lib/sanitize";
+import { JsonLd } from "../../lib/JsonLd";
+import { SITE_URL, absoluteUrl } from "../../lib/site";
 import "../profile.css";
 
 export function generateStaticParams() {
@@ -12,13 +16,28 @@ export async function generateMetadata({
     params,
 }: {
     params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
     const { slug } = await params;
-    const member = getTeamMember(slug);
+    const member = getTeamMember(sanitizeSlug(slug));
     if (!member) return { title: "Miembro no encontrado" };
+
+    const title = `${member.name} — ${member.role} en SentraLabs`;
+    const url = `/team/${member.slug}`;
     return {
-        title: `${member.name} — SentraLabs`,
+        title,
         description: member.oneLiner,
+        alternates: { canonical: url },
+        openGraph: {
+            title,
+            description: member.oneLiner,
+            url,
+            type: "profile",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description: member.oneLiner,
+        },
     };
 }
 
@@ -28,22 +47,59 @@ export default async function ProfilePage({
     params: Promise<{ slug: string }>;
 }) {
     const { slug } = await params;
-    const member = getTeamMember(slug);
+    const member = getTeamMember(sanitizeSlug(slug));
     if (!member) notFound();
+
+    const profileUrl = absoluteUrl(`/team/${member.slug}`);
+
+    /* Person: le dice a Google quien firma el contenido (páginas de autor). */
+    const personSchema = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": `${profileUrl}#person`,
+        name: member.name,
+        jobTitle: member.role,
+        description: member.oneLiner,
+        image: absoluteUrl(member.image),
+        url: profileUrl,
+        knowsAbout: member.skills,
+        worksFor: { "@id": `${SITE_URL}/#organization` },
+        sameAs: [member.socials.github, member.socials.linkedin].filter(
+            (link): link is string => Boolean(safeUrl(link))
+        ),
+    };
+
+    /* Breadcrumbs: la ruta Inicio → Equipo → Persona que sale en el buscador. */
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
+            { "@type": "ListItem", position: 2, name: "Equipo", item: absoluteUrl("/#team") },
+            { "@type": "ListItem", position: 3, name: member.name, item: profileUrl },
+        ],
+    };
 
     return (
         <div className="profile-page">
-            {/* Back */}
-            <Link href="/#team" className="profile-back">
-                ← Volver al equipo
-            </Link>
+            <JsonLd data={personSchema} />
+            <JsonLd data={breadcrumbSchema} />
+
+            {/* Breadcrumb: misma ruta que declara el BreadcrumbList de arriba. */}
+            <nav aria-label="Ruta de navegación" className="profile-breadcrumb">
+                <Link href="/">Inicio</Link>
+                <span aria-hidden="true">/</span>
+                <Link href="/#team">Equipo</Link>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page">{member.name}</span>
+            </nav>
 
             <div className="profile-container">
                 {/* Header */}
                 <header className="profile-header">
                     <Image
                         src={member.image}
-                        alt={member.name}
+                        alt={`${member.name}, ${member.role} en SentraLabs`}
                         width={100}
                         height={100}
                         className="profile-photo"
@@ -59,29 +115,29 @@ export default async function ProfilePage({
 
                 {/* Social Links */}
                 <div className="profile-socials">
-                    {member.socials.github && (
+                    {safeUrl(member.socials.github) && (
                         <a
-                            href={member.socials.github}
+                            href={safeUrl(member.socials.github)}
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             className="profile-social-link"
                         >
                             GitHub
                         </a>
                     )}
-                    {member.socials.linkedin && (
+                    {safeUrl(member.socials.linkedin) && (
                         <a
-                            href={member.socials.linkedin}
+                            href={safeUrl(member.socials.linkedin)}
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             className="profile-social-link"
                         >
                             LinkedIn
                         </a>
                     )}
-                    {member.socials.email && (
+                    {safeMailto(member.socials.email) && (
                         <a
-                            href={`mailto:${member.socials.email}`}
+                            href={safeMailto(member.socials.email)}
                             className="profile-social-link"
                         >
                             Email: {member.socials.email}
@@ -105,9 +161,9 @@ export default async function ProfilePage({
                                 const Tag = h.link ? "a" : "div";
                                 const linkProps = h.link
                                     ? {
-                                        href: h.link,
+                                        href: safeUrl(h.link),
                                         target: "_blank" as const,
-                                        rel: "noopener",
+                                        rel: "noopener noreferrer",
                                     }
                                     : {};
                                 return (
@@ -137,11 +193,11 @@ export default async function ProfilePage({
                             {member.projects.map((p) => (
                                 <div key={p.name} className="profile-project-row">
                                     <div className="project-row-left">
-                                        {p.link ? (
+                                        {safeUrl(p.link) ? (
                                             <a
-                                                href={p.link}
+                                                href={safeUrl(p.link)}
                                                 target="_blank"
-                                                rel="noopener"
+                                                rel="noopener noreferrer"
                                                 className="project-row-name"
                                             >
                                                 {p.name}
@@ -204,11 +260,11 @@ export default async function ProfilePage({
                                         <span className="cert-title">{c.title}</span>
                                         <span className="cert-issuer">— {c.issuer}</span>
                                     </div>
-                                    {c.link && (
+                                    {safeUrl(c.link) && (
                                         <a
-                                            href={c.link}
+                                            href={safeUrl(c.link)}
                                             target="_blank"
-                                            rel="noopener"
+                                            rel="noopener noreferrer"
                                             className="cert-link"
                                         >
                                             ver certificado →
