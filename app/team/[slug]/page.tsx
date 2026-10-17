@@ -1,7 +1,8 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { I18nProvider } from "../../i18n/context";
 import { getTeamMember, getAllSlugs } from "../data";
-import ProfileView from "./ProfileView";
+import { sanitizeSlug } from "../../lib/sanitize";
+import { ProfileRoute, profileMetadata } from "../profileRoute";
 import "../profile.css";
 
 export function generateStaticParams() {
@@ -12,14 +13,9 @@ export async function generateMetadata({
     params,
 }: {
     params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
     const { slug } = await params;
-    const member = getTeamMember(slug);
-    if (!member) return { title: "Miembro no encontrado" };
-    return {
-        title: `${member.name} — SentraLabs`,
-        description: member.oneLiner,
-    };
+    return profileMetadata(slug, "es");
 }
 
 export default async function ProfilePage({
@@ -28,12 +24,8 @@ export default async function ProfilePage({
     params: Promise<{ slug: string }>;
 }) {
     const { slug } = await params;
-    const member = getTeamMember(slug);
+    const member = getTeamMember(sanitizeSlug(slug));
     if (!member) notFound();
 
-    return (
-        <I18nProvider>
-            <ProfileView member={member} />
-        </I18nProvider>
-    );
+    return <ProfileRoute member={member} lang="es" />;
 }

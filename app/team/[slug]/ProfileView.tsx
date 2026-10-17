@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useI18n } from "../../i18n/context";
-import type { TeamMember, TimelineItem } from "../data";
+import { safeMailto, safeUrl } from "../../lib/sanitize";
+import { localizeMember, type TeamMember, type TimelineItem } from "../data";
 
 function Timeline({ title, items }: { title: string; items: TimelineItem[] }) {
     return (
@@ -27,27 +28,37 @@ function Timeline({ title, items }: { title: string; items: TimelineItem[] }) {
 }
 
 export default function ProfileView({ member: base }: { member: TeamMember }) {
-    const { t, lang, setLang } = useI18n();
+    const { t, lang } = useI18n();
     const p = t.profile;
-    const member: TeamMember =
-        lang === "en" && base.en ? { ...base, ...base.en } : base;
-    const role =
-        lang === "en" && member.role === "Fundador" ? "Founder" : member.role;
+    const member = localizeMember(base, lang);
+    const role = member.role;
+    const home = lang === "en" ? "/en" : "/";
+    const otherLang = lang === "es" ? "en" : "es";
+    /* Enlace, no botón: cada idioma tiene su propia URL indexable. */
+    const otherLangHref =
+        otherLang === "en" ? `/en/team/${base.slug}` : `/team/${base.slug}`;
 
     return (
         <div className="profile-page">
             <div className="profile-topbar">
-                <Link href="/#team" className="profile-back">
-                    {p.back}
-                </Link>
-                <button
-                    type="button"
-                    className="profile-lang"
-                    onClick={() => setLang(lang === "es" ? "en" : "es")}
-                    aria-label={p.switchLangLabel}
-                >
-                    {p.switchLang}
-                </button>
+                {/* Breadcrumb: misma ruta que declara el BreadcrumbList de la página. */}
+                <nav aria-label={p.breadcrumbLabel} className="profile-breadcrumb">
+                    <Link href={home}>{p.home}</Link>
+                    <span aria-hidden="true">/</span>
+                    <Link href={`${home}#team`}>{p.team}</Link>
+                    <span aria-hidden="true">/</span>
+                    <span aria-current="page">{member.name}</span>
+                </nav>
+                {base.en && (
+                    <Link
+                        href={otherLangHref}
+                        hrefLang={otherLang}
+                        className="profile-lang"
+                        aria-label={p.switchLangLabel}
+                    >
+                        {p.switchLang}
+                    </Link>
+                )}
             </div>
 
             <div className="profile-container">
@@ -55,7 +66,7 @@ export default function ProfileView({ member: base }: { member: TeamMember }) {
                 <header className="profile-header">
                     <Image
                         src={member.image}
-                        alt={member.name}
+                        alt={`${member.name}, ${role} ${lang === "en" ? "at" : "en"} SentraLabs`}
                         width={100}
                         height={100}
                         className="profile-photo"
@@ -71,29 +82,29 @@ export default function ProfileView({ member: base }: { member: TeamMember }) {
 
                 {/* Social Links */}
                 <div className="profile-socials">
-                    {member.socials.github && (
+                    {safeUrl(member.socials.github) && (
                         <a
-                            href={member.socials.github}
+                            href={safeUrl(member.socials.github)}
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             className="profile-social-link"
                         >
                             GitHub
                         </a>
                     )}
-                    {member.socials.linkedin && (
+                    {safeUrl(member.socials.linkedin) && (
                         <a
-                            href={member.socials.linkedin}
+                            href={safeUrl(member.socials.linkedin)}
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             className="profile-social-link"
                         >
                             LinkedIn
                         </a>
                     )}
-                    {member.socials.email && (
+                    {safeMailto(member.socials.email) && (
                         <a
-                            href={`mailto:${member.socials.email}`}
+                            href={safeMailto(member.socials.email)}
                             className="profile-social-link"
                         >
                             Email: {member.socials.email}
@@ -117,9 +128,9 @@ export default function ProfileView({ member: base }: { member: TeamMember }) {
                                 const Tag = h.link ? "a" : "div";
                                 const linkProps = h.link
                                     ? {
-                                        href: h.link,
+                                        href: safeUrl(h.link),
                                         target: "_blank" as const,
-                                        rel: "noopener",
+                                        rel: "noopener noreferrer",
                                     }
                                     : {};
                                 return (
@@ -177,11 +188,11 @@ export default function ProfileView({ member: base }: { member: TeamMember }) {
                             {member.projects.map((proj) => (
                                 <div key={proj.name} className="profile-project-row">
                                     <div className="project-row-left">
-                                        {proj.link ? (
+                                        {safeUrl(proj.link) ? (
                                             <a
-                                                href={proj.link}
+                                                href={safeUrl(proj.link)}
                                                 target="_blank"
-                                                rel="noopener"
+                                                rel="noopener noreferrer"
                                                 className="project-row-name"
                                             >
                                                 {proj.name}
@@ -226,11 +237,11 @@ export default function ProfileView({ member: base }: { member: TeamMember }) {
                                         <span className="cert-title">{c.title}</span>
                                         <span className="cert-issuer">— {c.issuer}</span>
                                     </div>
-                                    {c.link && (
+                                    {safeUrl(c.link) && (
                                         <a
-                                            href={c.link}
+                                            href={safeUrl(c.link)}
                                             target="_blank"
-                                            rel="noopener"
+                                            rel="noopener noreferrer"
                                             className="cert-link"
                                         >
                                             {p.viewCert}

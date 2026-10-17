@@ -1,0 +1,40 @@
+# SentraLabs
+
+> Estudio de desarrollo de software en Cartagena, Colombia. Creamos, probamos y
+> lanzamos productos digitales a medida: aplicaciones moviles, plataformas web,
+> soluciones con IA y ciberseguridad.
+
+SentraLabs trabaja en remoto con clientes dentro y fuera de Colombia. El equipo
+combina desarrollo movil (Flutter), web (Next.js / React), backend (Node.js,
+SQL Server, Azure), IA (OpenAI) y diseno UX/UI.
+
+## Servicios
+
+- Aplicaciones moviles multiplataforma con Flutter.
+- Sitios y plataformas web con Next.js, React y TypeScript.
+- Integraciones de IA (chatbots, asistentes, automatizaciones) con OpenAI.
+- Soluciones de ciberseguridad y formacion asociada.
+- Mantenimiento y soporte continuo despues del lanzamiento.
+
+## Proyectos
+
+- TransCar: app oficial de transporte urbano en Cartagena, con mapa interactivo,
+  rutas y ETAs en vivo, consulta de saldo y chatbot con IA.
+- MarSec: plataforma de ciberseguridad para embarcaciones. Ganadora del premio
+  al Mejor Proyecto TalentoTech 2025.
+- EcoOne: app de reciclaje que recompensa con EcoCoins.
+
+## Paginas
+
+- Inicio: https://sentralabs.co/
+- Equipo y perfiles: https://sentralabs.co/#team
+- Preguntas frecuentes: https://sentralabs.co/#faq
+- Politica de privacidad: https://sentralabs.co/privacidad
+- Terminos y condiciones: https://sentralabs.co/terminos
+- Sitemap: https://sentralabs.co/sitemap.xml
+
+## Contacto
+
+- Email: atencionsentralabs@gmail.com
+- WhatsApp: +57 321 564 0735
+- GitHub: https://github.com/Manuuell

@@ -1,8 +1,25 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata = {
+export const metadata: Metadata = {
     title: "Política de Privacidad — SentraLabs",
     description: "Política de privacidad de SentraLabs",
+    alternates: { canonical: "/privacidad" },
+    openGraph: {
+        title: "Política de Privacidad — SentraLabs",
+        description: "Política de privacidad de SentraLabs",
+        url: "/privacidad",
+        type: "website",
+        // Al declarar openGraph aquí no se hereda la imagen del layout: se pide
+        // explícitamente la tarjeta generada en app/opengraph-image.tsx.
+        images: ["/opengraph-image"],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Política de Privacidad — SentraLabs",
+        description: "Política de privacidad de SentraLabs",
+        images: ["/opengraph-image"],
+    },
 };
 
 export default function Privacidad() {
