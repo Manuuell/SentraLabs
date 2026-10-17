@@ -270,12 +270,12 @@ function useCountUp(target: number, duration = 1500) {
 /* ────────────────── About ────────────────── */
 function About() {
   const { t } = useI18n();
-  const projects = useCountUp(3);
+  const projectCount = useCountUp(projects.length);
   const devs = useCountUp(4);
   const awards = useCountUp(2);
 
   const stats = [
-    { ref: projects.ref, value: `${projects.count}+`, label: t.about.stats.projects, color: "blue" as const },
+    { ref: projectCount.ref, value: `${projectCount.count}+`, label: t.about.stats.projects, color: "blue" as const },
     { ref: devs.ref, value: `${devs.count}`, label: t.about.stats.devs, color: "purple" as const },
     { ref: awards.ref, value: `${awards.count}`, label: t.about.stats.awards, color: "green" as const },
   ];
@@ -420,12 +420,25 @@ function FAQ() {
 }
 
 /* ────────────────── Projects ────────────────── */
-const projects = [
+type Project = {
+  image: string;
+  name: string;
+  desc: string;
+  descEn?: string;
+  tags: string[];
+  tagsEn?: string[];
+  links: { label: string; labelEn?: string; href: string }[];
+  mockups?: string[];
+};
+
+const projects: Project[] = [
   {
     image: "/images/projects/icon.webp",
     name: "TransCar",
     desc: "App de transporte urbano en Cartagena. Mapa interactivo con rutas en tiempo real, ETAs en vivo, chatbot con IA (GPT-4), consulta de saldo y noticias del sistema.",
+    descEn: "Urban transit app for Cartagena. Interactive map with real-time routes, live ETAs, an AI chatbot (GPT-4), balance lookup and system news.",
     tags: ["Flutter", "Mapbox", "OpenAI", "En desarrollo"],
+    tagsEn: ["Flutter", "Mapbox", "OpenAI", "In development"],
     links: [
       { label: "GitHub →", href: "https://github.com/Manuuell/Trascaribe-APP" },
     ],
@@ -434,6 +447,7 @@ const projects = [
     image: "/images/projects/marsec_logo.webp",
     name: "MarSec",
     desc: "Plataforma de ciberseguridad para embarcaciones. Lecciones interactivas, cuestionarios y asistente virtual 'Capitán Ciber' con IA.",
+    descEn: "Cybersecurity platform for vessels. Interactive lessons, quizzes and 'Capitán Ciber', an AI virtual assistant.",
     tags: ["Node.js", "Flutter", "SQL Server", "Azure"],
     links: [
       { label: "GitHub →", href: "https://github.com/Manuuell/MarSec" },
@@ -448,6 +462,7 @@ const projects = [
     image: "",
     name: "EcoOne",
     desc: "App móvil multiplataforma que incentiva el reciclaje urbano con EcoCoins — moneda digital ecológica. Conecta ciudadanos, operadores, comercios y administradores. Chatbot IA, gestión de QR, billetera digital y mapa de centros.",
+    descEn: "Cross-platform mobile app that rewards urban recycling with EcoCoins — an eco-friendly digital currency. It connects citizens, operators, shops and administrators. AI chatbot, QR management, digital wallet and a map of recycling centers.",
     tags: ["Flutter", "Clean Architecture", "OpenAI", "Firebase"],
     links: [
       { label: "GitHub →", href: "https://github.com/Manuuell/EcoOnee" },
@@ -456,6 +471,54 @@ const projects = [
       "/images/projects/ecoone/mockup1e.webp",
       "/images/projects/ecoone/mockup2e.webp",
       "/images/projects/ecoone/mockup3e.webp",
+    ],
+  },
+  {
+    image: "/images/projects/tooli.webp",
+    name: "Tooli",
+    desc: "App para estudiantes de la Universidad del Sinú Cartagena: notas, horario, tareas, avisos de entregas y el aula virtual en un solo lugar, con widget para Android. Proyecto independiente, sin vínculo oficial con la universidad.",
+    descEn: "App for Universidad del Sinú Cartagena students: grades, schedule, assignments, due-date reminders and the virtual classroom in one place, with an Android widget. An independent project, not officially affiliated with the university.",
+    tags: ["Flutter", "Dart", "Moodle API", "Beta cerrada"],
+    tagsEn: ["Flutter", "Dart", "Moodle API", "Closed beta"],
+    links: [],
+  },
+  {
+    image: "/images/projects/safewatch.webp",
+    name: "SafeWatch",
+    desc: "Monitoreo de equipos de protección personal para Ecopetrol con visión por computador: detecta en tiempo real a quien entra a una zona sin casco, chaleco o mascarilla y genera alertas. Panel web con analítica y streaming de video.",
+    descEn: "Personal protective equipment monitoring for Ecopetrol using computer vision: detects in real time anyone entering an area without a helmet, vest or mask and raises alerts. Web dashboard with analytics and video streaming.",
+    tags: ["YOLO", "FastAPI", "Next.js", "Docker"],
+    links: [],
+  },
+  {
+    image: "/images/projects/fastfood.webp",
+    name: "FastFood",
+    desc: "Plataforma white-label de pedidos y fidelización para restaurantes, ya usada por 5 negocios. El cliente pide desde un QR en la mesa, sin descargar nada ni crear cuenta; acumula sellos y niveles, y recibe el estado de su pedido por WhatsApp.",
+    descEn: "White-label ordering and loyalty platform for restaurants, already used by 5 businesses. Customers order from a QR code at the table with no download or sign-up, collect stamps and loyalty tiers, and get order updates on WhatsApp.",
+    tags: ["Next.js", "Supabase", "WhatsApp API", "En producción"],
+    tagsEn: ["Next.js", "Supabase", "WhatsApp API", "In production"],
+    links: [],
+  },
+  {
+    image: "/images/projects/sentrawash.webp",
+    name: "SentraWash",
+    desc: "SaaS multi-tenant para lavaderos de vehículos: registra cada ingreso escaneando la placa con la cámara, guarda la foto del vehículo y mueve las órdenes en un tablero en tiempo real, con caja y arqueo.",
+    descEn: "Multi-tenant SaaS for car washes: logs each vehicle by scanning its plate with the camera, stores a photo of the car and moves orders across a real-time board, with cash register and daily closing.",
+    tags: ["Flutter", "NestJS", "PostgreSQL", "AWS"],
+    links: [
+      { label: "GitHub →", href: "https://github.com/Manuuell/SentraWash" },
+    ],
+  },
+  {
+    image: "/images/projects/elmundotebusca.webp",
+    name: "El Mundo Te Busca",
+    desc: "Plataforma ciudadana sin ánimo de lucro para localizar personas desaparecidas y coordinar ayuda tras el terremoto de Venezuela de 2026: registro, búsqueda avanzada, verificación contra abusos y puntos de ayuda. Web y app móvil.",
+    descEn: "Non-profit civic platform to find missing people and coordinate aid after the 2026 Venezuela earthquake: registration, advanced search, abuse-resistant verification and aid points. Web and mobile app.",
+    tags: ["Next.js", "Flutter", "Supabase", "En producción"],
+    tagsEn: ["Next.js", "Flutter", "Supabase", "In production"],
+    links: [
+      { label: "Sitio web →", labelEn: "Website →", href: "https://elmundotebusca.com" },
+      { label: "GitHub →", href: "https://github.com/Angelsistemas7/ElMundo-Te-Busca" },
     ],
   },
 ];
@@ -520,9 +583,9 @@ function Projects() {
                 </div>
                 <div className="project-info">
                   <h3 className="project-name">{p.name}</h3>
-                  <p className="project-desc">{p.desc}</p>
+                  <p className="project-desc">{lang === "en" && p.descEn ? p.descEn : p.desc}</p>
                   <div className="project-tags">
-                    {p.tags.map((t) => (
+                    {(lang === "en" && p.tagsEn ? p.tagsEn : p.tags).map((t) => (
                       <span className="tag" key={t}>
                         {t}
                       </span>
@@ -538,7 +601,7 @@ function Projects() {
                           target="_blank"
                           rel="noopener"
                         >
-                          {l.label}
+                          {lang === "en" && l.labelEn ? l.labelEn : l.label}
                         </a>
                       ))}
                     </div>
@@ -744,7 +807,7 @@ function Footer() {
 /* ────────────────── Terminal Easter Egg ────────────────── */
 const terminalCommands: Record<string, string> = {
   help: "Comandos: help, projects, team, contact, skills, clear",
-  projects: "→ TransCar — App de transporte urbano en Cartagena\n→ MarSec — Plataforma de ciberseguridad (🏆 Mejor Proyecto TalentoTech)\n→ EcoOne — Reciclaje con EcoCoins",
+  projects: "→ TransCar — App de transporte urbano en Cartagena\n→ MarSec — Plataforma de ciberseguridad (🏆 Mejor Proyecto TalentoTech)\n→ EcoOne — Reciclaje con EcoCoins\n→ Tooli — App para estudiantes de Unisinú Cartagena\n→ SafeWatch — Detección de EPP para Ecopetrol\n→ FastFood — Pedidos y fidelización para restaurantes\n→ SentraWash — SaaS para lavaderos\n→ El Mundo Te Busca — Personas desaparecidas",
   team: "→ Manuel Esteban — Fundador\n→ Ángel Acero — Co-founder / Dev\n→ Javier Mercado — Database Manager\n→ Jerson Díaz — Co-founder / Dev",
   contact: "→ Email: atencionsentralabs@gmail.com\n→ WhatsApp: +57 321 564 0735\n→ GitHub: github.com/Manuuell",
   skills: "Flutter · React · Next.js · TypeScript · Node.js · Firebase · Azure · OpenAI · SQL Server · Mapbox",
