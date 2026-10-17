@@ -36,8 +36,13 @@ export default function Tooli() {
                     Universidades
                 </h2>
                 <ul style={{ color: "#a1a1aa", lineHeight: 1.8, paddingLeft: "1.2rem" }}>
-                    <li>Universidad del Sinú, seccional Cartagena — Tooli Unisinú</li>
+                    <li>Universidad del Sinú, seccional Cartagena — Tooli Unisinú (prueba cerrada)</li>
                 </ul>
+                <p style={{ color: "#71717a", fontSize: "0.9rem", lineHeight: 1.7, marginTop: "1rem" }}>
+                    Tooli es un proyecto independiente de SentraLabs: no es una app oficial de
+                    ninguna universidad. Está en prueba cerrada con estudiantes y personal de
+                    cada institución antes de abrirla a todos.
+                </p>
 
                 <h2 style={{ fontFamily: mono, fontSize: "1.1rem", color: "#fff", margin: "2rem 0 1rem" }}>
                     Ayuda
