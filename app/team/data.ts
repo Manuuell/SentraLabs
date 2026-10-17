@@ -28,7 +28,35 @@ export interface TeamMember {
         issuer: string;
         link?: string;
     }[];
+    scholarships?: string[];
+    experience?: TimelineItem[];
+    education?: TimelineItem[];
+    /** Traducción al inglés. Lo que falte se muestra en español. */
+    en?: TeamMemberTranslation;
 }
+
+export interface TimelineItem {
+    title: string;
+    org: string;
+    period?: string;
+}
+
+export type TeamMemberTranslation = Partial<
+    Pick<
+        TeamMember,
+        | "role"
+        | "oneLiner"
+        | "bio"
+        | "highlights"
+        | "projects"
+        | "skills"
+        | "awards"
+        | "certifications"
+        | "scholarships"
+        | "experience"
+        | "education"
+    >
+>;
 
 export const teamMembers: TeamMember[] = [
     {
@@ -122,17 +150,383 @@ export const teamMembers: TeamMember[] = [
     },
     {
         slug: "nino-nina",
-        name: "Angel Acero",
+        name: "Ángel Acero",
         role: "Co-founder / Dev",
         image: "/images/team/miembro2f.jpg",
-        oneLiner: "Co-fundador de SentraLabs.",
-        bio: "Desarrollador comprometido con crear soluciones de calidad.",
+        oneLiner:
+            "Co-fundador de SentraLabs. Desarrollador full-stack con foco en IA, visión por computador y ciberseguridad.",
+        bio: "Desarrollador full-stack y estudiante de Ingeniería de Sistemas en la Universidad Tecnológica de Bolívar. Construyo productos completos —apps móviles y web, backend, bases de datos, infraestructura y modelos de Machine Learning— y los llevo a producción para clientes como Ecopetrol y la UTB. Me formé en ciberseguridad Blue Team con Trend Micro y AWS, y diseñé mi propio sistema de orquestación de agentes de IA para desarrollar más rápido sin bajar el estándar. Casi todo lo que hago nace de un problema real: transporte público, seguridad industrial, salud, transparencia electoral y personas desaparecidas.",
         socials: {
             github: "https://github.com/Angelsistemas7",
+            email: "angelacero_sistemas@hotmail.com",
         },
-        highlights: [],
-        projects: [],
-        skills: [],
+        highlights: [
+            {
+                title: "SafeWatch — Ecopetrol",
+                description:
+                    "Monitoreo de equipos de protección personal con visión por computador (YOLO): detecta y alerta en tiempo real cuando un trabajador entra a una zona sin el EPP requerido.",
+            },
+            {
+                title: "Tooli — proyecto de grado en la UTB",
+                description:
+                    "Chatbot de WhatsApp para la Universidad Tecnológica de Bolívar con asistente de IA, turnos, pagos y captación de aspirantes a posgrado. Los aliados del proyecto lo aprobaron y lo van a adoptar.",
+            },
+            {
+                title: "El Mundo Te Busca",
+                description:
+                    "Plataforma ciudadana sin ánimo de lucro, en producción, para localizar personas desaparecidas y coordinar ayuda tras el terremoto de Venezuela de 2026.",
+                link: "https://elmundotebusca.com",
+            },
+            {
+                title: "Ojo al Voto",
+                description:
+                    "Auditoría ciudadana de las actas E-14 de la elección presidencial de 2026: lee 121.041 actas reales con IA y señala inconsistencias aritméticas.",
+                link: "https://github.com/Manuuell/ojoalvoto",
+            },
+        ],
+        projects: [
+            {
+                name: "Tooli",
+                description:
+                    "App para estudiantes de la Universidad del Sinú Cartagena: notas, horario, tareas y aula virtual en un solo lugar. Independiente, en beta cerrada.",
+                tags: ["Flutter", "Dart", "Moodle"],
+            },
+            {
+                name: "SafeWatch",
+                description:
+                    "Detección de EPP en tiempo real para Ecopetrol, con panel web, streaming de video y alertas.",
+                tags: ["YOLO", "FastAPI", "Next.js"],
+            },
+            {
+                name: "FastFood",
+                description:
+                    "Plataforma white-label de pedidos y fidelización por QR, ya usada por 5 restaurantes.",
+                tags: ["Next.js", "Supabase", "WhatsApp API"],
+            },
+            {
+                name: "SentraWash",
+                description:
+                    "SaaS multi-tenant para lavaderos: escaneo de placa, foto del vehículo y tablero en tiempo real.",
+                tags: ["Flutter", "NestJS", "PostgreSQL"],
+                link: "https://github.com/Manuuell/SentraWash",
+            },
+            {
+                name: "TransCar",
+                description:
+                    "App para usuarios de TransCaribe en Cartagena: mapa en vivo, tiempos de llegada y chatbot de rutas con IA. 500 usuarios en Google Play.",
+                tags: ["Flutter", "Mapbox", "OpenAI"],
+                link: "https://play.google.com/store/apps/details?id=com.transcar.app",
+            },
+            {
+                name: "El Mundo Te Busca",
+                description:
+                    "Web y app móvil para encontrar personas desaparecidas tras el terremoto de Venezuela de 2026.",
+                tags: ["Next.js", "Flutter", "Supabase"],
+                link: "https://elmundotebusca.com",
+            },
+            {
+                name: "Ojo al Voto",
+                description:
+                    "Lectura con IA de 121.041 actas E-14 para detectar inconsistencias aritméticas.",
+                tags: ["Python", "IA / OCR", "PostgreSQL"],
+                link: "https://github.com/Manuuell/ojoalvoto",
+            },
+            {
+                name: "CrimenAI",
+                description:
+                    "Observatorio de criminalidad con datos oficiales de 18 países y más de 530.000 hechos registrados en Colombia en 2026.",
+                tags: ["JavaScript", "Leaflet", "GitHub Actions"],
+            },
+            {
+                name: "Semáforo Digital",
+                description:
+                    "Autodiagnóstico de madurez digital para empresas, con resultado por colores y panel administrador.",
+                tags: ["Next.js", "Supabase", "Docker"],
+                link: "https://github.com/Angelsistemas7/radar-digital",
+            },
+            {
+                name: "Malecón Business Center",
+                description:
+                    "Sitio web del proyecto Malecón para Conversión Consultorías, pensado para presentar la propuesta y captar contactos.",
+                tags: ["Next.js", "TypeScript"],
+                link: "https://maleconbusiness.com",
+            },
+            {
+                name: "Error Atlas",
+                description:
+                    "Enciclopedia abierta de errores de desarrollo, con servidor MCP para consultarla desde Claude o Cursor.",
+                tags: ["Next.js", "MCP", "Open source"],
+                link: "https://github.com/Angelsistemas7/error-atlas",
+            },
+        ],
+        skills: [
+            "Flutter",
+            "Dart",
+            "React",
+            "React Native",
+            "Next.js",
+            "TypeScript",
+            "Tailwind",
+            "Python",
+            "FastAPI",
+            "Node.js",
+            "NestJS",
+            "PostgreSQL",
+            "Supabase",
+            "Firebase",
+            "Machine Learning",
+            "YOLO",
+            "LLMs y agentes de IA",
+            "MCP",
+            "Docker",
+            "Nginx",
+            "AWS",
+            "GitHub Actions",
+            "Git",
+        ],
+        awards: [
+            "Proyecto ganador — Hackathon 2026 con Ecopetrol, la UTB, el SENA y la Alcaldía",
+            "Entre los 10 mejores proyectos — Nexus Rural 2026",
+            "Mejor proyecto de análisis de datos — Talento Tech 2024",
+            "Proyecto ganador — Trend Micro 2023",
+            "Proyecto ganador — MinTIC 2023",
+            "Mejor proyecto del curso — Oracle 2022",
+        ],
+        scholarships: [
+            "Becas con Corazón — Ecopetrol, para estudiar Ingeniería de Sistemas en la UTB",
+            "Beca de formación en ciberseguridad — Trend Micro",
+            "Beca de formación en desarrollo de software — ICETEX",
+        ],
+        certifications: [
+            { title: "CyberSecurity Professional", issuer: "Trend Micro" },
+            { title: "Deep Security 20", issuer: "Trend Micro" },
+            { title: "Apex One as a Service", issuer: "Trend Micro" },
+            { title: "Seguridad para TI", issuer: "Trend Micro" },
+            { title: "Arquitectura en la nube", issuer: "AWS" },
+            { title: "Ethical Hacking Red Team", issuer: "Hacker Mentor" },
+            { title: "Diplomado en Desarrollo de Aplicaciones Móviles", issuer: "MinTIC y UTB" },
+            { title: "Diplomado en Desarrollo de Software", issuer: "MinTIC y UTB" },
+            { title: "Diplomados en Python y Java", issuer: "MinTIC y UTB" },
+            { title: "Redes, ciberseguridad, IoT y SCRUM", issuer: "SENA" },
+        ],
+        experience: [
+            {
+                title: "Co-fundador y desarrollador full-stack",
+                org: "SentraLabs",
+                period: "2025 – hoy",
+            },
+            {
+                title: "Auxiliar de soporte de software",
+                org: "Nueva EPS",
+                period: "6 meses",
+            },
+            {
+                title: "Técnico en sistemas",
+                org: "Bienestar IPS",
+                period: "6 meses",
+            },
+        ],
+        education: [
+            {
+                title: "Ingeniería de Sistemas",
+                org: "Universidad Tecnológica de Bolívar",
+                period: "2022 – en curso",
+            },
+            {
+                title: "Técnico en Sistemas",
+                org: "SENA",
+            },
+            {
+                title: "Semillero de Medios Masivos y Productos Culturales",
+                org: "UTB",
+            },
+        ],
+        en: {
+            oneLiner:
+                "Co-founder of SentraLabs. Full-stack developer focused on AI, computer vision and cybersecurity.",
+            bio: "Full-stack developer and Systems Engineering student at Universidad Tecnológica de Bolívar. I build complete products — mobile and web apps, backends, databases, infrastructure and machine learning models — and ship them to production for clients such as Ecopetrol and UTB. I trained in Blue Team cybersecurity with Trend Micro and AWS, and I built my own AI agent orchestration system to move faster without lowering the bar. Most of my work starts from a real problem: public transit, industrial safety, healthcare, election transparency and missing persons.",
+            highlights: [
+                {
+                    title: "SafeWatch — Ecopetrol",
+                    description:
+                        "Personal protective equipment monitoring with computer vision (YOLO): detects and alerts in real time when a worker enters an area without the required PPE.",
+                },
+                {
+                    title: "Tooli — capstone project at UTB",
+                    description:
+                        "WhatsApp chatbot for Universidad Tecnológica de Bolívar with an AI assistant, appointments, payments and graduate-program lead capture. The project's partners approved it and are adopting it.",
+                },
+                {
+                    title: "El Mundo Te Busca",
+                    description:
+                        "Non-profit civic platform, live in production, to find missing people and coordinate aid after the 2026 Venezuela earthquake.",
+                    link: "https://elmundotebusca.com",
+                },
+                {
+                    title: "Ojo al Voto",
+                    description:
+                        "Citizen audit of the E-14 tally sheets from Colombia's 2026 presidential election: reads 121,041 real sheets with AI and flags arithmetic inconsistencies.",
+                    link: "https://github.com/Manuuell/ojoalvoto",
+                },
+            ],
+            projects: [
+                {
+                    name: "Tooli",
+                    description:
+                        "App for Universidad del Sinú Cartagena students: grades, schedule, assignments and the virtual classroom in one place. Independent, in closed beta.",
+                    tags: ["Flutter", "Dart", "Moodle"],
+                },
+                {
+                    name: "SafeWatch",
+                    description:
+                        "Real-time PPE detection for Ecopetrol, with a web dashboard, video streaming and alerts.",
+                    tags: ["YOLO", "FastAPI", "Next.js"],
+                },
+                {
+                    name: "FastFood",
+                    description:
+                        "White-label QR ordering and loyalty platform, already used by 5 restaurants.",
+                    tags: ["Next.js", "Supabase", "WhatsApp API"],
+                },
+                {
+                    name: "SentraWash",
+                    description:
+                        "Multi-tenant SaaS for car washes: plate scanning, vehicle photos and a real-time board.",
+                    tags: ["Flutter", "NestJS", "PostgreSQL"],
+                    link: "https://github.com/Manuuell/SentraWash",
+                },
+                {
+                    name: "TransCar",
+                    description:
+                        "App for TransCaribe riders in Cartagena: live map, arrival times and an AI route chatbot. 500 users on Google Play.",
+                    tags: ["Flutter", "Mapbox", "OpenAI"],
+                    link: "https://play.google.com/store/apps/details?id=com.transcar.app",
+                },
+                {
+                    name: "El Mundo Te Busca",
+                    description:
+                        "Web and mobile app to find people missing after the 2026 Venezuela earthquake.",
+                    tags: ["Next.js", "Flutter", "Supabase"],
+                    link: "https://elmundotebusca.com",
+                },
+                {
+                    name: "Ojo al Voto",
+                    description:
+                        "AI reading of 121,041 E-14 tally sheets to detect arithmetic inconsistencies.",
+                    tags: ["Python", "AI / OCR", "PostgreSQL"],
+                    link: "https://github.com/Manuuell/ojoalvoto",
+                },
+                {
+                    name: "CrimenAI",
+                    description:
+                        "Crime observatory built on official data from 18 countries, with over 530,000 incidents recorded in Colombia in 2026.",
+                    tags: ["JavaScript", "Leaflet", "GitHub Actions"],
+                },
+                {
+                    name: "Semáforo Digital",
+                    description:
+                        "Digital maturity self-assessment for businesses, with color-coded results and an admin panel.",
+                    tags: ["Next.js", "Supabase", "Docker"],
+                    link: "https://github.com/Angelsistemas7/radar-digital",
+                },
+                {
+                    name: "Malecón Business Center",
+                    description:
+                        "Website for the Malecón project by Conversión Consultorías, built to present the proposal and capture leads.",
+                    tags: ["Next.js", "TypeScript"],
+                    link: "https://maleconbusiness.com",
+                },
+                {
+                    name: "Error Atlas",
+                    description:
+                        "Open encyclopedia of development errors, with an MCP server to query it from Claude or Cursor.",
+                    tags: ["Next.js", "MCP", "Open source"],
+                    link: "https://github.com/Angelsistemas7/error-atlas",
+                },
+            ],
+            skills: [
+                "Flutter",
+                "Dart",
+                "React",
+                "React Native",
+                "Next.js",
+                "TypeScript",
+                "Tailwind",
+                "Python",
+                "FastAPI",
+                "Node.js",
+                "NestJS",
+                "PostgreSQL",
+                "Supabase",
+                "Firebase",
+                "Machine Learning",
+                "YOLO",
+                "LLMs & AI agents",
+                "MCP",
+                "Docker",
+                "Nginx",
+                "AWS",
+                "GitHub Actions",
+                "Git",
+            ],
+            awards: [
+                "Winning project — 2026 Hackathon with Ecopetrol, UTB, SENA and the Mayor's Office",
+                "Top 10 project — Nexus Rural 2026",
+                "Best data analytics project — Talento Tech 2024",
+                "Winning project — Trend Micro 2023",
+                "Winning project — MinTIC 2023",
+                "Best course project — Oracle 2022",
+            ],
+            scholarships: [
+                "Becas con Corazón — Ecopetrol, to study Systems Engineering at UTB",
+                "Cybersecurity training scholarship — Trend Micro",
+                "Software development training scholarship — ICETEX",
+            ],
+            certifications: [
+                { title: "CyberSecurity Professional", issuer: "Trend Micro" },
+                { title: "Deep Security 20", issuer: "Trend Micro" },
+                { title: "Apex One as a Service", issuer: "Trend Micro" },
+                { title: "Security for IT", issuer: "Trend Micro" },
+                { title: "Cloud Architecture", issuer: "AWS" },
+                { title: "Ethical Hacking Red Team", issuer: "Hacker Mentor" },
+                { title: "Mobile App Development Diploma", issuer: "MinTIC & UTB" },
+                { title: "Software Development Diploma", issuer: "MinTIC & UTB" },
+                { title: "Python and Java Diplomas", issuer: "MinTIC & UTB" },
+                { title: "Networking, cybersecurity, IoT and SCRUM", issuer: "SENA" },
+            ],
+            experience: [
+                {
+                    title: "Co-founder & full-stack developer",
+                    org: "SentraLabs",
+                    period: "2025 – present",
+                },
+                {
+                    title: "Software support assistant",
+                    org: "Nueva EPS",
+                    period: "6 months",
+                },
+                {
+                    title: "IT technician",
+                    org: "Bienestar IPS",
+                    period: "6 months",
+                },
+            ],
+            education: [
+                {
+                    title: "Systems Engineering",
+                    org: "Universidad Tecnológica de Bolívar",
+                    period: "2022 – in progress",
+                },
+                {
+                    title: "IT Technician",
+                    org: "SENA",
+                },
+                {
+                    title: "Mass Media and Cultural Products research group",
+                    org: "UTB",
+                },
+            ],
+        },
     },
     {
         slug: "matamba",

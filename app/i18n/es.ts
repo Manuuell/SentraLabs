@@ -55,6 +55,21 @@ export const es = {
         desc: "Cuéntanos tu idea y te ayudamos a hacerla realidad. Estamos listos para construir juntos.",
         email: "Escríbenos",
     },
+    // Profile
+    profile: {
+        back: "← Volver al equipo",
+        switchLang: "EN",
+        switchLangLabel: "Ver en inglés",
+        highlights: "Highlights",
+        projects: "Proyectos",
+        experience: "Experiencia",
+        education: "Formación",
+        stack: "Stack",
+        awards: "Premios",
+        scholarships: "Becas",
+        certifications: "Certificaciones",
+        viewCert: "ver certificado →",
+    },
     // Footer
     footer: {
         rights: "Todos los derechos reservados.",
