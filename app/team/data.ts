@@ -152,7 +152,7 @@ export const teamMembers: TeamMember[] = [
         slug: "nino-nina",
         name: "Ángel Acero",
         role: "Co-founder / Dev",
-        image: "/images/team/miembro2f.jpg",
+        image: "/images/team/miembro2p.jpg",
         oneLiner:
             "Co-fundador de SentraLabs. Desarrollador full-stack con foco en IA, visión por computador y ciberseguridad.",
         bio: "Desarrollador full-stack y estudiante de Ingeniería de Sistemas en la Universidad Tecnológica de Bolívar. Construyo productos completos —apps móviles y web, backend, bases de datos, infraestructura y modelos de Machine Learning— y los llevo a producción para clientes como Ecopetrol y la UTB. Me formé en ciberseguridad Blue Team con Trend Micro y AWS, y diseñé mi propio sistema de orquestación de agentes de IA para desarrollar más rápido sin bajar el estándar. Casi todo lo que hago nace de un problema real: transporte público, seguridad industrial, salud, transparencia electoral y personas desaparecidas.",

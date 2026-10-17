@@ -602,9 +602,9 @@ const team = [
   },
   {
     slug: "nino-nina",
-    name: "Angel Acero",
+    name: "Ángel Acero",
     role: "Co-founder / Dev",
-    image: "/images/team/miembro2f.jpg",
+    image: "/images/team/miembro2p.jpg",
     github: "https://github.com/Angelsistemas7",
     linkedin: "",
   },
@@ -745,7 +745,7 @@ function Footer() {
 const terminalCommands: Record<string, string> = {
   help: "Comandos: help, projects, team, contact, skills, clear",
   projects: "→ TransCar — App de transporte urbano en Cartagena\n→ MarSec — Plataforma de ciberseguridad (🏆 Mejor Proyecto TalentoTech)\n→ EcoOne — Reciclaje con EcoCoins",
-  team: "→ Manuel Esteban — Fundador\n→ Angel Acero — Co-founder / Dev\n→ Javier Mercado — Database Manager\n→ Jerson Díaz — Co-founder / Dev",
+  team: "→ Manuel Esteban — Fundador\n→ Ángel Acero — Co-founder / Dev\n→ Javier Mercado — Database Manager\n→ Jerson Díaz — Co-founder / Dev",
   contact: "→ Email: atencionsentralabs@gmail.com\n→ WhatsApp: +57 321 564 0735\n→ GitHub: github.com/Manuuell",
   skills: "Flutter · React · Next.js · TypeScript · Node.js · Firebase · Azure · OpenAI · SQL Server · Mapbox",
 };
