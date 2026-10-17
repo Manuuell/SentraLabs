@@ -155,6 +155,7 @@ export const en: Translations = {
         awards: "Awards",
         scholarships: "Scholarships",
         certifications: "Certifications",
+        languages: "Languages",
         viewCert: "view certificate →",
     },
     footer: {

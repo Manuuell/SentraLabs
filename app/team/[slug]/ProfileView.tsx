@@ -253,6 +253,20 @@ export default function ProfileView({ member: base }: { member: TeamMember }) {
                     </section>
                 )}
 
+                {/* Languages */}
+                {member.languages && member.languages.length > 0 && (
+                    <section className="profile-section">
+                        <h2 className="profile-section-title">{p.languages}</h2>
+                        <div className="profile-skills">
+                            {member.languages.map((l) => (
+                                <span key={l} className="profile-skill">
+                                    {l}
+                                </span>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
                 {/* Skills */}
                 {member.skills.length > 0 && (
                     <section className="profile-section">

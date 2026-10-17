@@ -31,6 +31,7 @@ export interface TeamMember {
     scholarships?: string[];
     experience?: TimelineItem[];
     education?: TimelineItem[];
+    languages?: string[];
     /** Traducción al inglés. Lo que falte se muestra en español. */
     en?: TeamMemberTranslation;
 }
@@ -55,6 +56,7 @@ export type TeamMemberTranslation = Partial<
         | "scholarships"
         | "experience"
         | "education"
+        | "languages"
     >
 >;
 
@@ -256,10 +258,46 @@ export const teamMembers: TeamMember[] = [
                 tags: ["Next.js", "MCP", "Open source"],
                 link: "https://github.com/Angelsistemas7/error-atlas",
             },
+            {
+                name: "HelpSearch",
+                description:
+                    "Red de auxilio SOS que funciona sin internet, por Bluetooth (malla BLE), pensada para emergencias y terremotos.",
+                tags: ["Bluetooth LE", "Mobile", "Open source"],
+                link: "https://github.com/Angelsistemas7/HelpSearch",
+            },
+            {
+                name: "DevAtlas",
+                description:
+                    "Formato abierto compartido para atlas de conocimiento técnico. Error Atlas es su primer módulo; Vuln Atlas (vulnerabilidades) y Package Atlas (deprecaciones de paquetes) se construyen sobre la misma base.",
+                tags: ["TypeScript", "JSON", "Open source"],
+                link: "https://github.com/Angelsistemas7/devatlas",
+            },
+            {
+                name: "Radar Digital",
+                description:
+                    "Diagnóstico de madurez digital en 8 dimensiones con radar interactivo y plan de acción por fases.",
+                tags: ["Next.js", "React", "Supabase"],
+                link: "https://github.com/Angelsistemas7/conversion",
+            },
+            {
+                name: "Qubi",
+                description:
+                    "Gestor de equipos y tareas tipo Notion: tableros, calendario, registro de horas y páginas colaborativas en tiempo real.",
+                tags: ["Next.js", "Prisma", "Yjs"],
+                link: "https://github.com/Manuuell/Qubi",
+            },
+            {
+                name: "Malecón Residences",
+                description:
+                    "Landing inmersiva para residencias frente al mar en Cartagena, hecha en colaboración con el equipo de SentraLabs.",
+                tags: ["Next.js", "TypeScript", "Tailwind"],
+                link: "https://github.com/jerdiaz/malecon-residences",
+            },
         ],
         skills: [
             "Flutter",
             "Dart",
+            "Expo",
             "React",
             "React Native",
             "Next.js",
@@ -272,7 +310,10 @@ export const teamMembers: TeamMember[] = [
             "PostgreSQL",
             "Supabase",
             "Firebase",
+            "SQLite",
             "Machine Learning",
+            "Deep Learning",
+            "PyTorch",
             "YOLO",
             "LLMs y agentes de IA",
             "MCP",
@@ -281,6 +322,7 @@ export const teamMembers: TeamMember[] = [
             "AWS",
             "GitHub Actions",
             "Git",
+            "Ciberseguridad (Blue Team)",
         ],
         awards: [
             "Proyecto ganador — Hackathon 2026 con Ecopetrol, la UTB, el SENA y la Alcaldía",
@@ -289,11 +331,13 @@ export const teamMembers: TeamMember[] = [
             "Proyecto ganador — Trend Micro 2023",
             "Proyecto ganador — MinTIC 2023",
             "Mejor proyecto del curso — Oracle 2022",
+            "Primeros puestos por excelencia académica en 10.º y 11.º grado — Corporación Educativa Maddox",
         ],
         scholarships: [
             "Becas con Corazón — Ecopetrol, para estudiar Ingeniería de Sistemas en la UTB",
             "Beca de formación en ciberseguridad — Trend Micro",
             "Beca de formación en desarrollo de software — ICETEX",
+            "Beca escolar — Corporación Educativa Maddox",
         ],
         certifications: [
             { title: "CyberSecurity Professional", issuer: "Trend Micro" },
@@ -305,12 +349,22 @@ export const teamMembers: TeamMember[] = [
             { title: "Diplomado en Desarrollo de Aplicaciones Móviles", issuer: "MinTIC y UTB" },
             { title: "Diplomado en Desarrollo de Software", issuer: "MinTIC y UTB" },
             { title: "Diplomados en Python y Java", issuer: "MinTIC y UTB" },
+            { title: "Diplomado en Habilidades de la Investigación", issuer: "UTB" },
             { title: "Redes, ciberseguridad, IoT y SCRUM", issuer: "SENA" },
+            { title: "Procesos para software de calidad", issuer: "SENA" },
+            { title: "Diseño de páginas web", issuer: "SENA" },
+            { title: "Excel avanzado", issuer: "SENA" },
+            { title: "Inglés", issuer: "SENA" },
         ],
         experience: [
             {
                 title: "Co-fundador y desarrollador full-stack",
                 org: "SentraLabs",
+                period: "2025 – hoy",
+            },
+            {
+                title: "Desarrollador de software independiente",
+                org: "Freelance — Conversión Consultorías (Malecón Business Center) y otros clientes",
                 period: "2025 – hoy",
             },
             {
@@ -338,7 +392,13 @@ export const teamMembers: TeamMember[] = [
                 title: "Semillero de Medios Masivos y Productos Culturales",
                 org: "UTB",
             },
+            {
+                title: "Bachiller",
+                org: "Corporación Educativa Maddox",
+                period: "2020",
+            },
         ],
+        languages: ["Español — nativo", "Inglés — B1 (MCER)"],
         en: {
             oneLiner:
                 "Co-founder of SentraLabs. Full-stack developer focused on AI, computer vision and cybersecurity.",
@@ -441,10 +501,46 @@ export const teamMembers: TeamMember[] = [
                     tags: ["Next.js", "MCP", "Open source"],
                     link: "https://github.com/Angelsistemas7/error-atlas",
                 },
+                {
+                    name: "HelpSearch",
+                    description:
+                        "SOS relief network that works without internet over Bluetooth (BLE mesh), built for emergencies and earthquakes.",
+                    tags: ["Bluetooth LE", "Mobile", "Open source"],
+                    link: "https://github.com/Angelsistemas7/HelpSearch",
+                },
+                {
+                    name: "DevAtlas",
+                    description:
+                        "Shared open format for technical knowledge atlases. Error Atlas is its first module; Vuln Atlas (vulnerabilities) and Package Atlas (package deprecations) are built on the same base.",
+                    tags: ["TypeScript", "JSON", "Open source"],
+                    link: "https://github.com/Angelsistemas7/devatlas",
+                },
+                {
+                    name: "Radar Digital",
+                    description:
+                        "Digital maturity assessment across 8 dimensions with an interactive radar chart and a phased action plan.",
+                    tags: ["Next.js", "React", "Supabase"],
+                    link: "https://github.com/Angelsistemas7/conversion",
+                },
+                {
+                    name: "Qubi",
+                    description:
+                        "Notion-style team and task manager: boards, calendar, time tracking and real-time collaborative pages.",
+                    tags: ["Next.js", "Prisma", "Yjs"],
+                    link: "https://github.com/Manuuell/Qubi",
+                },
+                {
+                    name: "Malecón Residences",
+                    description:
+                        "Immersive landing page for seafront residences in Cartagena, built together with the SentraLabs team.",
+                    tags: ["Next.js", "TypeScript", "Tailwind"],
+                    link: "https://github.com/jerdiaz/malecon-residences",
+                },
             ],
             skills: [
                 "Flutter",
                 "Dart",
+                "Expo",
                 "React",
                 "React Native",
                 "Next.js",
@@ -457,7 +553,10 @@ export const teamMembers: TeamMember[] = [
                 "PostgreSQL",
                 "Supabase",
                 "Firebase",
+                "SQLite",
                 "Machine Learning",
+                "Deep Learning",
+                "PyTorch",
                 "YOLO",
                 "LLMs & AI agents",
                 "MCP",
@@ -466,6 +565,7 @@ export const teamMembers: TeamMember[] = [
                 "AWS",
                 "GitHub Actions",
                 "Git",
+                "Cybersecurity (Blue Team)",
             ],
             awards: [
                 "Winning project — 2026 Hackathon with Ecopetrol, UTB, SENA and the Mayor's Office",
@@ -474,11 +574,13 @@ export const teamMembers: TeamMember[] = [
                 "Winning project — Trend Micro 2023",
                 "Winning project — MinTIC 2023",
                 "Best course project — Oracle 2022",
+                "Top of the class for academic excellence in 10th and 11th grade — Corporación Educativa Maddox",
             ],
             scholarships: [
                 "Becas con Corazón — Ecopetrol, to study Systems Engineering at UTB",
                 "Cybersecurity training scholarship — Trend Micro",
                 "Software development training scholarship — ICETEX",
+                "School scholarship — Corporación Educativa Maddox",
             ],
             certifications: [
                 { title: "CyberSecurity Professional", issuer: "Trend Micro" },
@@ -490,12 +592,22 @@ export const teamMembers: TeamMember[] = [
                 { title: "Mobile App Development Diploma", issuer: "MinTIC & UTB" },
                 { title: "Software Development Diploma", issuer: "MinTIC & UTB" },
                 { title: "Python and Java Diplomas", issuer: "MinTIC & UTB" },
+                { title: "Research Skills Diploma", issuer: "UTB" },
                 { title: "Networking, cybersecurity, IoT and SCRUM", issuer: "SENA" },
+                { title: "Quality software processes", issuer: "SENA" },
+                { title: "Web page design", issuer: "SENA" },
+                { title: "Advanced Excel", issuer: "SENA" },
+                { title: "English", issuer: "SENA" },
             ],
             experience: [
                 {
                     title: "Co-founder & full-stack developer",
                     org: "SentraLabs",
+                    period: "2025 – present",
+                },
+                {
+                    title: "Freelance software developer",
+                    org: "Conversión Consultorías (Malecón Business Center) and other clients",
                     period: "2025 – present",
                 },
                 {
@@ -523,7 +635,13 @@ export const teamMembers: TeamMember[] = [
                     title: "Mass Media and Cultural Products research group",
                     org: "UTB",
                 },
+                {
+                    title: "High school diploma",
+                    org: "Corporación Educativa Maddox",
+                    period: "2020",
+                },
             ],
+            languages: ["Spanish — native", "English — B1 (CEFR)"],
         },
     },
     {

@@ -169,6 +169,7 @@ export const es = {
         awards: "Premios",
         scholarships: "Becas",
         certifications: "Certificaciones",
+        languages: "Idiomas",
         viewCert: "ver certificado →",
     },
     // Footer
