@@ -73,7 +73,7 @@ export default function PrivacidadTooli() {
 
                 <div style={{ color: "#a1a1aa", fontSize: "0.9rem", lineHeight: 1.8 }}>
                     <p style={{ marginBottom: "1.5rem" }}>
-                        <strong style={fuerte}>Última actualización:</strong> 17 de octubre de 2026
+                        <strong style={fuerte}>Última actualización:</strong> 18 de octubre de 2026
                     </p>
 
                     <p style={p}>
@@ -82,11 +82,12 @@ export default function PrivacidadTooli() {
                         universidad: «Unisinú Tooli» (en el teléfono, «Unisinú App») para la
                         Universidad del Sinú, seccional Cartagena, y «Comfenalco Tooli» (en el
                         teléfono, «Comfenalco App») para la Fundación Universitaria Tecnológico
-                        Comfenalco. Ninguna es una app oficial de esas instituciones.
+                        Comfenalco (Cartagena). Son apps independientes: ninguna es una app
+                        oficial de esas instituciones ni está afiliada a ellas.
                         La idea es simple: <strong style={fuerte}>tus datos
-                        se quedan en tu teléfono</strong>. Tooli no tiene servidores propios que
-                        reciban tu información, no tiene cuentas de Tooli y no vende ni comparte
-                        tus datos.
+                        se quedan en tu teléfono</strong>. SentraLabs no tiene servidores que
+                        reciban datos de estudiantes, no hay cuentas de Tooli y no vendemos ni
+                        compartimos tus datos.
                     </p>
 
                     <h2 style={h2}>1. Lo que guarda Tooli en tu teléfono</h2>
@@ -99,8 +100,9 @@ export default function PrivacidadTooli() {
                         <li style={li}>
                             <strong style={fuerte}>Tu sesión del aula virtual:</strong> si entras
                             con tu usuario de la universidad, Tooli guarda el permiso de acceso
-                            (token) que da el aula virtual, cifrado con el almacén seguro del
-                            teléfono. También guarda tu usuario si marcas «Recordarme».
+                            (token) que da el aula virtual (Moodle en Unisinú, Ferrum en
+                            Comfenalco), cifrado con el almacén seguro del teléfono. También
+                            guarda tu usuario si marcas «Recordarme».
                         </li>
                         <li style={li}>
                             <strong style={fuerte}>Tu clave, solo si lo autorizas:</strong> si
@@ -110,15 +112,24 @@ export default function PrivacidadTooli() {
                             Si no lo marcas, tu clave nunca se guarda.
                         </li>
                         <li style={li}>
+                            <strong style={fuerte}>Tu clave de Campus (Comfenalco):</strong> si
+                            entras a Campus, el portal académico del Tecnológico Comfenalco, Tooli
+                            guarda tu usuario y tu clave cifrados en el teléfono para traer tu
+                            horario de clases, tus notas por corte, tu historial de cursos, tu
+                            estado de cuenta (saldo, cargos y pagos), tus retenciones y tus
+                            documentos pendientes.
+                        </li>
+                        <li style={li}>
                             <strong style={fuerte}>Tus PQRS:</strong> el borrador que escribes y
-                            el número de radicado que anotas. La app no envía la PQRS: tú la pegas
-                            en el formulario oficial de la universidad.
+                            el número de radicado que anotas. La app no envía la PQRS: tú copias
+                            el texto y lo pegas en el formulario oficial de la universidad (en
+                            Comfenalco, el formulario de PQRSD del SIA).
                         </li>
                         <li style={li}>
                             <strong style={fuerte}>Lo que trae de la universidad:</strong> tus
-                            cursos, tareas, calificaciones, mensajes y archivos del aula virtual, y
-                            las noticias y calendarios públicos de la sede, para que puedas verlos
-                            sin conexión.
+                            cursos, tareas, calificaciones, mensajes y archivos del aula virtual;
+                            en Comfenalco, también lo que trae de Campus; y las noticias y
+                            calendarios públicos de la sede, para que puedas verlos sin conexión.
                         </li>
                         <li style={li}>
                             <strong style={fuerte}>Tu foto de perfil</strong>, si eliges una.
@@ -131,16 +142,18 @@ export default function PrivacidadTooli() {
                         tu universidad y con fuentes públicas:
                     </p>
                     <ul style={ul}>
-                        <li style={li}>El aula virtual de la universidad, con tu cuenta: Moodle en Unisinú, Ferrum en Comfenalco. En Unisinú, también el portal académico (Elysa) si lo autorizas.</li>
-                        <li style={li}>La página web pública de la universidad (noticias, calendarios, trámites, bienestar).</li>
+                        <li style={li}>El aula virtual de la universidad, con tu cuenta: Moodle en Unisinú; Ferrum, el Moodle del Tecnológico Comfenalco (ferrum.tecnologicocomfenalco.edu.co), en Comfenalco.</li>
+                        <li style={li}>El portal académico, con tu cuenta: en Unisinú, Elysa, si lo autorizas; en Comfenalco, Campus (campus.tecnologicocomfenalco.edu.co, su portal PeopleSoft), del que la app lee tu horario de clases, tus notas por corte, tu historial de cursos, tu estado de cuenta (saldo, cargos y pagos), tus retenciones y tus documentos pendientes.</li>
+                        <li style={li}>La página web pública de la universidad (noticias, calendarios, trámites, bienestar); en Comfenalco, tecnologicocomfenalco.edu.co.</li>
                         <li style={li}>Archivos públicos que la universidad publica en Google: las hojas de cálculo de parciales (Unisinú) y las carpetas de horarios por programa (Comfenalco).</li>
-                        <li style={li}>El catálogo público de la biblioteca (Comfenalco), para buscar libros sin cuenta.</li>
-                        <li style={li}>Los formularios oficiales de PQRS, consulta de radicados y cuentas de biblioteca, que se abren dentro de la app y llenas tú.</li>
+                        <li style={li}>El catálogo público de la biblioteca (Comfenalco, en Koha), para buscar libros sin cuenta.</li>
+                        <li style={li}>Los formularios oficiales de PQRS (en Comfenalco, el de PQRSD del SIA), consulta de radicados y cuentas de biblioteca, que se abren dentro de la app y llenas tú: la app no los envía por ti.</li>
                         <li style={li}>YouTube, cuando abres un video que el docente puso en el aula.</li>
                     </ul>
                     <p style={p}>
                         Lo que intercambias con esos sistemas se rige también por sus propias
-                        políticas. SentraLabs no recibe una copia de nada de eso.
+                        políticas. SentraLabs no recibe una copia de nada de eso: no tiene
+                        servidores que reciban datos de estudiantes.
                     </p>
 
                     <h2 style={h2}>3. Permisos del teléfono</h2>
@@ -168,7 +181,7 @@ export default function PrivacidadTooli() {
 
                     <h2 style={h2}>6. Cómo borrar tus datos</h2>
                     <ul style={ul}>
-                        <li style={li}><strong style={fuerte}>Cerrar sesión del aula</strong> (Perfil) borra del teléfono tu sesión, la clave de Elysa si la guardaste y lo descargado del aula.</li>
+                        <li style={li}><strong style={fuerte}>Cerrar sesión</strong> (Perfil) borra del teléfono tu sesión del aula, la clave de Elysa (Unisinú) o de Campus (Comfenalco) si la guardaste y lo descargado.</li>
                         <li style={li}><strong style={fuerte}>Desinstalar Tooli</strong> borra todo lo que la app guardó en el teléfono.</li>
                     </ul>
                     <p style={p}>
