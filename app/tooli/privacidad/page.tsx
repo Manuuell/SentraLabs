@@ -79,9 +79,10 @@ export default function PrivacidadTooli() {
                     <p style={p}>
                         Tooli es una app para estudiantes universitarios hecha por SentraLabs
                         («nosotros»). Esta política aplica a todas las apps de Tooli, una por
-                        universidad: «Tooli Unisinú» para la Universidad del Sinú, seccional
-                        Cartagena, y «Tooli Comfenalco» para la Fundación Universitaria
-                        Tecnológico Comfenalco. Ninguna es una app oficial de esas instituciones.
+                        universidad: «Unisinú Tooli» (en el teléfono, «Unisinú App») para la
+                        Universidad del Sinú, seccional Cartagena, y «Comfenalco Tooli» (en el
+                        teléfono, «Comfenalco App») para la Fundación Universitaria Tecnológico
+                        Comfenalco. Ninguna es una app oficial de esas instituciones.
                         La idea es simple: <strong style={fuerte}>tus datos
                         se quedan en tu teléfono</strong>. Tooli no tiene servidores propios que
                         reciban tu información, no tiene cuentas de Tooli y no vende ni comparte
