@@ -79,8 +79,10 @@ export default function PrivacidadTooli() {
                     <p style={p}>
                         Tooli es una app para estudiantes universitarios hecha por SentraLabs
                         («nosotros»). Esta política aplica a todas las apps de Tooli, una por
-                        universidad (por ejemplo, «Tooli Unisinú» para la Universidad del Sinú,
-                        seccional Cartagena). La idea es simple: <strong style={fuerte}>tus datos
+                        universidad: «Tooli Unisinú» para la Universidad del Sinú, seccional
+                        Cartagena, y «Tooli Comfenalco» para la Fundación Universitaria
+                        Tecnológico Comfenalco. Ninguna es una app oficial de esas instituciones.
+                        La idea es simple: <strong style={fuerte}>tus datos
                         se quedan en tu teléfono</strong>. Tooli no tiene servidores propios que
                         reciban tu información, no tiene cuentas de Tooli y no vende ni comparte
                         tus datos.
@@ -101,10 +103,15 @@ export default function PrivacidadTooli() {
                         </li>
                         <li style={li}>
                             <strong style={fuerte}>Tu clave, solo si lo autorizas:</strong> si
-                            marcas «Entrar también a Elysa» (el portal académico, que usa la
-                            misma cuenta), Tooli guarda tu usuario y tu clave cifrados en el
+                            marcas «Entrar también a Elysa» (el portal académico de Unisinú, que
+                            usa la misma cuenta), Tooli guarda tu usuario y tu clave cifrados en el
                             teléfono para entrar por ti y traer tus notas oficiales y tu horario.
                             Si no lo marcas, tu clave nunca se guarda.
+                        </li>
+                        <li style={li}>
+                            <strong style={fuerte}>Tus PQRS:</strong> el borrador que escribes y
+                            el número de radicado que anotas. La app no envía la PQRS: tú la pegas
+                            en el formulario oficial de la universidad.
                         </li>
                         <li style={li}>
                             <strong style={fuerte}>Lo que trae de la universidad:</strong> tus
@@ -123,9 +130,11 @@ export default function PrivacidadTooli() {
                         tu universidad y con fuentes públicas:
                     </p>
                     <ul style={ul}>
-                        <li style={li}>El aula virtual (Moodle) y el portal académico (Elysa) de la universidad, con tu cuenta.</li>
-                        <li style={li}>La página web pública de la universidad (noticias, calendarios, trámites).</li>
-                        <li style={li}>Hojas de cálculo públicas de Google en las que la universidad publica los calendarios de parciales.</li>
+                        <li style={li}>El aula virtual de la universidad, con tu cuenta: Moodle en Unisinú, Ferrum en Comfenalco. En Unisinú, también el portal académico (Elysa) si lo autorizas.</li>
+                        <li style={li}>La página web pública de la universidad (noticias, calendarios, trámites, bienestar).</li>
+                        <li style={li}>Archivos públicos que la universidad publica en Google: las hojas de cálculo de parciales (Unisinú) y las carpetas de horarios por programa (Comfenalco).</li>
+                        <li style={li}>El catálogo público de la biblioteca (Comfenalco), para buscar libros sin cuenta.</li>
+                        <li style={li}>Los formularios oficiales de PQRS, consulta de radicados y cuentas de biblioteca, que se abren dentro de la app y llenas tú.</li>
                         <li style={li}>YouTube, cuando abres un video que el docente puso en el aula.</li>
                     </ul>
                     <p style={p}>
@@ -158,7 +167,7 @@ export default function PrivacidadTooli() {
 
                     <h2 style={h2}>6. Cómo borrar tus datos</h2>
                     <ul style={ul}>
-                        <li style={li}><strong style={fuerte}>Cerrar sesión de Moodle</strong> (Perfil) borra del teléfono tu sesión, la clave de Elysa si la guardaste y lo descargado del aula.</li>
+                        <li style={li}><strong style={fuerte}>Cerrar sesión del aula</strong> (Perfil) borra del teléfono tu sesión, la clave de Elysa si la guardaste y lo descargado del aula.</li>
                         <li style={li}><strong style={fuerte}>Desinstalar Tooli</strong> borra todo lo que la app guardó en el teléfono.</li>
                     </ul>
                     <p style={p}>
