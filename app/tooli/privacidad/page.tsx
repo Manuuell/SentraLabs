@@ -80,10 +80,13 @@ export default function PrivacidadTooli() {
                         Tooli es una app para estudiantes universitarios hecha por SentraLabs
                         («nosotros»). Esta política aplica a todas las apps de Tooli, una por
                         universidad: «Unisinú Tooli» (en el teléfono, «Unisinú App») para la
-                        Universidad del Sinú, seccional Cartagena, y «Comfenalco Tooli» (en el
-                        teléfono, «Comfenalco App») para la Fundación Universitaria Tecnológico
-                        Comfenalco (Cartagena). Son apps independientes: ninguna es una app
-                        oficial de esas instituciones ni está afiliada a ellas.
+                        Universidad del Sinú (sedes de Cartagena y Montería), «Comfenalco Tooli»
+                        (en el teléfono, «Comfenalco App») para la Fundación Universitaria
+                        Tecnológico Comfenalco (Cartagena) y «San Buenaventura Tooli» (en el
+                        teléfono, «USB App») para la Universidad de San Buenaventura (sedes de
+                        Cartagena, Medellín, Cali y Bogotá). Dentro de cada app eliges tu sede.
+                        Son apps independientes: ninguna es una app oficial de esas
+                        instituciones ni está afiliada a ellas.
                         La idea es simple: <strong style={fuerte}>tus datos
                         se quedan en tu teléfono</strong>. SentraLabs no tiene servidores que
                         reciban datos de estudiantes, no hay cuentas de Tooli y no vendemos ni
@@ -100,9 +103,16 @@ export default function PrivacidadTooli() {
                         <li style={li}>
                             <strong style={fuerte}>Tu sesión del aula virtual:</strong> si entras
                             con tu usuario de la universidad, Tooli guarda el permiso de acceso
-                            (token) que da el aula virtual (Moodle en Unisinú, Ferrum en
+                            (token) que da el aula virtual de tu sede (Moodle en Unisinú
+                            Cartagena y en San Buenaventura, Canvas en Unisinú Montería, Ferrum en
                             Comfenalco), cifrado con el almacén seguro del teléfono. También
-                            guarda tu usuario si marcas «Recordarme».
+                            guarda tu usuario si marcas «Recordarme». En Canvas, Tooli usa tu
+                            usuario y tu clave una sola vez para crear a tu nombre una llave de
+                            acceso llamada «Tooli», que ves y puedes borrar en Canvas ›
+                            Configuración; la clave no se guarda. Donde el aula se abre con la
+                            cuenta de Microsoft de la universidad (San Buenaventura Cali), escribes
+                            tu cuenta en la página de Microsoft, no en Tooli, y Tooli solo recibe
+                            el token del aula.
                         </li>
                         <li style={li}>
                             <strong style={fuerte}>Tu clave, solo si lo autorizas:</strong> si
@@ -118,6 +128,18 @@ export default function PrivacidadTooli() {
                             horario de clases, tus notas por corte, tu historial de cursos, tu
                             estado de cuenta (saldo, cargos y pagos), tus retenciones y tus
                             documentos pendientes.
+                        </li>
+                        <li style={li}>
+                            <strong style={fuerte}>Tu clave de ASIS (San Buenaventura):</strong>
+                            si marcas «Entrar también a ASIS» y escribes tu usuario y tu clave de
+                            ASIS, el portal académico de la universidad, Tooli los guarda cifrados
+                            en el teléfono para abrirlo por ti dentro de la app. Si no lo marcas,
+                            no se guardan.
+                        </li>
+                        <li style={li}>
+                            <strong style={fuerte}>Tu sede:</strong> la sede que eliges (por
+                            ejemplo, Cartagena o Montería), para saber con qué aula, página y
+                            calendario conectarte.
                         </li>
                         <li style={li}>
                             <strong style={fuerte}>Tu carné:</strong> el código estudiantil y el
@@ -148,9 +170,9 @@ export default function PrivacidadTooli() {
                         tu universidad y con fuentes públicas:
                     </p>
                     <ul style={ul}>
-                        <li style={li}>El aula virtual de la universidad, con tu cuenta: Moodle en Unisinú; Ferrum, el Moodle del Tecnológico Comfenalco (ferrum.tecnologicocomfenalco.edu.co), en Comfenalco.</li>
-                        <li style={li}>El portal académico, con tu cuenta: en Unisinú, Elysa, si lo autorizas; en Comfenalco, Campus (campus.tecnologicocomfenalco.edu.co, su portal PeopleSoft), del que la app lee tu horario de clases, tus notas por corte, tu historial de cursos, tu estado de cuenta (saldo, cargos y pagos), tus retenciones y tus documentos pendientes.</li>
-                        <li style={li}>La página web pública de la universidad (noticias, calendarios, trámites, bienestar); en Comfenalco, tecnologicocomfenalco.edu.co.</li>
+                        <li style={li}>El aula virtual de tu sede, con tu cuenta: en Unisinú, Moodle (Cartagena) o Canvas (Montería, unisinu.instructure.com); Ferrum, el Moodle del Tecnológico Comfenalco (ferrum.tecnologicocomfenalco.edu.co), en Comfenalco; en San Buenaventura, el Moodle de tu sede (Cartagena, Medellín, Cali o Bogotá) y, en Cali, el ingreso de Microsoft de la universidad.</li>
+                        <li style={li}>El portal académico, con tu cuenta: en Unisinú, Elysa, si lo autorizas; en San Buenaventura, ASIS (campus.usbco.edu.co), si lo autorizas; en Comfenalco, Campus (campus.tecnologicocomfenalco.edu.co, su portal PeopleSoft), del que la app lee tu horario de clases, tus notas por corte, tu historial de cursos, tu estado de cuenta (saldo, cargos y pagos), tus retenciones y tus documentos pendientes.</li>
+                        <li style={li}>La página web pública de tu sede (noticias, calendarios, trámites, bienestar): en Unisinú, unisinucartagena.edu.co o unisinu.edu.co; en Comfenalco, tecnologicocomfenalco.edu.co; en San Buenaventura, la de tu sede y usb.edu.co.</li>
                         <li style={li}>Archivos públicos que la universidad publica en Google: las hojas de cálculo de parciales (Unisinú) y las carpetas de horarios por programa (Comfenalco).</li>
                         <li style={li}>El catálogo público de la biblioteca (Comfenalco, en Koha), para buscar libros sin cuenta.</li>
                         <li style={li}>Los formularios oficiales de PQRS (en Comfenalco, el de PQRSD del SIA), consulta de radicados y cuentas de biblioteca, que se abren dentro de la app y llenas tú: la app no los envía por ti.</li>
@@ -187,7 +209,7 @@ export default function PrivacidadTooli() {
 
                     <h2 style={h2}>6. Cómo borrar tus datos</h2>
                     <ul style={ul}>
-                        <li style={li}><strong style={fuerte}>Cerrar sesión</strong> (Perfil) borra del teléfono tu sesión del aula, la clave de Elysa (Unisinú) o de Campus (Comfenalco) si la guardaste y lo descargado.</li>
+                        <li style={li}><strong style={fuerte}>Cerrar sesión</strong> (Perfil) borra del teléfono tu sesión del aula, la clave de Elysa (Unisinú), de Campus (Comfenalco) o de ASIS (San Buenaventura) si la guardaste y lo descargado. En Canvas, además, pide a Canvas que anule la llave «Tooli». Cambiar de sede cierra también la sesión del aula de la sede anterior.</li>
                         <li style={li}><strong style={fuerte}>Desinstalar Tooli</strong> borra todo lo que la app guardó en el teléfono.</li>
                     </ul>
                     <p style={p}>
