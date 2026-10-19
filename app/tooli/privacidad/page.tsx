@@ -73,7 +73,7 @@ export default function PrivacidadTooli() {
 
                 <div style={{ color: "#a1a1aa", fontSize: "0.9rem", lineHeight: 1.8 }}>
                     <p style={{ marginBottom: "1.5rem" }}>
-                        <strong style={fuerte}>Última actualización:</strong> 18 de octubre de 2026
+                        <strong style={fuerte}>Última actualización:</strong> 19 de octubre de 2026
                     </p>
 
                     <p style={p}>
@@ -118,6 +118,12 @@ export default function PrivacidadTooli() {
                             horario de clases, tus notas por corte, tu historial de cursos, tu
                             estado de cuenta (saldo, cargos y pagos), tus retenciones y tus
                             documentos pendientes.
+                        </li>
+                        <li style={li}>
+                            <strong style={fuerte}>Tu carné:</strong> el código estudiantil y el
+                            programa que anotas; en Comfenalco, tu número de documento, que es lo
+                            que lleva el QR de los torniquetes (el mismo de la app oficial del
+                            Tecnológico). Se muestra en tu teléfono y no se envía a nadie.
                         </li>
                         <li style={li}>
                             <strong style={fuerte}>Tus PQRS:</strong> el borrador que escribes y
