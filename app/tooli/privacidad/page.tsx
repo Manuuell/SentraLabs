@@ -73,7 +73,7 @@ export default function PrivacidadTooli() {
 
                 <div style={{ color: "#a1a1aa", fontSize: "0.9rem", lineHeight: 1.8 }}>
                     <p style={{ marginBottom: "1.5rem" }}>
-                        <strong style={fuerte}>Última actualización:</strong> 19 de octubre de 2026
+                        <strong style={fuerte}>Última actualización:</strong> 20 de octubre de 2026
                     </p>
 
                     <p style={p}>
@@ -84,7 +84,10 @@ export default function PrivacidadTooli() {
                         (en el teléfono, «Comfenalco App») para la Fundación Universitaria
                         Tecnológico Comfenalco (Cartagena) y «San Buenaventura Tooli» (en el
                         teléfono, «USB App») para la Universidad de San Buenaventura (sedes de
-                        Cartagena, Medellín, Cali y Bogotá). Dentro de cada app eliges tu sede.
+                        Cartagena, Medellín, Cali y Bogotá) y «UdeC Tooli» (en el teléfono,
+                        «UdeC App») para la Universidad de Cartagena (programas presenciales y
+                        a distancia). Dentro de cada app eliges tu sede (en la Universidad de
+                        Cartagena, tu modalidad).
                         Son apps independientes: ninguna es una app oficial de esas
                         instituciones ni está afiliada a ellas.
                         La idea es simple: <strong style={fuerte}>tus datos
@@ -170,9 +173,9 @@ export default function PrivacidadTooli() {
                         tu universidad y con fuentes públicas:
                     </p>
                     <ul style={ul}>
-                        <li style={li}>El aula virtual de tu sede, con tu cuenta: en Unisinú, Moodle (Cartagena) o Canvas (Montería, unisinu.instructure.com); Ferrum, el Moodle del Tecnológico Comfenalco (ferrum.tecnologicocomfenalco.edu.co), en Comfenalco; en San Buenaventura, el Moodle de tu sede (Cartagena, Medellín, Cali o Bogotá) y, en Cali, el ingreso de Microsoft de la universidad.</li>
-                        <li style={li}>El portal académico, con tu cuenta: en Unisinú, Elysa, si lo autorizas; en San Buenaventura, ASIS (campus.usbco.edu.co), si lo autorizas; en Comfenalco, Campus (campus.tecnologicocomfenalco.edu.co, su portal PeopleSoft), del que la app lee tu horario de clases, tus notas por corte, tu historial de cursos, tu estado de cuenta (saldo, cargos y pagos), tus retenciones y tus documentos pendientes.</li>
-                        <li style={li}>La página web pública de tu sede (noticias, calendarios, trámites, bienestar): en Unisinú, unisinucartagena.edu.co o unisinu.edu.co; en Comfenalco, tecnologicocomfenalco.edu.co; en San Buenaventura, la de tu sede y usb.edu.co.</li>
+                        <li style={li}>El aula virtual de tu sede, con tu cuenta: en Unisinú, Moodle (Cartagena) o Canvas (Montería, unisinu.instructure.com); Ferrum, el Moodle del Tecnológico Comfenalco (ferrum.tecnologicocomfenalco.edu.co), en Comfenalco; en San Buenaventura, el Moodle de tu sede (Cartagena, Medellín, Cali o Bogotá) y, en Cali, el ingreso de Microsoft de la universidad; en la Universidad de Cartagena, SIMA, el Moodle de tu modalidad (moodle.unicartagena.edu.co o sima.unicartagena.edu.co).</li>
+                        <li style={li}>El portal académico, con tu cuenta: en Unisinú, Elysa, si lo autorizas; en San Buenaventura, ASIS (campus.usbco.edu.co), si lo autorizas; en la Universidad de Cartagena, el SMA (sma.unicartagena.edu.co), que se abre como una página dentro de la app: la app no guarda su clave ni lee nada de él; en Comfenalco, Campus (campus.tecnologicocomfenalco.edu.co, su portal PeopleSoft), del que la app lee tu horario de clases, tus notas por corte, tu historial de cursos, tu estado de cuenta (saldo, cargos y pagos), tus retenciones y tus documentos pendientes.</li>
+                        <li style={li}>La página web pública de tu sede (noticias, calendarios, trámites, bienestar): en Unisinú, unisinucartagena.edu.co o unisinu.edu.co; en Comfenalco, tecnologicocomfenalco.edu.co; en San Buenaventura, la de tu sede y usb.edu.co; en la Universidad de Cartagena, unicartagena.edu.co y su blog de noticias «Universo U» (universounicartagena.co, en Blogger de Google).</li>
                         <li style={li}>Archivos públicos que la universidad publica en Google: las hojas de cálculo de parciales (Unisinú) y las carpetas de horarios por programa (Comfenalco).</li>
                         <li style={li}>El catálogo público de la biblioteca (Comfenalco, en Koha), para buscar libros sin cuenta.</li>
                         <li style={li}>Los formularios oficiales de PQRS (en Comfenalco, el de PQRSD del SIA), consulta de radicados y cuentas de biblioteca, que se abren dentro de la app y llenas tú: la app no los envía por ti.</li>
