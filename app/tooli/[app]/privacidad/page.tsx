@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import PrivacidadTooli from "../../privacidad/page";
+import PoliticaTooli from "../../privacidad/politica-tooli";
 
 /* Una URL de política por app (la que va en Google Play de cada una). Todas
-   muestran la misma política de Tooli: cubre las siete apps. */
+   muestran la misma política de Tooli, que nombra las siete, con el nombre
+   de esa app arriba. Los nombres son los de Play (3-textos de cada app). */
 const APPS: Record<string, string> = {
     unisinu: "Unisinú Tooli",
     comfenalco: "Comfenalco Tooli",
@@ -10,7 +11,7 @@ const APPS: Record<string, string> = {
     unitecnar: "Unitecnar Tooli",
     uninunez: "Uninúñez Tooli",
     sanbuenaventura: "San Buenaventura Tooli",
-    umayor: "Unimayor Tooli",
+    umayor: "Umayor Tooli",
 };
 
 export const dynamicParams = false;
@@ -33,4 +34,11 @@ export async function generateMetadata({
     };
 }
 
-export default PrivacidadTooli;
+export default async function PrivacidadApp({
+    params,
+}: {
+    params: Promise<{ app: string }>;
+}) {
+    const { app } = await params;
+    return <PoliticaTooli app={APPS[app]} />;
+}
