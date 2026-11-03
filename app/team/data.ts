@@ -133,22 +133,6 @@ export const teamMembers: TeamMember[] = [
         skills: [],
     },
     {
-        slug: "javier-mercado",
-        name: "Javier Mercado",
-        role: "Database Manager",
-        image: "/images/team/javier-mercado-database-manager.webp",
-        oneLiner: "Database Manager en SentraLabs.",
-        bio: "Especialista en bases de datos y gestión de infraestructura de datos.",
-        socials: {
-            github: "https://github.com/Javimercadobolivar",
-            linkedin:
-                "https://www.linkedin.com/in/javier-enrique-mercado-bolivar-203781359/",
-        },
-        highlights: [],
-        projects: [],
-        skills: [],
-    },
-    {
         slug: "jerson-diaz",
         name: "Jerson Díaz",
         role: "Co-founder / Dev",

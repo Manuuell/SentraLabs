@@ -290,7 +290,7 @@ function useCountUp(target: number, duration = 1500) {
 function About() {
   const { t } = useI18n();
   const projects = useCountUp(3);
-  const devs = useCountUp(4);
+  const devs = useCountUp(3);
   const awards = useCountUp(2);
 
   const stats = [
@@ -843,14 +843,6 @@ const team = [
     linkedin: "",
   },
   {
-    slug: "javier-mercado",
-    name: "Javier Mercado",
-    role: "Database Manager",
-    image: "/images/team/javier-mercado-database-manager.webp",
-    github: "https://github.com/Javimercadobolivar",
-    linkedin: "https://www.linkedin.com/in/javier-enrique-mercado-bolivar-203781359/",
-  },
-  {
     slug: "jerson-diaz",
     name: "Jerson Díaz",
     role: "Co-founder / Dev",
@@ -981,7 +973,7 @@ function Footer() {
 const terminalCommands = new Map<string, string>([
   ["help", "Comandos: help, projects, team, contact, skills, clear"],
   ["projects", "→ TransCar — App de transporte urbano en Cartagena\n→ MarSec — Plataforma de ciberseguridad (🏆 Mejor Proyecto TalentoTech)\n→ EcoOne — Reciclaje con EcoCoins"],
-  ["team", "→ Manuel Esteban — Fundador\n→ Angel Acero — Co-founder / Dev\n→ Javier Mercado — Database Manager\n→ Jerson Díaz — Co-founder / Dev"],
+  ["team", "→ Manuel Esteban — Fundador\n→ Angel Acero — Co-founder / Dev\n→ Jerson Díaz — Co-founder / Dev\n→ Gelbert Cantillo — Diseñador UX/UI"],
   ["contact", "→ Email: atencionsentralabs@gmail.com\n→ WhatsApp: +57 321 564 0735\n→ GitHub: github.com/Manuuell"],
   ["skills", "Flutter · React · Next.js · TypeScript · Node.js · Firebase · Azure · OpenAI · SQL Server · Mapbox"],
 ]);

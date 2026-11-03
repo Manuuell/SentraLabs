@@ -51,8 +51,8 @@ PROYECTOS
 
 EQUIPO
 Manuel Esteban (fundador), Angel Acero (cofundador / desarrollador), Jerson Diaz
-(cofundador / desarrollador), Javier Mercado (database manager) y Gelbert
-Cantillo (disenador UX/UI). Cada uno tiene su perfil en sentralabs.co/team.
+(cofundador / desarrollador) y Gelbert Cantillo (disenador UX/UI). Cada uno
+tiene su perfil en sentralabs.co/team.
 
 PLAZOS ORIENTATIVOS
 Un MVP suele estar listo en 4-8 semanas. Un proyecto complejo, entre 3 y 6 meses.
