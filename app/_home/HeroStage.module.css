@@ -1,0 +1,85 @@
+/* El escenario llega hasta el borde derecho de la ventana: la escena gana
+   ancho sin empujar el texto. --bleed es lo que hay entre la columna y el
+   borde. */
+.stage {
+  --bleed: max(var(--gutter), calc((100vw - var(--ancho)) / 2 + var(--gutter)));
+  position: relative;
+  height: clamp(440px, 42vw, 600px);
+}
+
+.glow {
+  position: absolute;
+  inset: 12% 6%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(96, 165, 250, 0.2), rgba(34, 211, 238, 0.07) 60%, transparent);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+/* ── Respaldo en CSS: la misma composicion que la escena 3D ── */
+.fallback {
+  position: absolute;
+  inset: 0;
+  right: calc(-1 * var(--bleed) + 24px);
+  transition: opacity 0.6s ease;
+}
+
+.fallback > * {
+  position: absolute;
+}
+
+.web {
+  width: 74%;
+  left: 13%;
+  top: 22%;
+}
+
+.phone {
+  width: 25%;
+  max-width: 190px;
+  z-index: 2;
+}
+
+.slot0 {
+  left: 2%;
+  top: 30%;
+  transform: rotate(-4deg);
+}
+
+.slot1 {
+  z-index: 1;
+}
+
+.slot2 {
+  right: 2%;
+  top: 34%;
+  transform: rotate(4deg);
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  right: calc(-1 * var(--bleed));
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.stage[data-ready="true"] .canvas {
+  opacity: 1;
+}
+
+.stage[data-ready="true"] .fallback {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .stage {
+    height: 420px;
+  }
+  .canvas,
+  .fallback {
+    left: calc(-1 * var(--gutter));
+    right: calc(-1 * var(--gutter));
+  }
+}

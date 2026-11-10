@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Figtree, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { JsonLd } from "./lib/JsonLd";
 import { AnalyticsNoScript, AnalyticsScript } from "./lib/Analytics";
@@ -11,6 +12,29 @@ import {
   SITE_URL,
   absoluteUrl,
 } from "./lib/site";
+
+/* Misma tipografia que SIMBIA (simbia.sentralabs.co): Figtree 800 muy
+   apretada para titulos e Inter para texto. JetBrains Mono queda solo para lo
+   que de verdad es codigo (la terminal y las pantallas del hero en modo codigo).
+   Las fuentes se descargan en el build y se sirven desde el propio dominio. */
+const title = Figtree({
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+  variable: "--font-title",
+  display: "swap",
+});
+const sans = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
+  display: "swap",
+});
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   // Base para resolver las URLs relativas de canonical y openGraph.
@@ -85,7 +109,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" className={`${title.variable} ${sans.variable} ${mono.variable}`}>
       <body>
         <AnalyticsNoScript />
         <AnalyticsScript />

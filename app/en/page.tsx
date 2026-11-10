@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HomeContent } from "../HomeContent";
+import { HomePage } from "../_home/HomePage";
 import { HtmlLang } from "../lib/HtmlLang";
 import { SITE_DESCRIPTION_EN, SITE_TITLE_EN } from "../lib/site";
 
@@ -32,7 +32,7 @@ export default function EnglishHome() {
   return (
     <>
       <HtmlLang lang="en" />
-      <HomeContent lang="en" />
+      <HomePage lang="en" />
     </>
   );
 }

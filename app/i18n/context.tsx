@@ -1,13 +1,12 @@
 "use client";
 
 import { createContext, useContext, type ReactNode } from "react";
-import { es, type Translations } from "./es";
-import { en } from "./en";
+import { es } from "./es";
+import { LANGS, translations, type Lang, type Translations } from "./dictionaries";
 import { sanitizeOption } from "../lib/sanitize";
 
-/* Idiomas válidos: cualquier otro valor recibido cae en "es". */
-export const LANGS = ["es", "en"] as const;
-export type Lang = (typeof LANGS)[number];
+export { LANGS, translations };
+export type { Lang };
 
 interface I18nContextType {
     lang: Lang;
@@ -18,8 +17,6 @@ const I18nContext = createContext<I18nContextType>({
     lang: "es",
     t: es,
 });
-
-export const translations: Record<Lang, Translations> = { es, en };
 
 /**
  * El idioma lo manda la URL ("/" en español, "/en" en inglés), no localStorage:

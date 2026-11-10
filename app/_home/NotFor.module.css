@@ -1,0 +1,57 @@
+.band {
+  --kicker: #22d3ee;
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(5rem, 11vw, 9rem);
+  background: #040507;
+  color: #f2f1ed;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Lineas de plano: el "laboratorio" visto desde arriba. */
+.band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000, transparent 80%);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-top: 1.25rem;
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.body {
+  margin-top: 1.75rem;
+  max-width: 58ch;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  line-height: 1.6;
+  color: rgba(242, 241, 237, 0.78);
+  text-wrap: pretty;
+}
+
+.sign {
+  margin-top: 1.75rem;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #22d3ee;
+}

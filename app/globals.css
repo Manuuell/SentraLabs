@@ -2,16 +2,16 @@
    SentraLabs — Dark Terminal Aesthetic Design System
    ══════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 /* ─── Variables ─── */
 :root {
-  --bg: #000000;
+  --bg: #07080b;
+  --bg-2: #0d0f14;           /* banda "levantada": alterna con --bg */
   --surface: #0a0a0f;
   --surface-2: #111118;
-  --fg: #f0f0f5;
-  --fg-muted: #8b8fa3;
-  --fg-dim: #4a4e5e;
+  --fg: #eef0f5;
+  --fg-muted: #9aa1b2;
+  --fg-dim: #5b6172;
   --blue: #60a5fa;
   --purple: #a78bfa;
   --green: #34d399;
@@ -19,6 +19,23 @@
   --amber: #fbbf24;
   --red: #f87171;
   --border: rgba(255, 255, 255, 0.07);
+  --line: rgba(255, 255, 255, 0.09);
+
+  /* Banda invertida (papel): clara en tema oscuro y oscura en tema claro.
+     Las secciones con .invert cambian sus tokens a estos. */
+  --paper: #f2f1ed;
+  --paper-fg: #0b0c10;
+  --paper-muted: #4f5463;
+  --paper-line: rgba(11, 12, 16, 0.12);
+
+  /* Marca: el degradado del logo (cian → azul) con el morado de acento. */
+  --brand: linear-gradient(100deg, #22d3ee 0%, #60a5fa 45%, #a78bfa 100%);
+  --mark: #ffffff;           /* pastilla del resaltado (como SIMBIA) */
+  --mark-fg: #0f1b24;        /* texto sobre la pastilla */
+
+  --ancho: 1200px;
+  --seccion: clamp(5rem, 10vw, 8.5rem);
+  --gutter: clamp(1rem, 4vw, 2.5rem);
   --glow-blue: rgba(96, 165, 250, 0.15);
   --glow-purple: rgba(167, 139, 250, 0.12);
   --radius-sm: 8px;
@@ -31,13 +48,21 @@
 }
 
 [data-theme="light"] {
-  --bg: #fafafa;
+  --bg: #f7f7f5;
+  --bg-2: #eeeeea;
   --surface: #f0f0f3;
   --surface-2: #ffffff;
-  --fg: #111118;
-  --fg-muted: #52525b;
-  --fg-dim: #a1a1aa;
+  --fg: #0d0f14;
+  --fg-muted: #4b5162;
+  --fg-dim: #8a90a0;
   --border: rgba(0, 0, 0, 0.08);
+  --line: rgba(0, 0, 0, 0.1);
+  --paper: #0b0c10;
+  --paper-fg: #f2f1ed;
+  --paper-muted: #a3a8b6;
+  --paper-line: rgba(255, 255, 255, 0.12);
+  --mark: #0f1b24;
+  --mark-fg: #ffffff;
   --blue: #2563eb;
   --purple: #7c3aed;
   --green: #059669;
@@ -144,7 +169,7 @@ html {
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -172,10 +197,10 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-family: var(--font-title);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
 }
 
 a {
@@ -210,7 +235,7 @@ a:hover {
 
 .section-label {
   display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.15em;
@@ -266,7 +291,7 @@ a:hover {
 }
 
 .nav-logo {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-weight: 700;
   font-size: 1rem;
   color: var(--fg);
@@ -308,7 +333,7 @@ a:hover {
 }
 
 .nav-links a {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--fg-muted);
@@ -324,7 +349,7 @@ a:hover {
 }
 
 .nav-cta {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 600;
   color: #000;
@@ -417,7 +442,7 @@ a:hover {
   color: var(--bg);
   padding: 13px 28px;
   border-radius: var(--radius-pill);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
@@ -440,7 +465,7 @@ a:hover {
   color: var(--fg-muted);
   padding: 13px 28px;
   border-radius: var(--radius-pill);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.85rem;
   font-weight: 500;
   text-decoration: none;
@@ -497,7 +522,7 @@ a:hover {
 }
 
 .code-filename {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--fg-dim);
   margin-left: 8px;
@@ -505,7 +530,7 @@ a:hover {
 
 .code-body {
   padding: 20px 24px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.82rem;
   line-height: 1.9;
   color: var(--fg-muted);
@@ -568,7 +593,7 @@ a:hover {
 }
 
 .stat-value {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 4px;
@@ -634,7 +659,7 @@ a:hover {
 }
 
 .project-name {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--fg);
@@ -655,7 +680,7 @@ a:hover {
 }
 
 .tag {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 500;
   padding: 4px 10px;
@@ -672,7 +697,7 @@ a:hover {
 }
 
 .project-link {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--blue);
   text-decoration: none;
@@ -715,7 +740,7 @@ a:hover {
 }
 
 .service-title {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 1rem;
   font-weight: 600;
   color: var(--fg);
@@ -736,7 +761,7 @@ a:hover {
 }
 
 .tech-item {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.82rem;
   font-weight: 500;
   text-align: center;
@@ -778,7 +803,7 @@ a:hover {
   background: none;
   border: none;
   color: var(--fg);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.88rem;
   font-weight: 500;
   cursor: pointer;
@@ -992,14 +1017,14 @@ a:hover {
   align-items: center;
   justify-content: center;
   margin: 0 auto 16px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 1.2rem;
   font-weight: 700;
   color: #000;
 }
 
 .team-name {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--fg);
@@ -1066,7 +1091,7 @@ a:hover {
 }
 
 .contact-email {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.88rem;
   color: var(--blue);
   text-decoration: none;
@@ -1093,7 +1118,7 @@ a:hover {
 }
 
 .footer-text {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--fg-dim);
 }
@@ -1106,7 +1131,7 @@ a:hover {
 }
 
 .footer-links a {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--fg-dim);
   text-decoration: none;
@@ -1314,7 +1339,7 @@ a:hover {
 }
 
 .terminal-title {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--fg-dim);
   margin-left: 8px;
@@ -1341,7 +1366,7 @@ a:hover {
   padding: 16px 20px;
   max-height: calc(70vh - 44px);
   overflow-y: auto;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.82rem;
   line-height: 1.8;
 }
@@ -1374,7 +1399,7 @@ a:hover {
   background: none;
   border: none;
   color: var(--fg);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.82rem;
   outline: none;
   caret-color: var(--blue);
@@ -1438,7 +1463,7 @@ a:hover {
 
 .process-step-n {
   display: block;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.15em;
@@ -1590,7 +1615,7 @@ a:hover {
 }
 
 .benefit-title {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--fg);
@@ -1741,7 +1766,7 @@ a:hover {
 }
 
 .chat-identity strong {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 0.88rem;
   color: var(--fg);
 }
@@ -1778,7 +1803,7 @@ a:hover {
 
 .chat-badge {
   align-self: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 0.62rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -1856,7 +1881,7 @@ a:hover {
 
 .chat-suggestions-label {
   display: block;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 0.62rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -1964,4 +1989,107 @@ a:hover {
   .chat-launcher {
     right: 20px;
   }
+}
+
+/* ══════════════════════════════════════════════════════
+   Rediseño 2026 — primitivas compartidas
+   Lo especifico de cada seccion vive en su CSS Module
+   (app/_home/*.module.css). Aqui solo lo que se repite.
+   ══════════════════════════════════════════════════════ */
+
+:root { --kicker: var(--cyan); }
+[data-theme="light"] { --kicker: #0e7490; }
+
+.wrap {
+  width: 100%;
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Etiqueta de seccion de SIMBIA. El aire de abajo lo pone cada titulo. */
+.kicker {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.h2 {
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+.lead {
+  font-size: clamp(16px, 1.6vw, 18.5px);
+  line-height: 1.6;
+  color: var(--fg-muted);
+  max-width: 56ch;
+  text-wrap: pretty;
+}
+
+/* Resaltado de SIMBIA: pastilla clara, levemente inclinada y con sombra. */
+.mark {
+  display: inline-block;
+  padding: 0.02em 0.22em 0.08em;
+  border-radius: 0.22em;
+  background: var(--mark);
+  color: var(--mark-fg);
+  transform: rotate(-2.5deg);
+  box-shadow: 0 14px 28px -16px rgba(8, 20, 28, 0.45);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.btn--primary { background: var(--fg); color: var(--bg); }
+.btn--primary:hover { color: var(--bg); transform: translateY(-2px); }
+.btn--ghost { border-color: var(--line); color: var(--fg); }
+.btn--ghost:hover { border-color: var(--fg-muted); color: var(--fg); }
+.btn .arrow { transition: transform 0.2s ease; }
+.btn:hover .arrow { transform: translateX(3px); }
+
+/* Banda invertida: toma los tokens de "papel". Todo lo que este adentro y use
+   --bg / --fg / --line se invierte solo, sin reglas por componente. */
+.invert {
+  --bg: var(--paper);
+  --fg: var(--paper-fg);
+  --fg-muted: var(--paper-muted);
+  --line: var(--paper-line);
+  --kicker: #0e7490;
+  background: var(--paper);
+  color: var(--paper-fg);
+}
+[data-theme="light"] .invert { --kicker: var(--cyan); }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

@@ -1,0 +1,80 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+  min-height: 100svh;
+  padding: 120px 0 64px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* Rejilla de puntos que se desvanece hacia los bordes: el "laboratorio". */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(color-mix(in oklab, var(--fg) 14%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 70% 60% at 65% 45%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 65% 45%, #000 20%, transparent 75%);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 60vw;
+  height: 60vw;
+  right: -12vw;
+  top: -8vw;
+  background: radial-gradient(closest-side, rgba(34, 211, 238, 0.13), rgba(167, 139, 250, 0.08) 55%, transparent);
+  pointer-events: none;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+.copy {
+  max-width: 640px;
+}
+
+.title {
+  margin: 1.1rem 0 1.5rem;
+  font-size: clamp(2.6rem, 4.1vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+/* El resaltado no se parte: dos cajas en dos lineas se leen como dos ideas. */
+.title :global(.mark) {
+  white-space: nowrap;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.1rem;
+}
+
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: 0;
+    padding: 108px 0 40px;
+  }
+  .inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .title {
+    font-size: clamp(2.5rem, 11vw, 3.8rem);
+  }
+}

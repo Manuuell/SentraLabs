@@ -1,0 +1,98 @@
+.compare {
+  padding-block: var(--seccion);
+}
+
+.title {
+  margin-top: 1rem;
+  max-width: 16ch;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.card {
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+}
+
+.card h3 {
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+}
+
+.card ul {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1.25rem;
+  list-style: none;
+  font-size: 0.95rem;
+}
+
+.card li {
+  display: grid;
+  grid-template-columns: 1.2rem minmax(0, 1fr);
+  gap: 0.4rem;
+}
+
+.pro span { color: #059669; font-weight: 700; }
+.con { color: var(--fg-muted); }
+.con span { opacity: 0.7; }
+
+/* La opcion destacada invierte otra vez los colores dentro de la banda de
+   papel, y lleva el degradado de marca en la costura superior. */
+.featured {
+  --bg: var(--paper-fg);
+  --fg: var(--paper);
+  --fg-muted: color-mix(in oklab, var(--paper) 70%, transparent);
+  --line: color-mix(in oklab, var(--paper) 14%, transparent);
+  position: relative;
+  padding-block: clamp(2rem, 4vw, 3rem);
+  border: 0;
+  background: var(--bg);
+  color: var(--fg);
+  overflow: hidden;
+  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.5);
+}
+
+.featured::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: var(--brand);
+}
+
+.featured h3 {
+  font-size: 1.6rem;
+}
+
+.featured .pro span {
+  color: #34d399;
+}
+
+.cta {
+  width: 100%;
+  margin-top: 1.75rem;
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.cta:hover {
+  color: var(--bg);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .featured {
+    order: -1;
+  }
+}

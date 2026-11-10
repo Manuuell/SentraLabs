@@ -1,0 +1,303 @@
+.showcase {
+  padding-block: var(--seccion);
+  background: var(--bg-2);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.side :global(.h2) {
+  margin: 1rem 0 1rem;
+}
+
+.tabs {
+  display: grid;
+  margin-top: 2.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Fila con borde fino, no tarjeta. El acento de color va en la costura. */
+.tab {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.1rem 0.75rem 1.1rem 1rem;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: none;
+  color: var(--fg);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.25s ease, padding 0.25s ease;
+}
+
+.tab::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--c);
+  transform: scaleY(0);
+  transition: transform 0.25s ease;
+}
+
+.tab:hover {
+  padding-left: 1.35rem;
+}
+
+.tab[aria-selected="true"] {
+  padding-left: 1.35rem;
+  background: linear-gradient(90deg, color-mix(in oklab, var(--c) 12%, transparent), transparent 75%);
+}
+
+.tab[aria-selected="true"]::before {
+  transform: scaleY(1);
+}
+
+.tabText strong {
+  display: block;
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.tabText span {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+}
+
+.tabArrow {
+  color: var(--fg-dim);
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.tab[aria-selected="true"] .tabArrow {
+  color: var(--c);
+  transform: translateX(4px);
+}
+
+.panel {
+  position: relative;
+}
+
+.stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(380px, 38vw, 520px);
+  border-radius: 28px;
+  background:
+    radial-gradient(closest-side at 50% 55%, color-mix(in oklab, var(--c) 30%, transparent), transparent),
+    color-mix(in oklab, var(--fg) 3%, transparent);
+  overflow: hidden;
+  animation: rise 0.5s ease both;
+}
+
+.stage > * {
+  flex: none;
+  width: min(30%, 190px);
+}
+
+.shot0 { transform: translateX(22%) rotate(-6deg) translateY(4%) scale(0.92); }
+.shot1 { z-index: 2; width: min(33%, 210px) !important; }
+.shot2 { transform: translateX(-22%) rotate(6deg) translateY(4%) scale(0.92); }
+.shotSolo { width: min(36%, 220px) !important; }
+
+/* Proyecto web: ventana de escritorio con la version movil adelante. */
+.webStage {
+  position: relative;
+  width: 86%;
+}
+
+.stage > .webStage {
+  width: 86%;
+}
+
+.webDesktop {
+  width: 100%;
+}
+
+.webPhone {
+  position: absolute;
+  right: -4%;
+  bottom: -14%;
+  width: 24%;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+.details {
+  padding: 1.75rem 0.25rem 0;
+}
+
+.details h3 {
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  letter-spacing: -0.035em;
+}
+
+.details p {
+  margin-top: 0.75rem;
+  color: var(--fg-muted);
+  max-width: 62ch;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.1rem;
+  list-style: none;
+}
+
+.facts li {
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--c) 16%, transparent);
+  color: var(--fg);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.link {
+  display: inline-flex;
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--fg);
+  border-bottom: 1px solid var(--line);
+}
+
+.link:hover {
+  border-color: var(--fg);
+}
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tabs {
+    margin-top: 1.75rem;
+  }
+}
+
+/* ── Mas proyectos: muro de logos con bordes finos (el de basement) ── */
+.moreWrap {
+  margin-top: clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.moreTitle {
+  margin-bottom: 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  list-style: none;
+}
+
+.grid li {
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  width: 100%;
+  height: 100%;
+  padding: 1.15rem 1.1rem;
+  border: 0;
+  background: none;
+  color: var(--fg);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.cell::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background: var(--c);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.cell:hover,
+.cell[aria-pressed="true"] {
+  background: linear-gradient(180deg, color-mix(in oklab, var(--c) 12%, transparent), transparent 80%);
+}
+
+.cell:hover::before,
+.cell[aria-pressed="true"]::before {
+  transform: scaleX(1);
+}
+
+.cellText {
+  min-width: 0;
+}
+
+.cellText strong {
+  display: block;
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.cellText span {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: var(--fg-muted);
+}
+
+/* En movil la rejilla va en dos columnas compactas: logo y nombre. */
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cell {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 1rem 0.85rem;
+  }
+  .cellText span {
+    display: none;
+  }
+  .cellText strong {
+    font-size: 0.95rem;
+  }
+}

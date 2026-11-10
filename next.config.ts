@@ -34,9 +34,9 @@ const contentSecurityPolicy = [
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}${analytics.script}`,
 
   // Los estilos en linea salen de los style={{ }} de React y de framer-motion.
-  // googleapis sirve la hoja de fuentes que importa globals.css.
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.gstatic.com",
+  // Las fuentes las sirve el propio sitio (next/font las descarga en el build).
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self'",
 
   // Todas las imagenes son locales; data:/blob: los usa next/image internamente.
   `img-src 'self' data: blob:${analytics.img}`,

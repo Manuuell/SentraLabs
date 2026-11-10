@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HomeContent } from "./HomeContent";
+import { HomePage } from "./_home/HomePage";
 import { SITE_DESCRIPTION, SITE_TITLE } from "./lib/site";
 
 /* hreflang: le dice al buscador que "/" y "/en" son la misma página en dos
@@ -25,5 +25,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <HomeContent lang="es" />;
+  return <HomePage lang="es" />;
 }

@@ -1,0 +1,124 @@
+.team {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+}
+
+/* El texto se alinea con el contenedor del resto de la pagina aunque la
+   seccion vaya de borde a borde. */
+.text {
+  padding-block: var(--seccion);
+  padding-left: max(var(--gutter), calc((100vw - var(--ancho)) / 2 + var(--gutter)));
+  padding-right: clamp(2rem, 5vw, 4.5rem);
+}
+
+.title {
+  margin-top: 1rem;
+}
+
+/* El enunciado de SIMBIA: Figtree 600 con una barra de color a la izquierda. */
+.letter {
+  margin: 28px 0 0;
+  padding-left: 20px;
+  border-left: 4px solid var(--cyan);
+  max-width: 48ch;
+}
+
+.letter p {
+  font-family: var(--font-title);
+  font-size: clamp(17px, 1.7vw, 20px);
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+.letter footer {
+  margin-top: 1rem;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.creds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  list-style: none;
+}
+
+.creds li {
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px;
+  align-self: center;
+  list-style: none;
+}
+
+/* Ancho primero y la altura sale de la proporcion: con height:100% y
+   aspect-ratio juntos, la foto se ensanchaba mas alla de su columna. */
+.member {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--bg-2);
+  color: #fff;
+}
+
+.photo {
+  object-fit: cover;
+  filter: grayscale(0.35);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.4s ease;
+}
+
+.member:hover .photo,
+.member:focus-visible .photo {
+  transform: scale(1.04);
+  filter: grayscale(0);
+}
+
+.caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: grid;
+  gap: 0.15rem;
+  padding: 3rem 1.1rem 1rem;
+  background: linear-gradient(to top, rgba(7, 8, 11, 0.92), rgba(7, 8, 11, 0.6) 50%, transparent);
+}
+
+.caption strong {
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.caption span {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+@media (max-width: 900px) {
+  .team {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .text {
+    padding-right: var(--gutter);
+    padding-bottom: 2.5rem;
+  }
+}

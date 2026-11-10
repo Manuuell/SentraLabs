@@ -1,0 +1,80 @@
+.footer {
+  padding-top: clamp(4rem, 8vw, 6rem);
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.colTitle {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+.cols ul {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 1rem;
+  list-style: none;
+}
+
+.cols a {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
+.cols a:hover {
+  color: var(--cyan);
+}
+
+/* La palabra ocupa todo el ancho: el tamaño sale del ancho de la ventana. */
+.wordmark {
+  margin: clamp(3rem, 7vw, 5rem) 0 0;
+  font-family: var(--font-title);
+  font-size: 14.6vw;
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  text-align: center;
+  white-space: nowrap;
+  background: linear-gradient(180deg, var(--fg) 30%, color-mix(in oklab, var(--fg) 15%, transparent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  user-select: none;
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-block: 1.5rem 2rem;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--fg-dim);
+}
+
+/* La terminal se abre con teclado: en tactil el aviso no tiene sentido. */
+@media (pointer: coarse) {
+  .terminal {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

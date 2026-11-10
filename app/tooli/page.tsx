@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     },
 };
 
-const mono = "'JetBrains Mono', monospace";
+const mono = "var(--font-mono)";
 
 export default function Tooli() {
     return (
@@ -38,7 +38,7 @@ export default function Tooli() {
                 background: "#000",
                 color: "#e4e4e7",
                 padding: "120px 24px 80px",
-                fontFamily: "'Inter', system-ui, sans-serif",
+                fontFamily: "var(--font-sans)",
             }}
         >
             <div style={{ maxWidth: 720, margin: "0 auto" }}>

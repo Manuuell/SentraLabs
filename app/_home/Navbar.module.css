@@ -1,0 +1,115 @@
+.bar {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: min(calc(100% - 24px), 1120px);
+  height: 58px;
+  padding: 0 8px 0 18px;
+  transform: translateX(-50%);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--bg) 62%, transparent);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.bar[data-scrolled="true"] {
+  background: color-mix(in oklab, var(--bg) 86%, transparent);
+  box-shadow: 0 10px 40px -20px rgba(0, 0, 0, 0.6);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+.nav {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.nav a {
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--fg-muted);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.nav a:hover {
+  color: var(--fg);
+  background: color-mix(in oklab, var(--fg) 7%, transparent);
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+}
+
+.icon {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.icon:hover {
+  border-color: var(--fg-muted);
+  color: var(--fg);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 1.15rem;
+  border-radius: 999px;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cta:hover {
+  color: var(--bg);
+  opacity: 0.88;
+}
+
+@media (max-width: 900px) {
+  .nav {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .bar {
+    padding-left: 12px;
+  }
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
+  .cta {
+    padding: 0 0.9rem;
+  }
+}

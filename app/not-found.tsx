@@ -21,7 +21,7 @@ export default function NotFound() {
                 alignItems: "center",
                 justifyContent: "center",
                 padding: "2rem",
-                fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                fontFamily: "var(--font-mono)",
             }}
         >
             <div style={{ textAlign: "center", maxWidth: 520 }}>
@@ -89,7 +89,7 @@ export default function NotFound() {
                         borderRadius: "9999px",
                         fontSize: "0.85rem",
                         fontWeight: 600,
-                        fontFamily: "'JetBrains Mono', monospace",
+                        fontFamily: "var(--font-mono)",
                         textDecoration: "none",
                         transition: "transform 0.25s, box-shadow 0.25s",
                     }}

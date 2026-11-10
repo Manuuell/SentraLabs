@@ -5,7 +5,7 @@ import Link from "next/link";
    de cada app); en esta última, «app» es el nombre de esa app en Play. */
 
 const h2 = {
-    fontFamily: "'JetBrains Mono', monospace",
+    fontFamily: "var(--font-mono)",
     fontSize: "1.1rem",
     color: "#fff",
     margin: "2rem 0 1rem",
@@ -23,7 +23,7 @@ export default function PoliticaTooli({ app }: { app?: string }) {
                 background: "#000",
                 color: "#e4e4e7",
                 padding: "120px 24px 80px",
-                fontFamily: "'Inter', system-ui, sans-serif",
+                fontFamily: "var(--font-sans)",
             }}
         >
             <div style={{ maxWidth: 720, margin: "0 auto" }}>
@@ -32,7 +32,7 @@ export default function PoliticaTooli({ app }: { app?: string }) {
                     style={{
                         color: "#71717a",
                         textDecoration: "none",
-                        fontFamily: "'JetBrains Mono', monospace",
+                        fontFamily: "var(--font-mono)",
                         fontSize: "0.85rem",
                         marginBottom: "2rem",
                         display: "inline-block",
@@ -41,10 +41,10 @@ export default function PoliticaTooli({ app }: { app?: string }) {
                     ← Tooli
                 </Link>
 
-                <p style={{ color: "#60a5fa", fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", letterSpacing: "0.15em", marginBottom: "12px" }}>
+                <p style={{ color: "#60a5fa", fontFamily: "var(--font-mono)", fontSize: "0.75rem", letterSpacing: "0.15em", marginBottom: "12px" }}>
                     {"// tooli · legal"}
                 </p>
-                <h1 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "2rem", fontWeight: 700, marginBottom: "2rem", color: "#fff" }}>
+                <h1 style={{ fontFamily: "var(--font-mono)", fontSize: "2rem", fontWeight: 700, marginBottom: "2rem", color: "#fff" }}>
                     {app ? `Política de Privacidad de ${app}` : "Política de Privacidad de Tooli"}
                 </h1>
 
