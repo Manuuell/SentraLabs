@@ -4,6 +4,9 @@
  * no hay claves, pero el prompt tampoco tiene por que viajar al navegador.
  */
 
+import { projects } from "../content/projects";
+import { translations } from "../i18n/dictionaries";
+import { teamMembers } from "../team/data";
 import { CONTACT_EMAIL } from "./site";
 
 /* Modelo por defecto. Se puede cambiar sin tocar codigo con OPENAI_MODEL. */
@@ -22,37 +25,53 @@ export const MAX_HISTORY_MESSAGES = 12;
 export const RATE_LIMIT = { windowMs: 60_000, maxPerWindow: 8 };
 export const DAILY_LIMIT = 600;
 
+/* Proyectos, equipo y proceso salen de las mismas fuentes que la web
+   (app/content/projects.ts, app/team/data.ts y los textos en español): al
+   agregar un proyecto en la home, el asistente lo conoce sin tocar este archivo. */
+const es = translations.es;
+
+const PROJECTS = projects
+  .map((p) => {
+    const t = p.text.es;
+    const site = p.links.find((l) => l.kind === "site");
+    const domain = site ? site.href.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "") : "";
+    // Si un dato ya nombra el sitio ("En producción · funconceptos.org"), no se repite.
+    const named = domain && t.facts.some((f) => f.includes(domain));
+    const extra = [...t.facts, domain && !named ? `Sitio: ${domain}` : ""].filter(Boolean).join(". ");
+    return `- ${p.name} (${t.tagline}): ${t.desc}${extra ? ` ${extra}.` : ""}`;
+  })
+  .join("\n");
+
+const TEAM = teamMembers.map((m) => `${m.name} (${es.team.roles[m.role] ?? m.role})`).join(", ");
+
+const PROCESS = es.how.steps.map((s, i) => `${i + 1}. ${s.title}: ${s.desc}`).join("\n");
+
+const SERVICES = es.services.items.map((s) => `- ${s.title}: ${s.desc}`).join("\n");
+
 /**
  * Lo que el asistente sabe de SentraLabs. Todo lo de aqui es informacion que ya
  * esta publicada en la web: no se le da nada que no pueda repetir.
  */
 const FACTS = `
 SentraLabs es un estudio de desarrollo de software con sede en Cartagena, Colombia.
-Lema: "Creamos. Probamos. Lanzamos." Trabaja en remoto con clientes de cualquier pais.
+Lema: "Creamos. Probamos. Lanzamos." Trabaja en remoto con clientes de cualquier pais,
+en español y en inglés.
 Contacto: ${CONTACT_EMAIL} · WhatsApp +57 321 564 0735 · sentralabs.co
 
 SERVICIOS
-- Desarrollo movil: apps nativas y multiplataforma con Flutter, publicadas en iOS y Android.
-- Desarrollo web: sitios y aplicaciones con Next.js, React y TypeScript.
-- Inteligencia artificial: chatbots, asistentes y automatizacion; integracion de IA en productos que ya existen.
-- Ciberseguridad: plataformas de formacion, analisis de vulnerabilidades y soluciones de seguridad para empresas.
+${SERVICES}
 
-PROCESO (cinco fases)
-1. Descubrimiento: objetivos, usuarios y alcance del primer lanzamiento.
-2. Diseno: wireframes y prototipo navegable, validados antes de construir.
-3. Desarrollo: sprints cortos con entregas semanales.
-4. Pruebas: QA funcional, dispositivos reales y rendimiento.
-5. Lanzamiento: publicacion, monitoreo y soporte.
+COMO TRABAJAMOS (tres pasos)
+${PROCESS}
 
-PROYECTOS
-- TransCar: app de transporte para el sistema TransCaribe en Cartagena. Mapa con buses en tiempo real, ETAs con datos de trafico, recarga de tarjeta desde el celular, membresia premium y chatbot con IA. Flutter, Firebase, Mapbox, OpenAI. En fase beta con usuarios reales.
-- MarSec: plataforma de ciberseguridad para embarcaciones, con lecciones, cuestionarios y un asistente virtual. Node.js, Flutter, SQL Server, Azure. Gano el premio a Mejor Proyecto TalentoTech 2025.
-- EcoOne: app que incentiva el reciclaje urbano con EcoCoins, una moneda digital ecologica. Flutter, Clean Architecture, OpenAI, Firebase.
+PROYECTOS (${projects.length})
+${PROJECTS}
+
+RECONOCIMIENTOS
+Mejor Proyecto TalentoTech 2025 con MarSec y ganadores del Hackathon de IA de TalentoTech.
 
 EQUIPO
-Manuel Esteban (fundador), Angel Acero (cofundador / desarrollador), Jerson Diaz
-(cofundador / desarrollador) y Gelbert Cantillo (disenador UX/UI). Cada uno
-tiene su perfil en sentralabs.co/team.
+${TEAM}. Cada uno tiene su perfil en sentralabs.co/team.
 
 PLAZOS ORIENTATIVOS
 Un MVP suele estar listo en 4-8 semanas. Un proyecto complejo, entre 3 y 6 meses.
@@ -77,7 +96,8 @@ LIMITES QUE NO PUEDES SALTARTE
 - No prometas fechas de entrega concretas. Puedes citar los plazos orientativos de
   arriba dejando claro que son estimaciones.
 - No inventes clientes, casos de exito, cifras de resultados ni testimonios.
-  Los unicos proyectos que existen son los tres de la lista.
+  Los unicos proyectos que existen son los de la lista; no les agregues datos
+  que no esten ahi (usuarios, cifras, clientes o tecnologias).
 - Si no sabes algo, dilo y deriva a ${CONTACT_EMAIL}. Es mejor que quedar bien.
 - Habla solo de SentraLabs y de lo que el visitante quiere construir. Si te piden
   otra cosa (escribir codigo suelto, hacer de asistente general, opinar de otros
