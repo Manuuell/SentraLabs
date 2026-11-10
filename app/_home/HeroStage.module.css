@@ -24,7 +24,9 @@
   transition: opacity 0.6s ease;
 }
 
-.fallback > * {
+/* Dos clases: le gana a `position: relative` de PhoneFrame sin importar el
+   orden en que el build cargue las hojas de estilo. */
+.stage .fallback > * {
   position: absolute;
 }
 

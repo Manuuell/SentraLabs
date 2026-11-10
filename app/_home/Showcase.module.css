@@ -115,25 +115,27 @@
 .shot2 { transform: translateX(-22%) rotate(6deg) translateY(4%) scale(0.92); }
 .shotSolo { width: min(36%, 220px) !important; }
 
-/* Proyecto web: ventana de escritorio con la version movil adelante. */
-.webStage {
-  position: relative;
-  width: 86%;
-}
-
+/* Proyecto web: ventana de escritorio con la version movil montada sobre la
+   esquina. Los selectores van con dos clases a proposito: en el build de
+   produccion la hoja de PhoneFrame puede cargar despues y su
+   `position: relative` le ganaba a una regla de una sola clase, y el telefono
+   caia debajo de la ventana. */
 .stage > .webStage {
-  width: 86%;
+  position: relative;
+  width: 84%;
+  margin-bottom: 4%;
 }
 
-.webDesktop {
+.webStage .webDesktop {
   width: 100%;
 }
 
-.webPhone {
+.webStage .webPhone {
   position: absolute;
-  right: -4%;
-  bottom: -14%;
-  width: 24%;
+  right: -5%;
+  bottom: -9%;
+  width: 23%;
+  z-index: 2;
 }
 
 @keyframes rise {
