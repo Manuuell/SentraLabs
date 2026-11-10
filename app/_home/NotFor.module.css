@@ -45,13 +45,3 @@
   color: rgba(242, 241, 237, 0.78);
   text-wrap: pretty;
 }
-
-.sign {
-  margin-top: 1.75rem;
-  font-family: var(--font-sans);
-  font-size: 12.5px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #22d3ee;
-}

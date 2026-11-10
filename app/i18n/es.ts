@@ -130,13 +130,6 @@ export const es = {
         kicker: "Quiénes lo construyen",
         title: "El equipo detrás del código",
         letter: "Fundé SentraLabs para construir software que resuelva problemas reales, empezando por los de nuestra ciudad. Somos un equipo pequeño a propósito: quien te atiende es quien diseña y programa tu producto, y respondemos por él después del lanzamiento.",
-        signature: "Manuel Esteban · Fundador",
-        creds: [
-            "Mejor Proyecto TalentoTech 2025",
-            "Hackathon de IA · TalentoTech",
-            "Cartagena, Colombia",
-            "Español e inglés",
-        ],
         profile: "Ver perfil",
         roles: {
             "Fundador": "Fundador",
@@ -148,7 +141,6 @@ export const es = {
         kicker: "Antes de escribirnos",
         title: "SentraLabs no es para todos.",
         body: "Si buscas la opción más barata o una app lista en un fin de semana, no somos tu equipo. Si quieres un producto que funcione, que entiendas y que pueda crecer contigo, hablemos.",
-        signature: "— Manuel Esteban, fundador",
     },
     compare: {
         kicker: "Tus opciones",

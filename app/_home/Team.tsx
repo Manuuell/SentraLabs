@@ -17,13 +17,7 @@ export function Team({ t }: { t: Translations["team"] }) {
         <h2 className={`h2 ${styles.title}`}>{t.title}</h2>
         <blockquote className={styles.letter}>
           <p>{t.letter}</p>
-          <footer>{t.signature}</footer>
         </blockquote>
-        <ul className={styles.creds}>
-          {t.creds.map((c) => (
-            <li key={c}>{c}</li>
-          ))}
-        </ul>
       </div>
       <ul className={styles.grid}>
         {teamMembers.map((m) => {

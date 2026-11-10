@@ -9,7 +9,6 @@ export function NotFor({ t }: { t: Translations["notFor"] }) {
         <span className="kicker">{t.kicker}</span>
         <h2 className={styles.title}>{t.title}</h2>
         <p className={styles.body}>{t.body}</p>
-        <p className={styles.sign}>{t.signature}</p>
       </div>
     </section>
   );

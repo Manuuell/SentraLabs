@@ -126,13 +126,6 @@ export const en: Translations = {
         kicker: "Who builds it",
         title: "The team behind the code",
         letter: "I founded SentraLabs to build software that solves real problems, starting with the ones in our own city. We're a small team on purpose: the person you talk to is the one who designs and codes your product, and we stand behind it after launch.",
-        signature: "Manuel Esteban · Founder",
-        creds: [
-            "Best Project, TalentoTech 2025",
-            "AI Hackathon · TalentoTech",
-            "Cartagena, Colombia",
-            "Spanish and English",
-        ],
         profile: "View profile",
         roles: {
             "Fundador": "Founder",
@@ -144,7 +137,6 @@ export const en: Translations = {
         kicker: "Before you write to us",
         title: "SentraLabs isn't for everyone.",
         body: "If you're looking for the cheapest option or an app ready in a weekend, we're not your team. If you want a product that works, that you understand and that can grow with you, let's talk.",
-        signature: "— Manuel Esteban, founder",
     },
     compare: {
         kicker: "Your options",
