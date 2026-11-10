@@ -25,16 +25,24 @@ export function PhoneFrame({
 }) {
   return (
     <div className={`${styles.phone} ${className}`}>
-      <div className={styles.screen}>
-        {src ? (
-          <Image src={src} alt={alt} fill sizes={sizes} preload={priority} className={styles.shot} />
-        ) : project ? (
-          <Splash project={project} />
-        ) : (
-          <div className={styles.blank} />
-        )}
+      {/* Botones laterales: accion y volumen a la izquierda, encendido a la derecha. */}
+      <span className={`${styles.btn} ${styles.action}`} aria-hidden="true" />
+      <span className={`${styles.btn} ${styles.volUp}`} aria-hidden="true" />
+      <span className={`${styles.btn} ${styles.volDown}`} aria-hidden="true" />
+      <span className={`${styles.btn} ${styles.power}`} aria-hidden="true" />
+      <div className={styles.glass}>
+        <div className={styles.screen}>
+          {src ? (
+            <Image src={src} alt={alt} fill sizes={sizes} preload={priority} className={styles.shot} />
+          ) : project ? (
+            <Splash project={project} />
+          ) : (
+            <div className={styles.blank} />
+          )}
+          <span className={styles.island} aria-hidden="true" />
+          <span className={styles.glare} aria-hidden="true" />
+        </div>
       </div>
-      <span className={styles.island} aria-hidden="true" />
     </div>
   );
 }

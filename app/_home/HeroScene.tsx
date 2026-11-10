@@ -26,8 +26,17 @@ interface SceneProps {
 
 /* Medidas en unidades de la escena. Las pantallas respetan la proporcion de
    las capturas (telefono 9:20, laptop 16:10) para no deformarlas. */
-const PHONE = { w: 0.94, h: 1.96, d: 0.085, r: 0.14, screenW: 0.86 };
-const PHONE_SCREEN_H = PHONE.screenW * (2400 / 1080);
+/* Bisel delgado: la pantalla ocupa casi todo el frente y el cuerpo se ajusta a
+   ella, con el mismo grosor de borde arriba, abajo y a los lados. */
+const PHONE_SCREEN_W = 0.875;
+const PHONE_SCREEN_H = PHONE_SCREEN_W * (2400 / 1080);
+const PHONE_BEZEL = 0.033;
+const PHONE = {
+  w: PHONE_SCREEN_W + PHONE_BEZEL * 2,
+  h: PHONE_SCREEN_H + PHONE_BEZEL * 2,
+  d: 0.08,
+  r: 0.15,
+};
 const LAPTOP = { w: 3.1, h: 1.98, lid: 0.045, baseH: 0.07, baseD: 2.05, screenW: 2.92 };
 const LAPTOP_SCREEN_H = LAPTOP.screenW * (10 / 16);
 const FLOOR_Y = -1.2;
@@ -36,9 +45,9 @@ const FLOOR_Y = -1.2;
 /* Los telefonos van adelante y montados sobre los bordes de la laptop: asi el
    conjunto queda compacto y cada dispositivo se ve grande. */
 const SLOTS: { pos: [number, number, number]; rot: [number, number, number] }[] = [
-  { pos: [-1.42, -0.22, 1.0], rot: [0.02, 0.3, 0.03] },
+  { pos: [-1.42, -0.16, 1.0], rot: [0.02, 0.3, 0.03] },
   { pos: [0.05, FLOOR_Y, -0.55], rot: [0, -0.05, 0] },
-  { pos: [1.52, -0.3, 0.85], rot: [0.02, -0.32, -0.03] },
+  { pos: [1.52, -0.24, 0.85], rot: [0.02, -0.32, -0.03] },
 ];
 
 export default function HeroScene({ paused, interactive, eventSource, onReady, onSelect }: SceneProps) {
@@ -217,6 +226,7 @@ function Phone({ index, pos, rot, texture, hovered, onHover, onSelect }: DeviceP
   const shadow = useRef<THREE.Mesh>(null);
   const geo = usePhoneGeometry();
   const shadowTex = useShadowTexture();
+  const glare = useGlareTexture();
   const events = deviceEvents({ onHover, onSelect });
 
   useFrame((state, delta) => {
@@ -246,7 +256,7 @@ function Phone({ index, pos, rot, texture, hovered, onHover, onSelect }: DeviceP
       <group ref={ref} position={pos} rotation={rot} {...events}>
         {/* Marco de metal */}
         <mesh geometry={geo.body}>
-          <meshStandardMaterial color="#2a2e37" metalness={1} roughness={0.28} />
+          <meshStandardMaterial color="#5a5f69" metalness={1} roughness={0.3} />
         </mesh>
         {/* Vidrio frontal negro: el bisel alrededor de la pantalla */}
         <mesh geometry={geo.glass} position={[0, 0, front + 0.001]}>
@@ -256,13 +266,18 @@ function Phone({ index, pos, rot, texture, hovered, onHover, onSelect }: DeviceP
           <meshBasicMaterial map={texture} toneMapped={false} />
         </mesh>
         {/* Isla */}
-        <mesh geometry={geo.island} position={[0, PHONE_SCREEN_H / 2 - 0.075, front + 0.003]}>
+        <mesh geometry={geo.island} position={[0, PHONE_SCREEN_H / 2 - 0.072, front + 0.003]}>
           <meshBasicMaterial color="#000000" />
         </mesh>
+        {/* Reflejo del vidrio: el mismo brillo diagonal que el telefono en CSS. */}
+        <mesh geometry={geo.screen} position={[0, 0, front + 0.004]}>
+          <meshBasicMaterial map={glare} transparent depthWrite={false} toneMapped={false} />
+        </mesh>
         {/* Botones laterales */}
-        <SideButton x={PHONE.w / 2 + 0.006} y={0.38} h={0.26} />
-        <SideButton x={-PHONE.w / 2 - 0.006} y={0.5} h={0.16} />
-        <SideButton x={-PHONE.w / 2 - 0.006} y={0.28} h={0.16} />
+        <SideButton x={PHONE.w / 2 + 0.005} y={0.42} h={0.24} />
+        <SideButton x={-PHONE.w / 2 - 0.005} y={0.62} h={0.08} />
+        <SideButton x={-PHONE.w / 2 - 0.005} y={0.46} h={0.15} />
+        <SideButton x={-PHONE.w / 2 - 0.005} y={0.28} h={0.15} />
       </group>
     </>
   );
@@ -271,8 +286,8 @@ function Phone({ index, pos, rot, texture, hovered, onHover, onSelect }: DeviceP
 function SideButton({ x, y, h }: { x: number; y: number; h: number }) {
   return (
     <mesh position={[x, y, 0]}>
-      <boxGeometry args={[0.014, h, 0.04]} />
-      <meshStandardMaterial color="#2a2e37" metalness={1} roughness={0.3} />
+      <boxGeometry args={[0.012, h, 0.036]} />
+      <meshStandardMaterial color="#5a5f69" metalness={1} roughness={0.3} />
     </mesh>
   );
 }
@@ -337,9 +352,9 @@ function usePhoneGeometry() {
   const geo = useMemo(
     () => ({
       body: new RoundedBoxGeometry(PHONE.w, PHONE.h, PHONE.d, 6, PHONE.r),
-      glass: roundedPlane(PHONE.w - 0.03, PHONE.h - 0.03, PHONE.r - 0.015),
-      screen: roundedPlane(PHONE.screenW, PHONE_SCREEN_H, 0.105),
-      island: roundedPlane(0.24, 0.07, 0.035),
+      glass: roundedPlane(PHONE.w - 0.018, PHONE.h - 0.018, PHONE.r - 0.009),
+      screen: roundedPlane(PHONE_SCREEN_W, PHONE_SCREEN_H, PHONE_SCREEN_W * 0.135),
+      island: roundedPlane(PHONE_SCREEN_W * 0.3, 0.075, 0.0375),
     }),
     [],
   );
@@ -377,6 +392,27 @@ function useShadowTexture() {
     ctx.fillRect(0, 0, 128, 128);
     shadowCache = new THREE.CanvasTexture(c);
     return shadowCache;
+  }, []);
+}
+
+/** Brillo diagonal del vidrio, compartido por todos los telefonos. */
+let glareCache: THREE.CanvasTexture | null = null;
+function useGlareTexture() {
+  return useMemo(() => {
+    if (glareCache) return glareCache;
+    const c = document.createElement("canvas");
+    c.width = 256;
+    c.height = 512;
+    const ctx = c.getContext("2d")!;
+    const g = ctx.createLinearGradient(0, 0, 256, 300);
+    g.addColorStop(0, "rgba(255,255,255,0.16)");
+    g.addColorStop(0.3, "rgba(255,255,255,0.05)");
+    g.addColorStop(0.48, "rgba(255,255,255,0)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, 256, 512);
+    glareCache = new THREE.CanvasTexture(c);
+    glareCache.colorSpace = THREE.SRGBColorSpace;
+    return glareCache;
   }, []);
 }
 
