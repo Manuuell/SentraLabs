@@ -1,0 +1,179 @@
+.head {
+  padding: 140px 0 clamp(2.5rem, 5vw, 3.5rem);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 14px;
+  color: var(--fg-dim);
+}
+
+.crumbs a {
+  color: var(--fg-muted);
+}
+
+.crumbs a:hover {
+  color: var(--fg);
+}
+
+.crumbs [aria-current] {
+  color: var(--fg);
+}
+
+.identity {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(1.25rem, 4vw, 2.5rem);
+  align-items: center;
+  margin-top: 2.25rem;
+}
+
+.photo {
+  width: clamp(110px, 16vw, 160px);
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 28%;
+  object-fit: cover;
+}
+
+.name {
+  margin-top: 0.6rem;
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  font-weight: 800;
+}
+
+.oneLiner {
+  margin-top: 0.75rem;
+  font-size: clamp(16px, 1.6vw, 18.5px);
+  color: var(--fg-muted);
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  list-style: none;
+}
+
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 40px;
+  padding: 0 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fg);
+  overflow-wrap: anywhere;
+}
+
+.socials a:hover {
+  border-color: var(--fg-muted);
+  color: var(--fg);
+}
+
+/* Alineado con la cabecera; el ancho de lectura lo pone cada bloque. */
+.body {
+  padding-block: clamp(2.5rem, 6vw, 4rem) var(--seccion);
+}
+
+.body > * {
+  max-width: 72ch;
+}
+
+/* La bio va como el enunciado de SIMBIA: Figtree con barra de color. */
+.bio {
+  padding-left: 20px;
+  border-left: 4px solid var(--cyan);
+  font-family: var(--font-title);
+  font-size: clamp(17px, 1.7vw, 20px);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+.section {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.section h2 {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* Filas con bordes finos en vez de tarjetas. */
+.rows {
+  margin-top: 1rem;
+  list-style: none;
+  border-bottom: 1px solid var(--line);
+}
+
+.rows li {
+  padding-block: 1.1rem;
+  border-top: 1px solid var(--line);
+}
+
+.rows h3 {
+  font-size: 1.15rem;
+  letter-spacing: -0.025em;
+}
+
+.rows p {
+  margin-top: 0.35rem;
+  color: var(--fg-muted);
+  font-size: 15px;
+}
+
+.cert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cert a {
+  flex: none;
+  font-size: 14px;
+  color: var(--fg);
+  border-bottom: 1px solid var(--line);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  list-style: none;
+}
+
+.chips li {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 14px;
+  color: var(--fg-muted);
+}
+
+@media (max-width: 600px) {
+  .identity {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cert {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

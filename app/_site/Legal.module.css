@@ -1,0 +1,72 @@
+.head {
+  padding: 150px 0 clamp(2.5rem, 5vw, 3.5rem);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-size: 14px;
+  color: var(--fg-muted);
+}
+
+.back:hover {
+  color: var(--fg);
+}
+
+.kicker {
+  display: block;
+}
+
+.title {
+  margin-top: 1rem;
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  font-weight: 800;
+}
+
+.updated {
+  margin-top: 1rem;
+  font-size: 14px;
+  color: var(--fg-muted);
+}
+
+/* Columna de lectura alineada con el titulo: secciones separadas por bordes
+   finos, no tarjetas. */
+.prose {
+  padding-block: clamp(2.5rem, 6vw, 4.5rem) var(--seccion);
+}
+
+.prose > * {
+  max-width: 68ch;
+}
+
+.prose section {
+  padding-block: 1.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.prose section:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.prose h2 {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  letter-spacing: -0.03em;
+}
+
+.prose p {
+  margin-top: 0.75rem;
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: var(--fg-muted);
+}
+
+.prose a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

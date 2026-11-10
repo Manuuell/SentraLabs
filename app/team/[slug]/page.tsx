@@ -6,7 +6,9 @@ import { getTeamMember, getAllSlugs } from "../data";
 import { safeMailto, safeUrl, sanitizeSlug } from "../../lib/sanitize";
 import { JsonLd } from "../../lib/JsonLd";
 import { SITE_URL, absoluteUrl } from "../../lib/site";
-import "../profile.css";
+import { SitePage } from "../../_site/SitePage";
+import { translations } from "../../i18n/dictionaries";
+import styles from "./Profile.module.css";
 
 export function generateStaticParams() {
     return getAllSlugs().map((slug) => ({ slug }));
@@ -75,207 +77,145 @@ export default async function ProfilePage({
         "@type": "BreadcrumbList",
         itemListElement: [
             { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
-            { "@type": "ListItem", position: 2, name: "Equipo", item: absoluteUrl("/#team") },
+            { "@type": "ListItem", position: 2, name: "Equipo", item: absoluteUrl("/#equipo") },
             { "@type": "ListItem", position: 3, name: member.name, item: profileUrl },
         ],
     };
 
+    const role = translations.es.team.roles[member.role] ?? member.role;
+
     return (
-        <div className="profile-page">
+        <SitePage>
             <JsonLd data={personSchema} />
             <JsonLd data={breadcrumbSchema} />
 
-            {/* Breadcrumb: misma ruta que declara el BreadcrumbList de arriba. */}
-            <nav aria-label="Ruta de navegación" className="profile-breadcrumb">
-                <Link href="/">Inicio</Link>
-                <span aria-hidden="true">/</span>
-                <Link href="/#team">Equipo</Link>
-                <span aria-hidden="true">/</span>
-                <span aria-current="page">{member.name}</span>
-            </nav>
+            <header className={styles.head}>
+                <div className="wrap">
+                    {/* Breadcrumb: misma ruta que declara el BreadcrumbList de arriba. */}
+                    <nav aria-label="Ruta de navegación" className={styles.crumbs}>
+                        <Link href="/">Inicio</Link>
+                        <span aria-hidden="true">/</span>
+                        <Link href="/#equipo">Equipo</Link>
+                        <span aria-hidden="true">/</span>
+                        <span aria-current="page">{member.name}</span>
+                    </nav>
 
-            <div className="profile-container">
-                {/* Header */}
-                <header className="profile-header">
-                    <Image
-                        src={member.image}
-                        alt={`${member.name}, ${member.role} en SentraLabs`}
-                        width={100}
-                        height={100}
-                        className="profile-photo"
-                        priority
-                    />
-                    <div className="profile-identity">
-                        <h1>{member.name}</h1>
-                        <p className="profile-role">{member.role}</p>
+                    <div className={styles.identity}>
+                        <Image
+                            src={member.image}
+                            alt={`${member.name}, ${role} en SentraLabs`}
+                            width={160}
+                            height={160}
+                            className={styles.photo}
+                            preload
+                        />
+                        <div>
+                            <span className="kicker">{role}</span>
+                            <h1 className={styles.name}>{member.name}</h1>
+                            <p className={styles.oneLiner}>{member.oneLiner}</p>
+                            <ul className={styles.socials}>
+                                {safeUrl(member.socials.github) && (
+                                    <li>
+                                        <a href={safeUrl(member.socials.github)} target="_blank" rel="noopener noreferrer">
+                                            GitHub <span aria-hidden="true">↗</span>
+                                        </a>
+                                    </li>
+                                )}
+                                {safeUrl(member.socials.linkedin) && (
+                                    <li>
+                                        <a href={safeUrl(member.socials.linkedin)} target="_blank" rel="noopener noreferrer">
+                                            LinkedIn <span aria-hidden="true">↗</span>
+                                        </a>
+                                    </li>
+                                )}
+                                {safeMailto(member.socials.email) && (
+                                    <li>
+                                        <a href={safeMailto(member.socials.email)}>{member.socials.email}</a>
+                                    </li>
+                                )}
+                            </ul>
+                        </div>
                     </div>
-                </header>
-
-                <p className="profile-oneliner">{member.oneLiner}</p>
-
-                {/* Social Links */}
-                <div className="profile-socials">
-                    {safeUrl(member.socials.github) && (
-                        <a
-                            href={safeUrl(member.socials.github)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="profile-social-link"
-                        >
-                            GitHub
-                        </a>
-                    )}
-                    {safeUrl(member.socials.linkedin) && (
-                        <a
-                            href={safeUrl(member.socials.linkedin)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="profile-social-link"
-                        >
-                            LinkedIn
-                        </a>
-                    )}
-                    {safeMailto(member.socials.email) && (
-                        <a
-                            href={safeMailto(member.socials.email)}
-                            className="profile-social-link"
-                        >
-                            Email: {member.socials.email}
-                        </a>
-                    )}
                 </div>
+            </header>
 
-                {/* Bio */}
-                {member.bio && (
-                    <section className="profile-section">
-                        <p className="profile-bio">{member.bio}</p>
-                    </section>
-                )}
+            <div className={`wrap ${styles.body}`}>
+                {member.bio && <p className={styles.bio}>{member.bio}</p>}
 
-                {/* Highlights */}
                 {member.highlights.length > 0 && (
-                    <section className="profile-section">
-                        <h2 className="profile-section-title">Highlights</h2>
-                        <div className="profile-highlights">
-                            {member.highlights.map((h) => {
-                                const Tag = h.link ? "a" : "div";
-                                const linkProps = h.link
-                                    ? {
-                                        href: safeUrl(h.link),
-                                        target: "_blank" as const,
-                                        rel: "noopener noreferrer",
-                                    }
-                                    : {};
-                                return (
-                                    <Tag
-                                        key={h.title}
-                                        className="profile-highlight-card"
-                                        {...linkProps}
-                                    >
-                                        <div className="highlight-info">
-                                            <h3>{h.title}</h3>
-                                            <p>{h.description}</p>
-                                        </div>
-                                    </Tag>
-                                );
-                            })}
-                        </div>
+                    <section className={styles.section}>
+                        <h2>Destacados</h2>
+                        <ul className={styles.rows}>
+                            {member.highlights.map((h) => (
+                                <li key={h.title}>
+                                    <h3>{h.title}</h3>
+                                    <p>{h.description}</p>
+                                </li>
+                            ))}
+                        </ul>
                     </section>
                 )}
 
-                <hr className="profile-divider" />
-
-                {/* Projects */}
+                {/* Sin enlaces a repositorios ni tecnologias por proyecto, como en la home. */}
                 {member.projects.length > 0 && (
-                    <section className="profile-section">
-                        <h2 className="profile-section-title">Proyectos</h2>
-                        <div className="profile-projects">
+                    <section className={styles.section}>
+                        <h2>Proyectos</h2>
+                        <ul className={styles.rows}>
                             {member.projects.map((p) => (
-                                <div key={p.name} className="profile-project-row">
-                                    <div className="project-row-left">
-                                        {safeUrl(p.link) ? (
-                                            <a
-                                                href={safeUrl(p.link)}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="project-row-name"
-                                            >
-                                                {p.name}
-                                            </a>
-                                        ) : (
-                                            <span className="project-row-name">{p.name}</span>
-                                        )}
-                                        <span className="project-row-dash">—</span>
-                                        <span className="project-row-desc">{p.description}</span>
-                                    </div>
-                                    <div className="project-row-tags">
-                                        {p.tags.slice(0, 3).map((t) => (
-                                            <span key={t} className="project-row-tag">
-                                                {t}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
+                                <li key={p.name}>
+                                    <h3>{p.name}</h3>
+                                    <p>{p.description}</p>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
                     </section>
                 )}
 
-                {/* Skills */}
                 {member.skills.length > 0 && (
-                    <section className="profile-section">
-                        <h2 className="profile-section-title">Stack</h2>
-                        <div className="profile-skills">
+                    <section className={styles.section}>
+                        <h2>Habilidades</h2>
+                        <ul className={styles.chips}>
                             {member.skills.map((s) => (
-                                <span key={s} className="profile-skill">
-                                    {s}
-                                </span>
+                                <li key={s}>{s}</li>
                             ))}
-                        </div>
+                        </ul>
                     </section>
                 )}
 
-                {/* Awards */}
                 {member.awards && member.awards.length > 0 && (
-                    <section className="profile-section">
-                        <h2 className="profile-section-title">Premios</h2>
-                        <div className="profile-awards">
+                    <section className={styles.section}>
+                        <h2>Premios</h2>
+                        <ul className={styles.rows}>
                             {member.awards.map((a) => (
-                                <div key={a} className="profile-award-item">
-                                    🏆 {a}
-                                </div>
+                                <li key={a}>
+                                    <h3>{a}</h3>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
                     </section>
                 )}
 
-                {/* Certifications */}
                 {member.certifications && member.certifications.length > 0 && (
-                    <section className="profile-section">
-                        <h2 className="profile-section-title">Certificaciones</h2>
-                        <div className="profile-certifications">
+                    <section className={styles.section}>
+                        <h2>Certificaciones</h2>
+                        <ul className={styles.rows}>
                             {member.certifications.map((c) => (
-                                <div key={c.title} className="profile-cert-row">
-                                    <div className="cert-info">
-                                        <span className="cert-title">{c.title}</span>
-                                        <span className="cert-issuer">— {c.issuer}</span>
+                                <li key={c.title} className={styles.cert}>
+                                    <div>
+                                        <h3>{c.title}</h3>
+                                        <p>{c.issuer}</p>
                                     </div>
                                     {safeUrl(c.link) && (
-                                        <a
-                                            href={safeUrl(c.link)}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="cert-link"
-                                        >
-                                            ver certificado →
+                                        <a href={safeUrl(c.link)} target="_blank" rel="noopener noreferrer">
+                                            Ver certificado <span aria-hidden="true">↗</span>
                                         </a>
                                     )}
-                                </div>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
                     </section>
                 )}
             </div>
-        </div>
+        </SitePage>
     );
 }
