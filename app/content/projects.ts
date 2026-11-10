@@ -46,7 +46,7 @@ export const projects: Project[] = [
         screens: [
             "/images/projects/transcar/transcar-app-inicio.webp",
             "/images/projects/transcar/transcar-app-mapa.webp",
-            "/images/projects/transcar/transcar-app-ruta.webp",
+            "/images/projects/transcar/transcar-app-asistente.webp",
         ],
         links: [],
         text: {
