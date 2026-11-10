@@ -475,18 +475,22 @@ export const projects: Project[] = [
 ];
 
 /**
- * Los tres dispositivos del hero, de izquierda a derecha.
- *
- * El tercero esta en blanco a proposito: es el lugar para el proyecto de otro
- * compañero. Para llenarlo, agrega el proyecto a la lista de arriba y cambia
- * `id: null` por su id (por ejemplo `id: "mi-proyecto"`). Si es una pagina web,
- * cambia tambien `device` a "web".
+ * Los tres dispositivos del hero, de izquierda a derecha. `id: null` deja un
+ * dispositivo en blanco. Un proyecto web en un telefono muestra su captura
+ * movil (la segunda de `screens`).
  */
 export const heroLineup: { id: string | null; device: Device }[] = [
     { id: "transcar", device: "phone" },
     { id: "malecon", device: "web" },
-    { id: null, device: "phone" },
+    { id: "mundo-te-busca", device: "phone" },
 ];
+
+/** La captura que corresponde al dispositivo: la movil si un proyecto web va en telefono. */
+export function screenFor(p: Project | undefined, device: Device): string | undefined {
+    if (!p) return undefined;
+    if (device === "phone" && p.device === "web") return p.screens[1] ?? p.screens[0];
+    return p.screens[0];
+}
 
 export function getProject(id: string | null): Project | undefined {
     return id ? projects.find((p) => p.id === id) : undefined;

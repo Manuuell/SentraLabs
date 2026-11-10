@@ -20,7 +20,7 @@ export const en: Translations = {
         sub: "Software development studio. We turn ideas into digital products: mobile apps, web platforms and AI integrations.",
         cta1: "Tell us about your project",
         cta2: "View projects",
-        sceneLabel: "A laptop showing the Malecón Business Center website and a phone with the TransCar app, built by SentraLabs",
+        sceneLabel: "A laptop showing the Malecón Business Center website and two phones with the TransCar app and El Mundo Te Busca, built by SentraLabs",
     },
     showcase: {
         kicker: "Projects",

@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Translations } from "../i18n/dictionaries";
-import { getProject, heroLineup } from "../content/projects";
+import { getProject, heroLineup, screenFor } from "../content/projects";
 import { BrowserFrame, PhoneFrame } from "./PhoneFrame";
 import { SELECT_PROJECT_EVENT } from "./events";
 import styles from "./HeroStage.module.css";
@@ -97,7 +97,7 @@ export function HeroStage({ t }: { t: Translations["hero"] }) {
             <PhoneFrame
               key={i}
               project={p}
-              src={p?.screens[0]}
+              src={screenFor(p, slot.device)}
               alt={p?.name ?? ""}
               sizes="(max-width: 900px) 30vw, 180px"
               className={`${styles.phone} ${position}`}

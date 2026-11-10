@@ -24,7 +24,7 @@ export const es = {
         sub: "Estudio de desarrollo de software. Convertimos ideas en productos digitales: apps móviles, plataformas web e integraciones de IA.",
         cta1: "Cuéntanos tu proyecto",
         cta2: "Ver proyectos",
-        sceneLabel: "Una laptop con el sitio de Malecón Business Center y un teléfono con la app TransCar, hechos por SentraLabs",
+        sceneLabel: "Una laptop con el sitio de Malecón Business Center y dos teléfonos con la app TransCar y El Mundo Te Busca, hechos por SentraLabs",
     },
     showcase: {
         kicker: "Proyectos",

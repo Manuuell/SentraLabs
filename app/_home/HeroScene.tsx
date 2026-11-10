@@ -5,7 +5,7 @@ import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
-import { getProject, heroLineup, type Device } from "../content/projects";
+import { getProject, heroLineup, screenFor, type Device } from "../content/projects";
 
 /**
  * Escena del hero: una laptop con una pagina web al centro y dos telefonos a
@@ -115,7 +115,7 @@ function Devices({ interactive, onSelect }: { interactive: boolean; onSelect: (i
 
   const slots: Slot[] = heroLineup.map((l) => {
     const p = getProject(l.id);
-    return { id: p?.id ?? null, device: l.device, screen: p?.screens[0] ?? null };
+    return { id: p?.id ?? null, device: l.device, screen: screenFor(p, l.device) ?? null };
   });
 
   // Solo se cargan las capturas que existen; el hueco en blanco no carga nada.
@@ -130,6 +130,7 @@ function Devices({ interactive, onSelect }: { interactive: boolean; onSelect: (i
       const tex = loaded[k++];
       tex.colorSpace = THREE.SRGBColorSpace;
       tex.anisotropy = max;
+      coverFit(tex, s.device === "web" ? 16 / 10 : 1080 / 2400);
       tex.needsUpdate = true;
       return tex;
     });
@@ -393,6 +394,26 @@ function useShadowTexture() {
     shadowCache = new THREE.CanvasTexture(c);
     return shadowCache;
   }, []);
+}
+
+/**
+ * Recorta la textura como `object-fit: cover`: si la captura no tiene la misma
+ * proporcion que la pantalla, se recortan los lados (o el pie) en vez de
+ * estirarla. Queda anclada arriba, que es donde esta lo importante de una web.
+ */
+function coverFit(tex: THREE.Texture, screenAspect: number) {
+  const img = tex.image as { width?: number; height?: number } | undefined;
+  if (!img?.width || !img?.height) return;
+  const imgAspect = img.width / img.height;
+  tex.repeat.set(1, 1);
+  tex.offset.set(0, 0);
+  if (imgAspect > screenAspect) {
+    tex.repeat.x = screenAspect / imgAspect;
+    tex.offset.x = (1 - tex.repeat.x) / 2;
+  } else if (imgAspect < screenAspect) {
+    tex.repeat.y = imgAspect / screenAspect;
+    tex.offset.y = 1 - tex.repeat.y;
+  }
 }
 
 /** Brillo diagonal del vidrio, compartido por todos los telefonos. */
