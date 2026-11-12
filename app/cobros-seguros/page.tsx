@@ -1,19 +1,24 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { CompareSlider, CuotasDemo, DayStory, RolesTabs, SinSenalDemo, TiltPhone } from "./Interactivos";
+import { Carrusel, CompareSlider, CuotasDemo, DayStory, RolesTabs, SinSenalDemo, TiltPhone } from "./Interactivos";
+import { Simulador } from "./Simulador";
+import { Tomas } from "./Tomas";
+import { Videos } from "./Videos";
 import s from "./cobros.module.css";
 
 const title = "Cobros Seguros — tu cartera de microcrédito en el teléfono";
 const description =
     "La app de SentraLabs para quien presta y cobra en la calle: agenda con lo vencido, cobro por cuotas con recibo, ruta del día, cuadre de caja y trabajo en equipo. Funciona sin señal.";
 
+const OG = "/images/projects/cobros-seguros/og.png";
+
 export const metadata: Metadata = {
     title,
     description,
     alternates: { canonical: "/cobros-seguros" },
-    openGraph: { title, description, url: "/cobros-seguros", type: "website", locale: "es_CO", images: ["/opengraph-image"] },
-    twitter: { card: "summary_large_image", title, description, images: ["/opengraph-image"] },
+    openGraph: { title, description, url: "/cobros-seguros", type: "website", locale: "es_CO", images: [{ url: OG, width: 1024, height: 500 }] },
+    twitter: { card: "summary_large_image", title, description, images: [OG] },
 };
 
 /* Sitio propio de la app (Firebase Hosting): políticas, borrado y prueba cerrada. */
@@ -122,8 +127,11 @@ export default function CobrosSeguros() {
                             <a href={`${APP_SITE}/probar.html`} className={s.primary}>
                                 Quiero probarla
                             </a>
-                            <a href="#demo-cuotas" className={s.ghost}>
-                                Probar el cobro aquí <span aria-hidden="true">↓</span>
+                            <a href="#pruebala" className={s.ghost}>
+                                Probarla aquí <span aria-hidden="true">↓</span>
+                            </a>
+                            <a href="#video" className={s.ghost}>
+                                <span aria-hidden="true">▶</span> Ver el tráiler
                             </a>
                         </div>
                         <p className={s.status}>
@@ -187,6 +195,48 @@ export default function CobrosSeguros() {
                     </ul>
                 </section>
 
+                {/* ─── Tráiler y videos ─── */}
+                <section className={s.section} id="video" aria-labelledby="video-titulo">
+                    <div className={s.wrap}>
+                        <p className={s.kicker}>En video</p>
+                        <h2 id="video-titulo" className={s.h2}>
+                            Llovió. Y el cuaderno se mojó.
+                        </h2>
+                        <p className={s.lead}>El tráiler y los videos de la app, hechos con tomas reales del teléfono.</p>
+                        <Videos />
+                    </div>
+                </section>
+
+                {/* ─── Simulador ─── */}
+                <section className={s.simSection} id="pruebala" aria-labelledby="sim-titulo">
+                    <div className={s.wrap}>
+                        <p className={s.kicker}>Pruébala aquí</p>
+                        <h2 id="sim-titulo" className={s.h2}>
+                            Úsala como si la tuvieras en la mano.
+                        </h2>
+                        <p className={s.lead}>
+                            Elige un rol y toca, mantén presionado, desliza las tarjetas y desliza desde el borde para
+                            volver, como en el teléfono. Apaga la señal y cobra como en una vereda.
+                        </p>
+                        <Simulador />
+                    </div>
+                </section>
+
+                {/* ─── Tomas reales con gestos ─── */}
+                <section className={`${s.section} ${s.raised}`} id="gestos" aria-labelledby="gestos-titulo">
+                    <div className={s.wrap}>
+                        <p className={s.kicker}>Gestos de verdad</p>
+                        <h2 id="gestos-titulo" className={s.h2}>
+                            Desliza, mantén presionado, cobra.
+                        </h2>
+                        <p className={s.lead}>
+                            Tomas grabadas en el teléfono, rol por rol. El punto azul muestra dónde va el dedo en cada
+                            momento: tocar, deslizar una tarjeta o mantenerla presionada para el menú.
+                        </p>
+                        <Tomas />
+                    </div>
+                </section>
+
                 {/* ─── Un día de cobro ─── */}
                 <section className={s.section} aria-labelledby="dia-titulo">
                     <div className={s.wrap}>
@@ -198,8 +248,19 @@ export default function CobrosSeguros() {
                     </div>
                 </section>
 
+                {/* ─── Todas las pantallas ─── */}
+                <section className={`${s.section} ${s.raised}`} aria-labelledby="pantallas-titulo">
+                    <div className={s.wrap}>
+                        <p className={s.kicker}>Toda la app</p>
+                        <h2 id="pantallas-titulo" className={s.h2}>
+                            Cada pantalla, pensada para la calle.
+                        </h2>
+                        <Carrusel />
+                    </div>
+                </section>
+
                 {/* ─── Demo de cuotas ─── */}
-                <section className={`${s.section} ${s.raised}`} id="demo-cuotas" aria-labelledby="cuotas-titulo">
+                <section className={s.section} id="demo-cuotas" aria-labelledby="cuotas-titulo">
                     <div className={s.wrap}>
                         <p className={s.kicker}>Pruébalo aquí</p>
                         <h2 id="cuotas-titulo" className={s.h2}>

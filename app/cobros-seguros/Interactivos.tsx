@@ -533,3 +533,102 @@ export function CompareSlider() {
         </div>
     );
 }
+
+/* ─── Carrusel con todas las pantallas ─── */
+const GALLERY = [
+    { img: "agenda", title: "Agenda del día", text: "Lo vencido primero, con lo que falta por pagar." },
+    { img: "hoja-acciones", title: "Qué pasó en la visita", text: "Cobrar, promesa, no encontrado o reprogramar." },
+    { img: "cobro-inicial", title: "Cobro por cuotas", text: "Una cuota o ponerse al día, con la frase exacta." },
+    { img: "revision", title: "Revisa antes de guardar", text: "Monto, cuotas, interés y capital a la vista." },
+    { img: "recibo-imagen", title: "El recibo", text: "Imagen con QR que le llega al cliente." },
+    { img: "prestamo", title: "El préstamo", text: "Cuotas pendientes, lo pagado y prestar más." },
+    { img: "rutas", title: "Ruta de hoy", text: "Paradas por cercanía y Google Maps." },
+    { img: "caja", title: "Caja", text: "Lo recogido: capital, interés y mora." },
+    { img: "exito-sin-senal", title: "Sin señal", text: "Guardado en el teléfono; sale solo después." },
+    { img: "alertas-jefe", title: "Alertas del jefe", text: "Promesas incumplidas y cuotas vencidas." },
+    { img: "mi-equipo", title: "Mi equipo", text: "Cada cobrador con sus clientes y su día." },
+    { img: "agregar-trabajador", title: "Agregar trabajador", text: "Un código y entra a tu equipo." },
+    { img: "cliente-cuenta", title: "La cuenta del cliente", text: "Lo que debe y lo que ha pagado." },
+    { img: "cliente-avisar", title: "«Ya pagué»", text: "El cliente avisa con la foto del comprobante." },
+    { img: "agenda-oscuro-13", title: "Oscuro y letra grande", text: "Se re-mide sola en cada pantalla." },
+];
+
+export function Carrusel() {
+    const track = useRef<HTMLUListElement>(null);
+    const drag = useRef<{ x: number; left: number; moved: boolean } | null>(null);
+    const [edges, setEdges] = useState({ start: true, end: false });
+
+    const update = () => {
+        const el = track.current;
+        if (!el) return;
+        setEdges({ start: el.scrollLeft < 8, end: el.scrollLeft + el.clientWidth > el.scrollWidth - 8 });
+    };
+    useEffect(update, []);
+
+    const by = (dir: number) => {
+        const el = track.current;
+        if (!el) return;
+        const card = el.querySelector("li");
+        el.scrollBy({ left: dir * ((card?.clientWidth ?? 260) + 20) * 2, behavior: "smooth" });
+    };
+
+    /* Arrastrar con el mouse (el dedo ya desplaza solo). */
+    const down = (e: React.PointerEvent) => {
+        if (e.pointerType !== "mouse" || !track.current) return;
+        drag.current = { x: e.clientX, left: track.current.scrollLeft, moved: false };
+        track.current.classList.add(s.grabbing);
+    };
+    const move = (e: React.PointerEvent) => {
+        const d = drag.current;
+        if (!d || !track.current) return;
+        const dx = e.clientX - d.x;
+        if (Math.abs(dx) > 4) d.moved = true;
+        track.current.scrollLeft = d.left - dx;
+    };
+    const up = () => {
+        drag.current = null;
+        track.current?.classList.remove(s.grabbing);
+    };
+
+    return (
+        <div className={s.carousel}>
+            <div className={s.carouselNav}>
+                <button type="button" aria-label="Pantallas anteriores" disabled={edges.start} onClick={() => by(-1)}>
+                    ←
+                </button>
+                <button type="button" aria-label="Más pantallas" disabled={edges.end} onClick={() => by(1)}>
+                    →
+                </button>
+            </div>
+            <ul
+                ref={track}
+                className={s.track}
+                onScroll={update}
+                onPointerDown={down}
+                onPointerMove={move}
+                onPointerUp={up}
+                onPointerLeave={up}
+                tabIndex={0}
+                aria-label="Pantallas de la app"
+            >
+                {GALLERY.map((g) => (
+                    <li key={g.img} className={s.slide}>
+                        <div className={s.slidePhone}>
+                            <img
+                                src={`/images/projects/cobros-seguros/app/${g.img}.webp`}
+                                alt={`${g.title}: ${g.text}`}
+                                width={720}
+                                height={1560}
+                                loading="lazy"
+                                decoding="async"
+                                draggable={false}
+                            />
+                        </div>
+                        <strong>{g.title}</strong>
+                        <span>{g.text}</span>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}

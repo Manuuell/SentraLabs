@@ -129,6 +129,11 @@ const nextConfig: NextConfig = {
         source: `/tooli/:app(${TOOLI_WEBS})/:dir(medios)/:file*`,
         headers: [{ key: "Cache-Control", value: "public, max-age=604800" }],
       },
+      // Cobros Seguros: clips, videos y pósters de su página. Una semana.
+      {
+        source: "/cobros-seguros/medios/:file*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=604800" }],
+      },
     ];
   },
 
