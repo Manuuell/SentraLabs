@@ -1,0 +1,460 @@
+/* Portada de Tooli: la vara de la home (display pesado con cápsula, luz de
+   fondo, wordmark al pie) y una tarjeta por app con el color de su marca.
+   Solo transform y opacity se animan; todo queda quieto con reducir movimiento. */
+
+.page {
+    --ink: #eef0f5;
+    --muted: #9aa1b2;
+    --dim: #5b6172;
+    --bg: #05070d;
+    --card: #0d111b;
+    --card-2: #131826;
+    --line: rgba(255, 255, 255, 0.08);
+    --salida: cubic-bezier(0.16, 1, 0.3, 1);
+    --tarjeta: cubic-bezier(0.22, 1.2, 0.36, 1);
+    --icono: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    position: relative;
+    z-index: 1;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    overflow-x: clip;
+}
+
+@supports (animation-timing-function: linear(0, 1)) {
+    .page {
+        --tarjeta: linear(0, .006 1.5%, .026 3.3%, .058 5%, .105 7%, .206 10.5%, .537 21%, .635 24.5%, .72 28%, .787 31.3%, .844 34.5%, .89 37.8%, .93 41.3%, .964 45.3%, .989 49.5%, 1.006 54.3%, 1.016 59.5%, 1.019 71.3%, 1);
+        --icono: linear(0, .007 1.3%, .032 2.8%, .072 4.3%, .133 6%, .264 9%, .561 15%, .679 17.5%, .795 20.3%, .886 22.8%, .962 25.3%, 1.022 27.8%, 1.067 30.3%, 1.098 32.8%, 1.124 37%, 1.122 42%, 1.103 46.3%, 1.02 60.5%, 1 65.8%, .989 71%, .985 81.3%, 1);
+    }
+}
+
+.page :focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 3px;
+    border-radius: 10px;
+}
+
+.skip {
+    position: absolute;
+    left: 16px;
+    top: -60px;
+    z-index: 30;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: #fff;
+    color: #000;
+    font-weight: 600;
+}
+.skip:focus {
+    top: 12px;
+}
+
+/* ── Barra ── */
+.top {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(5, 7, 13, 0.97);
+    border-bottom: 1px solid var(--line);
+}
+.topInner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px clamp(16px, 4vw, 40px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+.back {
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-decoration: none;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.back:hover {
+    color: var(--ink);
+}
+.brand {
+    font-family: var(--font-title);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    font-size: 1.05rem;
+}
+.topCta {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 16px;
+    border-radius: 999px;
+    background: #fff;
+    color: #05070d;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: transform 160ms var(--salida);
+}
+.topCta:active {
+    transform: scale(0.96);
+}
+
+/* ── Portada ── */
+.hero {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(72px, 12vw, 140px) clamp(16px, 4vw, 40px) clamp(40px, 6vw, 72px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 48px;
+}
+.copy {
+    min-width: 0;
+    position: relative;
+    z-index: 2;
+}
+
+/* Abanico de teléfonos: cinco Inicios reales. Entran una vez desde abajo y
+   se abren; al pasar el ratón, el tocado se adelanta. */
+.fan {
+    position: relative;
+    height: clamp(380px, 38vw, 520px);
+}
+.phone {
+    --w: clamp(132px, 12vw, 172px);
+    --sep: 46%;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: var(--w);
+    margin-left: calc(var(--w) / -2);
+    aspect-ratio: 300 / 650;
+    border-radius: calc(var(--w) * 0.13);
+    padding: calc(var(--w) * 0.035);
+    background: #1a1d26;
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    z-index: calc(10 - var(--f) * var(--f));
+    transform-origin: 50% 120%;
+    transform: translateX(calc(var(--f) * var(--sep))) rotate(calc(var(--f) * 7deg)) translateY(calc(var(--f) * var(--f) * 4%));
+    animation: abreFan 900ms var(--salida) calc(250ms + (var(--f) + 2) * 60ms) backwards;
+    transition: transform 420ms var(--tarjeta);
+}
+.phone img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: calc(var(--w) * 0.1);
+}
+@keyframes abreFan {
+    from {
+        opacity: 0;
+        transform: translateY(14%) rotate(0deg);
+    }
+}
+@media (hover: hover) {
+    .phone:hover {
+        transform: translateX(calc(var(--f) * var(--sep))) rotate(calc(var(--f) * 7deg)) translateY(calc(var(--f) * var(--f) * 4% - 6%));
+    }
+}
+
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .fan {
+        height: 300px;
+        margin-top: 8px;
+    }
+    .phone {
+        --w: 118px;
+        --sep: 42%;
+    }
+}
+.halo {
+    position: absolute;
+    inset: -10% -20% auto;
+    height: 120%;
+    pointer-events: none;
+    background:
+        radial-gradient(40% 50% at 20% 30%, rgba(228, 35, 19, 0.16), transparent 70%),
+        radial-gradient(35% 45% at 55% 20%, rgba(49, 68, 145, 0.22), transparent 70%),
+        radial-gradient(35% 45% at 85% 40%, rgba(30, 128, 116, 0.16), transparent 70%);
+    z-index: -1;
+}
+.kicker {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 18px;
+}
+.title {
+    font-family: var(--font-title);
+    font-weight: 800;
+    font-size: clamp(2.7rem, 7.4vw, 6rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+    margin: 0;
+    max-width: 12ch;
+    text-wrap: balance;
+}
+/* Cápsula de la casa: clara, levemente inclinada; entra una vez. */
+.mark {
+    display: inline-block;
+    white-space: nowrap;
+    padding: 0.02em 0.2em 0.08em;
+    border-radius: 0.22em;
+    background: #fff;
+    color: #0f1b24;
+    transform: rotate(-2.5deg);
+    box-shadow: 0 18px 36px -18px rgba(96, 165, 250, 0.55);
+    animation: entraMarca 620ms var(--salida) 120ms both;
+}
+@keyframes entraMarca {
+    from {
+        transform: rotate(-2.5deg) scaleX(0.6);
+        opacity: 0;
+    }
+}
+.lede {
+    margin: 26px 0 0;
+    max-width: 58ch;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    line-height: 1.65;
+    text-wrap: pretty;
+}
+.stats {
+    list-style: none;
+    padding: 0;
+    margin: 32px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.stats li {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 14px;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+.stats strong {
+    color: var(--ink);
+    font-family: var(--font-title);
+    font-weight: 800;
+    margin-right: 4px;
+}
+
+/* ── Tarjetas ── */
+.apps {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px clamp(16px, 4vw, 40px) 40px;
+    scroll-margin-top: 72px;
+}
+.h2 {
+    font-family: var(--font-title);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+    margin: 0 0 24px;
+}
+.grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 14px;
+}
+.item {
+    /* entran escalonadas: 50 ms por tarjeta, el grupo cabe en 400 ms */
+    animation: entraTarjeta 640ms var(--salida) calc(min(var(--k) * 50ms, 400ms) + 150ms) both;
+}
+@keyframes entraTarjeta {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+}
+.card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px 20px 22px;
+    border-radius: 22px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    color: inherit;
+    text-decoration: none;
+}
+.cardLink {
+    transition: transform 420ms var(--tarjeta), border-color 200ms ease;
+}
+/* Luz de la marca en la esquina: quieta, solo cambia de opacidad. */
+.glow {
+    position: absolute;
+    inset: -40% -30% auto auto;
+    width: 80%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, var(--c), transparent);
+    opacity: 0.28;
+    z-index: -1;
+    transition: opacity 300ms ease;
+    pointer-events: none;
+}
+.cardTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+.icon {
+    display: block;
+    width: 56px;
+    height: 56px;
+    border-radius: 15px;
+    box-shadow: 0 10px 24px -12px var(--c), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    transition: transform 520ms var(--icono);
+}
+.estado {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: #05070d;
+}
+.pronto {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--line);
+}
+.appName {
+    font-family: var(--font-title);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    font-size: 1.45rem;
+    line-height: 1.1;
+}
+.inst {
+    color: var(--ink);
+    opacity: 0.85;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+.donde {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-top: 4px;
+}
+.rasgo {
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin-top: 12px;
+    flex: 1;
+}
+.ir {
+    margin-top: 16px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+}
+.flecha {
+    display: inline-block;
+    transition: transform 320ms var(--tarjeta);
+}
+
+@media (hover: hover) {
+    .cardLink:hover {
+        transform: translateY(-4px);
+        border-color: rgba(255, 255, 255, 0.16);
+    }
+    .cardLink:hover .glow {
+        opacity: 0.5;
+    }
+    .cardLink:hover .icon {
+        transform: scale(1.06) rotate(-3deg);
+    }
+    .cardLink:hover .flecha {
+        transform: translateX(4px);
+    }
+}
+.cardLink:active {
+    transform: scale(0.985);
+    transition-duration: 120ms;
+}
+
+.nota {
+    margin: 22px 0 0;
+    color: var(--dim);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 70ch;
+}
+
+/* ── Cierre ── */
+.fin {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px clamp(16px, 4vw, 40px) 0;
+    border-top: 1px solid var(--line);
+}
+.honesto,
+.ayuda {
+    max-width: 70ch;
+    color: var(--muted);
+    line-height: 1.7;
+    margin: 0 0 14px;
+}
+.ayuda a {
+    color: #93c5fd;
+}
+.wordmark {
+    margin: 40px 0 0;
+    font-family: var(--font-title);
+    font-weight: 800;
+    letter-spacing: -0.07em;
+    line-height: 0.8;
+    font-size: clamp(6rem, 26vw, 22rem);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    user-select: none;
+    overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mark,
+    .item,
+    .phone {
+        animation: none;
+    }
+    .cardLink,
+    .icon,
+    .flecha,
+    .glow {
+        transition: none;
+    }
+}

@@ -1,0 +1,1 @@
+import{d as e,i as t,r as n}from"./main-kLChAdyI.js";function r(){let r=0;t(`.qa`).forEach(t=>{let i=n(`button`,t);i.addEventListener(`click`,()=>{let n=i.getAttribute(`aria-expanded`)!==`true`;i.setAttribute(`aria-expanded`,String(n)),t.classList.toggle(`is-open`,n),clearTimeout(r),r=window.setTimeout(()=>e.refresh(),600)})})}export{r as faq};
