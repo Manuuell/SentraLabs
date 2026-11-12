@@ -202,6 +202,34 @@ export const projects: Project[] = [
         },
     },
     {
+        id: "cobros-seguros",
+        name: "Cobros Seguros",
+        featured: true,
+        device: "phone",
+        logo: "/images/projects/logos/cobros-seguros.webp",
+        monogram: "C",
+        accent: "#3d7bff",
+        splash: { from: "#0b1736", to: "#13254f" },
+        screens: [
+            "/images/projects/cobros-seguros/cobros-seguros-app-agenda.webp",
+            "/images/projects/cobros-seguros/cobros-seguros-app-pago.webp",
+            "/images/projects/cobros-seguros/cobros-seguros-app-sin-senal.webp",
+        ],
+        links: [{ kind: "site", href: "https://sentralabs.co/cobros-seguros" }],
+        text: {
+            es: {
+                tagline: "Tu cartera de microcrédito en el teléfono",
+                desc: "Para quien presta y cobra en la calle: agenda con lo vencido primero, cobro por cuotas con recibo al instante, ruta del día, cuadre de caja y equipo con jefe, cobradores y clientes. Funciona sin señal. No presta ni mueve plata: lleva en orden los préstamos que tú ya haces.",
+                facts: ["En prueba cerrada en Android", "Funciona sin señal"],
+            },
+            en: {
+                tagline: "Your microloan portfolio on your phone",
+                desc: "For people who lend and collect on the street: an agenda with overdue payments first, installment collection with an instant receipt, the day's route, cash reconciliation and a team with a boss, collectors and clients. It works offline. It doesn't lend or move money: it keeps the loans you already make in order.",
+                facts: ["In closed testing on Android", "Works offline"],
+            },
+        },
+    },
+    {
         id: "marsec",
         name: "MarSec",
         device: "phone",
