@@ -83,6 +83,14 @@ const securityHeaders = [
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
 ];
 
+/**
+ * Apps de Tooli con página propia: un build estático de Vite copiado en
+ * public/tooli/<app>/ (index.html, assets/, medios/). Next quita la barra
+ * final, así que /tooli/<app> se reescribe a su index.html y la página usa
+ * rutas absolutas (/tooli/<app>/…). Al sumar una app, se agrega aquí.
+ */
+const TOOLI_WEBS = "unisinu";
+
 const nextConfig: NextConfig = {
   // Genera .next/standalone: un servidor Node autocontenido, con solo las
   // dependencias que la app realmente usa en runtime. El build se hace en
@@ -94,7 +102,34 @@ const nextConfig: NextConfig = {
 
   // Las cabeceras las emite el servidor Node de Next; Nginx solo hace de proxy.
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [
+      { source: "/:path*", headers: securityHeaders },
+
+      // Páginas de las apps de Tooli (estáticas, en public/tooli/<app>/). El
+      // teléfono de la portada se inclina con el giroscopio en Android: solo
+      // aquí se permite, para el propio sitio.
+      {
+        source: `/tooli/:app(${TOOLI_WEBS})`,
+        headers: [
+          {
+            key: "Permissions-Policy",
+            value:
+              "camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(self), accelerometer=(self), interest-cohort=()",
+          },
+          { key: "Cache-Control", value: "public, max-age=0, must-revalidate" },
+        ],
+      },
+      // JS, CSS y fuente llevan huella en el nombre: no cambian nunca.
+      {
+        source: `/tooli/:app(${TOOLI_WEBS})/assets/:file*`,
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+      // Clips, pósters e íconos no llevan huella: una semana.
+      {
+        source: `/tooli/:app(${TOOLI_WEBS})/:dir(medios)/:file*`,
+        headers: [{ key: "Cache-Control", value: "public, max-age=604800" }],
+      },
+    ];
   },
 
   // www y raiz servian el mismo HTML con 200, o sea contenido duplicado. Esto
@@ -134,6 +169,11 @@ const nextConfig: NextConfig = {
             "/:ruta((?!tooli|_next|api|favicon|icon|images|opengraph-image|robots\\.txt|sitemap\\.xml).*)",
           has: [{ type: "host", value: "tooli.sentralabs.co" }],
           destination: "/tooli/:ruta",
+        },
+        // La página de cada app: /tooli/unisinu → public/tooli/unisinu/index.html
+        {
+          source: `/tooli/:app(${TOOLI_WEBS})`,
+          destination: "/tooli/:app/index.html",
         },
       ],
       afterFiles: [],

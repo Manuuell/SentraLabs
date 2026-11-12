@@ -58,15 +58,26 @@ export default function Tooli() {
                     Universidades
                 </h2>
                 <ul style={{ color: "#a1a1aa", lineHeight: 1.8, paddingLeft: "1.2rem" }}>
-                    <li>Universidad del Sinú, Cartagena y Montería — Unisinú Tooli (prueba cerrada)</li>
-                    <li>Fundación Universitaria Tecnológico Comfenalco, Cartagena — Comfenalco Tooli (prueba cerrada)</li>
-                    <li>Universidad de San Buenaventura, Cartagena, Medellín, Cali y Bogotá — San Buenaventura Tooli (en desarrollo)</li>
-                    <li>Universidad de Cartagena, presencial y a distancia — UdeC Tooli (en desarrollo)</li>
+                    <li>
+                        Universidad del Sinú, Cartagena y Montería — Unisinú Tooli (en prueba en Google Play) ·{" "}
+                        <a href="/tooli/unisinu" style={{ color: "#60a5fa" }}>conoce la app</a>
+                    </li>
+                    <li>Fundación Universitaria Tecnológico Comfenalco, Cartagena — Comfenalco Tooli</li>
+                    <li>Universidad de San Buenaventura, Cartagena, Medellín, Cali y Bogotá — San Buenaventura Tooli</li>
+                    <li>Universidad de Cartagena, presencial y a distancia — UdeC Tooli</li>
+                    <li>Fundación Universitaria Antonio de Arévalo, Unitecnar — Unitecnar Tooli</li>
+                    <li>Corporación Universitaria Rafael Núñez, Cartagena, Barranquilla y Medicina — Uninúñez Tooli</li>
+                    <li>Institución Universitaria Mayor de Cartagena — Umayor Tooli</li>
+                    <li>Fundación Universitaria Colombo Internacional, Unicolombo — Unicolombo Tooli</li>
+                    <li>Fundación Internacional de Educación Elyon Yireh — Elyon Yireh Tooli</li>
                 </ul>
+                <p style={{ color: "#71717a", fontSize: "0.9rem", lineHeight: 1.7, marginTop: "0.75rem" }}>
+                    Las demás llegan a Google Play después de Unisinú, cada una con su página.
+                </p>
                 <p style={{ color: "#71717a", fontSize: "0.9rem", lineHeight: 1.7, marginTop: "1rem" }}>
                     Tooli es un proyecto independiente de SentraLabs: no es una app oficial de
-                    ninguna universidad. Está en prueba cerrada con estudiantes y personal de
-                    cada institución antes de abrirla a todos.
+                    ninguna universidad. Cada app se prueba con estudiantes de su institución
+                    antes de abrirla a todos.
                 </p>
 
                 <h2 style={{ fontFamily: mono, fontSize: "1.1rem", color: "#fff", margin: "2rem 0 1rem" }}>
