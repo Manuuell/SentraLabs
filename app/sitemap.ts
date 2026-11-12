@@ -31,6 +31,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/tooli/privacidad"), lastModified, changeFrequency: "yearly", priority: 0.3 },
     // Página de cada app de Tooli (estática, en public/tooli/<app>/).
     { url: absoluteUrl("/tooli/unisinu"), lastModified, changeFrequency: "monthly", priority: 0.6 },
+    { url: absoluteUrl("/tooli/comfenalco"), lastModified, changeFrequency: "monthly", priority: 0.6 },
+    { url: absoluteUrl("/tooli/sanbuenaventura"), lastModified, changeFrequency: "monthly", priority: 0.6 },
+    { url: absoluteUrl("/tooli/unicartagena"), lastModified, changeFrequency: "monthly", priority: 0.6 },
+    { url: absoluteUrl("/tooli/unitecnar"), lastModified, changeFrequency: "monthly", priority: 0.6 },
+    { url: absoluteUrl("/tooli/uninunez"), lastModified, changeFrequency: "monthly", priority: 0.6 },
+    { url: absoluteUrl("/tooli/umayor"), lastModified, changeFrequency: "monthly", priority: 0.6 },
     // Cobros Seguros: página de producto (las políticas viven en el sitio de la app).
     { url: absoluteUrl("/cobros-seguros"), lastModified, changeFrequency: "monthly", priority: 0.6 },
   ];

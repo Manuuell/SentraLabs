@@ -89,7 +89,7 @@ const securityHeaders = [
  * final, así que /tooli/<app> se reescribe a su index.html y la página usa
  * rutas absolutas (/tooli/<app>/…). Al sumar una app, se agrega aquí.
  */
-const TOOLI_WEBS = "unisinu";
+const TOOLI_WEBS = "unisinu|comfenalco|sanbuenaventura|unicartagena|unitecnar|uninunez|umayor";
 
 const nextConfig: NextConfig = {
   // Genera .next/standalone: un servidor Node autocontenido, con solo las
