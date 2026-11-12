@@ -31,6 +31,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/tooli/privacidad"), lastModified, changeFrequency: "yearly", priority: 0.3 },
     // Página de cada app de Tooli (estática, en public/tooli/<app>/).
     { url: absoluteUrl("/tooli/unisinu"), lastModified, changeFrequency: "monthly", priority: 0.6 },
+    // Cobros Seguros: página de producto (las políticas viven en el sitio de la app).
+    { url: absoluteUrl("/cobros-seguros"), lastModified, changeFrequency: "monthly", priority: 0.6 },
   ];
 
   // Un perfil por miembro del equipo: son las paginas de autor del sitio.
