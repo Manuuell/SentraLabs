@@ -146,6 +146,62 @@ export const projects: Project[] = [
         },
     },
     {
+        id: "albion-world",
+        name: "Albion World",
+        featured: true,
+        device: "phone",
+        logo: "/images/projects/logos/albion-world.webp",
+        monogram: "A",
+        accent: "#b8860b",
+        splash: { from: "#1c1606", to: "#2e240c" },
+        screens: [
+            "/images/projects/albion-world/albion-world-app-inicio.webp",
+            "/images/projects/albion-world/albion-world-app-radar.webp",
+            "/images/projects/albion-world/albion-world-app-rankings.webp",
+        ],
+        links: [],
+        text: {
+            es: {
+                tagline: "El centro de datos de Albion Online",
+                desc: "App para jugadores de Albion Online: radar de oportunidades del mercado, precios por ciudad y calidad, Party en vivo con sus kills, rankings, mapa con rutas y una comunidad para comprar y vender. En español, inglés y portugués.",
+                facts: ["Publicada en Google Play", "Español, inglés y portugués"],
+            },
+            en: {
+                tagline: "The data hub for Albion Online",
+                desc: "App for Albion Online players: a market opportunity radar, prices by city and quality, a live Party with its kills, rankings, a map with routes and a community to buy and sell. In Spanish, English and Portuguese.",
+                facts: ["Live on Google Play", "Spanish, English and Portuguese"],
+            },
+        },
+    },
+    {
+        id: "tooli-universidades",
+        name: "Tooli Universidades",
+        featured: true,
+        device: "phone",
+        logo: null,
+        monogram: "T",
+        accent: "#e42313",
+        splash: { from: "#2a0806", to: "#45100b" },
+        screens: [
+            "/images/projects/tooli-universidades/tooli-universidades-app-inicio.webp",
+            "/images/projects/tooli-universidades/tooli-universidades-app-notas.webp",
+            "/images/projects/tooli-universidades/tooli-universidades-app-carne.webp",
+        ],
+        links: [{ kind: "site", href: "https://sentralabs.co/tooli" }],
+        text: {
+            es: {
+                tagline: "Tu semestre en el bolsillo",
+                desc: "Una app por institución de Cartagena y Montería: horario con el salón, carné digital, notas por corte con lo que te falta para pasar, el aula virtual y los avisos de la universidad. Los datos se quedan en el teléfono del estudiante. No son apps oficiales de las universidades.",
+                facts: ["Nueve instituciones", "Unisinú en prueba en Google Play"],
+            },
+            en: {
+                tagline: "Your semester in your pocket",
+                desc: "One app per institution in Cartagena and Montería: schedule with the classroom, digital student ID, grades per term with what you still need to pass, the virtual classroom and the university's notices. Data stays on the student's phone. They are not official university apps.",
+                facts: ["Nine institutions", "Unisinú in testing on Google Play"],
+            },
+        },
+    },
+    {
         id: "marsec",
         name: "MarSec",
         device: "phone",

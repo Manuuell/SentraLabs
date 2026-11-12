@@ -1,0 +1,1 @@
+import{n as e,r as t,u as n}from"./main-j6HTOTc_.js";function r(){let r=0;t(`.qa`).forEach(t=>{let i=e(`button`,t);i.addEventListener(`click`,()=>{let e=i.getAttribute(`aria-expanded`)!==`true`;i.setAttribute(`aria-expanded`,String(e)),t.classList.toggle(`is-open`,e),clearTimeout(r),r=window.setTimeout(()=>n.refresh(),600)})})}export{r as faq};

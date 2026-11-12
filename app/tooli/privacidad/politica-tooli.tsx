@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-/* La política de Tooli, una sola para las siete apps. La sirven
+/* La política de Tooli, una sola para las nueve apps. La sirven
    /tooli/privacidad y /tooli/<app>/privacidad (la URL que va en Google Play
    de cada app); en esta última, «app» es el nombre de esa app en Play. */
 
@@ -50,7 +50,7 @@ export default function PoliticaTooli({ app }: { app?: string }) {
 
                 <div style={{ color: "#a1a1aa", fontSize: "0.9rem", lineHeight: 1.8 }}>
                     <p style={{ marginBottom: "1.5rem" }}>
-                        <strong style={fuerte}>Última actualización:</strong> 28 de octubre de 2026
+                        <strong style={fuerte}>Última actualización:</strong> 12 de noviembre de 2026
                     </p>
 
                     {app && (
@@ -74,9 +74,15 @@ export default function PoliticaTooli({ app }: { app?: string }) {
                         Fundación Universitaria Antonio de Arévalo, Unitecnar (presencial, y
                         virtual y a distancia); «Uninúñez Tooli» («Uninúñez App») para la
                         Corporación Universitaria Rafael Núñez (Cartagena, Barranquilla y
-                        Medicina), y «Umayor Tooli» («Umayor App») para la Institución
-                        Universitaria Mayor de Cartagena (Cartagena y Regionalización). Dentro de
-                        cada app eliges tu sede o tu modalidad.
+                        Medicina); «Umayor Tooli» («Umayor App») para la Institución
+                        Universitaria Mayor de Cartagena (Cartagena y Regionalización);
+                        «Unicolombo Tooli» («Unicolombo App») para la Fundación Universitaria
+                        Colombo Internacional, Unicolombo (Cartagena), y «Elyon Yireh Tooli»
+                        («Elyon Yireh App») para la Fundación Internacional de Educación Elyon
+                        Yireh (Cartagena), institución de educación para el trabajo. Dentro de
+                        cada app eliges tu sede o tu modalidad. Unicolombo Tooli y Elyon Yireh
+                        Tooli no tienen aula virtual dentro de la app: no te piden usuario ni
+                        clave en ningún momento.
                         Son apps independientes: ninguna es una app oficial de esas
                         instituciones ni está afiliada a ellas.
                         La idea es simple: <strong style={fuerte}>tus datos
@@ -166,11 +172,11 @@ export default function PoliticaTooli({ app }: { app?: string }) {
                     </p>
                     <ul style={ul}>
                         <li style={li}>El aula virtual de tu sede, con tu cuenta: en Unisinú, Moodle (Cartagena) o Canvas (Montería, unisinu.instructure.com); Ferrum, el Moodle del Tecnológico Comfenalco (ferrum.tecnologicocomfenalco.edu.co), en Comfenalco; en San Buenaventura, el Moodle de tu sede (Cartagena, Medellín, Cali o Bogotá) y, en Cali, el ingreso de Microsoft de la universidad; en la Universidad de Cartagena, SIMA, el Moodle de tu modalidad (moodle.unicartagena.edu.co o sima.unicartagena.edu.co); en Unitecnar, SPLAVIA (splavia5.unitecnar.edu.co); en Uninúñez, SIACURN (aulas.uninunez.edu.co); en Umayor, Génesis (genesisava.umayor.edu.co).</li>
-                        <li style={li}>El portal académico, con tu cuenta: en Unisinú, Elysa, si lo autorizas; en San Buenaventura, ASIS (campus.usbco.edu.co), si lo autorizas; en la Universidad de Cartagena, el SMA (sma.unicartagena.edu.co), que se abre como una página dentro de la app: la app no guarda su clave ni lee nada de él; en Comfenalco, Campus (campus.tecnologicocomfenalco.edu.co, su portal PeopleSoft), del que la app lee tu horario de clases, tus notas por corte, tu historial de cursos, tu estado de cuenta (saldo, cargos y pagos), tus retenciones y tus documentos pendientes; en Uninúñez, el Portal Uninúñez y Servicios Académicos, y en Umayor, Ulyses, que se abren como páginas dentro de la app y en los que entras tú con tu cuenta: la app no guarda esas claves ni lee nada de ellos.</li>
-                        <li style={li}>La página web pública de tu sede (noticias, calendarios, trámites, bienestar): en Unisinú, unisinucartagena.edu.co o unisinu.edu.co; en Comfenalco, tecnologicocomfenalco.edu.co; en San Buenaventura, la de tu sede y usb.edu.co; en la Universidad de Cartagena, unicartagena.edu.co y su blog de noticias «Universo U» (universounicartagena.co, en Blogger de Google); en Unitecnar, unitecnar.edu.co; en Uninúñez, uninunez.edu.co; en Umayor, umayor.edu.co.</li>
+                        <li style={li}>El portal académico, con tu cuenta: en Unisinú, Elysa, si lo autorizas; en San Buenaventura, ASIS (campus.usbco.edu.co), si lo autorizas; en la Universidad de Cartagena, el SMA (sma.unicartagena.edu.co), que se abre como una página dentro de la app: la app no guarda su clave ni lee nada de él; en Comfenalco, Campus (campus.tecnologicocomfenalco.edu.co, su portal PeopleSoft), del que la app lee tu horario de clases, tus notas por corte, tu historial de cursos, tu estado de cuenta (saldo, cargos y pagos), tus retenciones y tus documentos pendientes; en Uninúñez, el Portal Uninúñez y Servicios Académicos; en Umayor, Ulyses; en Unicolombo, TRONOS (tronos.unicolombo.edu.co) y la evaluación docente (evaluacion.unicolombo.edu.co), y en Elyon Yireh, su portal académico (portalelyonyireh.edu.co, de SYSCOMER, donde están también sus pagos) y sus cursos virtuales (virtual.elyonyireh.edu.co), que se abren como páginas dentro de la app y en los que entras tú con tu cuenta: la app no guarda esas claves ni lee nada de ellos.</li>
+                        <li style={li}>La página web pública de tu sede (noticias, calendarios, trámites, bienestar): en Unisinú, unisinucartagena.edu.co o unisinu.edu.co; en Comfenalco, tecnologicocomfenalco.edu.co; en San Buenaventura, la de tu sede y usb.edu.co; en la Universidad de Cartagena, unicartagena.edu.co y su blog de noticias «Universo U» (universounicartagena.co, en Blogger de Google); en Unitecnar, unitecnar.edu.co; en Uninúñez, uninunez.edu.co; en Umayor, umayor.edu.co; en Unicolombo, unicolombo.edu.co; en Elyon Yireh, elyonyireh.edu.co.</li>
                         <li style={li}>Archivos públicos que la universidad publica en Google: las hojas de cálculo de parciales (Unisinú) y las carpetas de horarios por programa (Comfenalco).</li>
                         <li style={li}>El catálogo público de la biblioteca (Comfenalco, en Koha), para buscar libros sin cuenta.</li>
-                        <li style={li}>Los formularios oficiales de PQRS (en Comfenalco, el de PQRSD del SIA), consulta de radicados y cuentas de biblioteca, que se abren dentro de la app y llenas tú: la app no los envía por ti.</li>
+                        <li style={li}>Los formularios oficiales de PQRS (en Comfenalco, el de PQRSD del SIA; en Elyon Yireh, el formulario de Google de la institución), consulta de radicados y cuentas de biblioteca, que se abren dentro de la app y llenas tú: la app no los envía por ti. En Unicolombo, la PQRS la envías tú por WhatsApp, desde tu propia app de WhatsApp.</li>
                         <li style={li}>YouTube, cuando abres un video que el docente puso en el aula.</li>
                     </ul>
                     <p style={p}>

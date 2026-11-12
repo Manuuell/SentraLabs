@@ -29,6 +29,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Tooli: también se sirve en tooli.sentralabs.co; el canonical apunta aquí.
     { url: absoluteUrl("/tooli"), lastModified, changeFrequency: "monthly", priority: 0.5 },
     { url: absoluteUrl("/tooli/privacidad"), lastModified, changeFrequency: "yearly", priority: 0.3 },
+    // Página de cada app de Tooli (estática, en public/tooli/<app>/).
+    { url: absoluteUrl("/tooli/unisinu"), lastModified, changeFrequency: "monthly", priority: 0.6 },
   ];
 
   // Un perfil por miembro del equipo: son las paginas de autor del sitio.

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PoliticaTooli from "../../privacidad/politica-tooli";
 
 /* Una URL de política por app (la que va en Google Play de cada una). Todas
-   muestran la misma política de Tooli, que nombra las siete, con el nombre
+   muestran la misma política de Tooli, que nombra las nueve, con el nombre
    de esa app arriba. Los nombres son los de Play (3-textos de cada app). */
 const APPS: Record<string, string> = {
     unisinu: "Unisinú Tooli",
@@ -12,6 +12,8 @@ const APPS: Record<string, string> = {
     uninunez: "Uninúñez Tooli",
     sanbuenaventura: "San Buenaventura Tooli",
     umayor: "Umayor Tooli",
+    unicolombo: "Unicolombo Tooli",
+    elyonyireh: "Elyon Yireh Tooli",
 };
 
 export const dynamicParams = false;
