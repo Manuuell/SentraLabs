@@ -5,9 +5,9 @@ import { CONTACT_EMAIL } from "../lib/site";
 import { APPS } from "./apps";
 import s from "./tooli.module.css";
 
-const title = "Tooli — tu semestre en el bolsillo";
+const title = "Gestor académico — tu semestre en el bolsillo";
 const description =
-    "Tooli, las apps para estudiantes hechas por SentraLabs: clases, tareas, notas y el aula virtual de tu universidad en un solo lugar. Nueve instituciones, una app para cada una.";
+    "Gestor académico, las apps para estudiantes hechas por SentraLabs: clases, tareas, notas y el aula virtual de tu universidad en un solo lugar. Nueve instituciones, una app para cada una.";
 
 /* La página también se sirve en tooli.sentralabs.co: el canonical la une a
    sentralabs.co/tooli para que no cuente como contenido duplicado. */
@@ -93,7 +93,7 @@ export default function Tooli() {
                     <Link href="/#proyectos" className={s.back}>
                         <span aria-hidden="true">←</span> <span className={s.backLabel}>SentraLabs</span>
                     </Link>
-                    <span className={s.brand}>Tooli</span>
+                    <span className={s.brand}>Gestor académico</span>
                     <a href="#apps" className={s.topCta}>
                         Elige la tuya
                     </a>
@@ -104,7 +104,7 @@ export default function Tooli() {
                 <section className={s.hero}>
                     <div className={s.halo} aria-hidden="true" />
                     <div className={s.copy}>
-                    <p className={s.kicker}>Tooli · apps para estudiantes</p>
+                    <p className={s.kicker}>Gestor académico · apps para estudiantes</p>
                     <h1 className={s.title}>
                         Tu semestre en el <span className={s.mark}>bolsillo.</span>
                     </h1>
@@ -207,7 +207,7 @@ export default function Tooli() {
 
                 <section className={s.fin}>
                     <p className={s.honesto}>
-                        Tooli es un proyecto independiente de SentraLabs: no es una app oficial de ninguna
+                        Gestor académico es un proyecto independiente de SentraLabs: no es una app oficial de ninguna
                         universidad. Habla directo con los sistemas de tu institución con tu propia cuenta y no
                         guarda tus datos en ningún servidor nuestro.
                     </p>
@@ -217,7 +217,7 @@ export default function Tooli() {
                         su página.
                     </p>
                     <p className={s.wordmark} aria-hidden="true">
-                        Tooli
+                        Gestor académico
                     </p>
                 </section>
             </main>

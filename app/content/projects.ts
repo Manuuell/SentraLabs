@@ -175,7 +175,7 @@ export const projects: Project[] = [
     },
     {
         id: "tooli-universidades",
-        name: "Tooli Universidades",
+        name: "Gestor académico",
         featured: true,
         device: "phone",
         logo: null,
