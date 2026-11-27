@@ -436,7 +436,7 @@
     font-weight: 800;
     letter-spacing: -0.07em;
     line-height: 0.8;
-    font-size: clamp(6rem, 26vw, 22rem);
+    font-size: clamp(3rem, 11vw, 10rem);
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0));
     -webkit-background-clip: text;
     background-clip: text;

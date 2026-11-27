@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import PoliticaTooli from "./politica-tooli";
 
-const title = "Política de Privacidad — Tooli";
+const title = "Política de Privacidad — Gestor académico";
 const description =
     "Cómo trata tus datos Tooli, la app para estudiantes hecha por SentraLabs.";
 

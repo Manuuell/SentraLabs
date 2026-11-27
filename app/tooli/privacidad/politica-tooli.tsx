@@ -38,14 +38,14 @@ export default function PoliticaTooli({ app }: { app?: string }) {
                         display: "inline-block",
                     }}
                 >
-                    ← Tooli
+                    ← Gestor académico
                 </Link>
 
                 <p style={{ color: "#60a5fa", fontFamily: "var(--font-mono)", fontSize: "0.75rem", letterSpacing: "0.15em", marginBottom: "12px" }}>
                     {"// tooli · legal"}
                 </p>
                 <h1 style={{ fontFamily: "var(--font-mono)", fontSize: "2rem", fontWeight: 700, marginBottom: "2rem", color: "#fff" }}>
-                    {app ? `Política de Privacidad de ${app}` : "Política de Privacidad de Tooli"}
+                    {app ? `Política de Privacidad de ${app}` : "Política de Privacidad de Gestor académico"}
                 </h1>
 
                 <div style={{ color: "#a1a1aa", fontSize: "0.9rem", lineHeight: 1.8 }}>
